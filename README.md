@@ -1,0 +1,1 @@
+Project to facilitate work on Subspace Faucet, including discord bot, HTTP API server, and Smart Contact. 
