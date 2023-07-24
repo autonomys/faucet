@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 let contractAddress = "0xE56Cd3Cf62f0575309D2F5CF4D13A86c553068a4";
 let contractAbi = [
  {
@@ -115,13 +117,15 @@ let contractAbi = [
 ];
 
 const API_URL = "https://goerli.infura.io/v3/9e87bdd3ecff41568a661c916df3c818"
-const PRIVATE_KEY = "your_private_key"
+const PRIVATE_KEY = process.env.PRIVATE_KEY
   
+
+//async function
 const provider = new ethers.providers.JsonRpcProvider(API_URL);
 console.log({ provider });
 const signer = new ethers.Wallet(PRIVATE_KEY, provider);
 console.log({ signer });
-const contract = new ethers.Contract(contractAddress, contractAbi, signer);
+const contract = new ethers.Contract(contractAddress, contractAbi, signer); //signer = our acct that calls
 console.log({ contract });
 async function drip() {
     var address = document.getElementById("address");
@@ -135,3 +139,6 @@ async function drip() {
      await tx.wait();
      cand.innerHTML= "Tokens transferred";
 }
+
+//export functions
+module.exports = drip; 
