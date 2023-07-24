@@ -1,8 +1,11 @@
+require('dotenv').config()
+
 const hre = require("hardhat");
+const private_key = process.env.PRIVATE_KEY
 
 async function main() {
   const Faucet = await hre.ethers.getContractFactory("Faucet");
-  const faucet = await Faucet.deploy("0xFC2Aa4EEC439FbAF8315c4FF9443692d8970579c");
+  const faucet = await Faucet.deploy(private_key);
 
   await faucet.deployed();
 
