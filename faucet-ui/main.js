@@ -118,8 +118,7 @@ let contractAbi = [
   }
 ];
 
-const API_URL = "https://goerli.infura.io/v3/9e87bdd3ecff41568a661c916df3c818"
-const PRIVATE_KEY = "your_private_key"
+const API_URL = "https://goerli.infura.io/v3/9e87bdd3ecff41568a661c916df3c818";
 // const PRIVATE_KEY = process.env.PRIVATE_KEY
   
 
@@ -133,13 +132,18 @@ console.log({ contract });
 async function drip() {
     var address = document.getElementById("address");
     var cand = document.getElementById("status");
-    console.log(address.value);
     
     cand.innerHTML = "Please wait, tranferring Tokens";
+     try {
+      const tx = await contract.requestTokens(address.value);
+      await tx.wait();
+      console.log("Transaction hash", tx.hash);
+      cand.innerHTML= "Tokens transferred";
+     } catch (error) {
+      console.log(error);
+      cand.innerHTML= `${error.message} error, try again later`
+     }
      
-     const tx = await contract.requestTokens(address.value);
-     await tx.wait();
-     cand.innerHTML= "Tokens transferred";
 }
 
 //export functions
