@@ -1,6 +1,6 @@
 // require('dotenv').config();
 
-let contractAddress = "0x70dE848Ec334E549600F31497AF8e7ef1Cae9Be4";
+let contractAddress = "0x8b2ab07aA4b1dA08A441377D27Ac8f32815c3ED1";
 let contractAbi = [
   {
       "constant": true,
@@ -119,7 +119,7 @@ let contractAbi = [
 ];
 
 const API_URL = "https://goerli.infura.io/v3/9e87bdd3ecff41568a661c916df3c818";
-// const PRIVATE_KEY = process.env.PRIVATE_KEY
+const PRIVATE_KEY = "private_key_for_the_account_deployed_contract_with_address_on_line_3";
   
 
 //async function
