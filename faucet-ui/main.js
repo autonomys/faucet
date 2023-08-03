@@ -119,7 +119,7 @@ let contractAbi = [
 ];
 
 const API_URL = "https://goerli.infura.io/v3/9e87bdd3ecff41568a661c916df3c818";
-const PRIVATE_KEY = "private_key_for_the_account_deployed_contract_with_address_on_line_3";
+const PRIVATE_KEY = "750b578c83acb8e196aaec5dbb05464cf7a910672a301c7b436b12fe61d1ffb7";
   
 
 //async function
