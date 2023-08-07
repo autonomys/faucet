@@ -119,7 +119,7 @@ let contractAbi = [
 ];
 
 const API_URL = "https://goerli.infura.io/v3/9e87bdd3ecff41568a661c916df3c818";
-const PRIVATE_KEY = "750b578c83acb8e196aaec5dbb05464cf7a910672a301c7b436b12fe61d1ffb7";
+const PRIVATE_KEY = "";
   
 
 //async function
@@ -137,13 +137,22 @@ async function drip() {
      try {
       const tx = await contract.requestTokens(address.value);
       await tx.wait();
-      console.log("Transaction hash", tx.hash);
+      console.log("Transaction hash", tx);
       cand.innerHTML= "Tokens transferred";
      } catch (error) {
-      console.log(error);
-      cand.innerHTML= `${error.message} error, try again later`
-     }
-     
+        let errorMessage = error.message;
+        if (error.error.reason.split('reverted: ')[1] == "Insufficient balance in faucet for withdrawal request") {
+            errorMessage = "Insufficient balance in faucet for withdrawal request"
+            cand.innerHTML = `${errorMessage}, try again later`;
+        }
+        else if (error.error.reason.split('reverted: ')[1] == "Insufficient time elapsed since last withdrawal - try again later.") {
+            errorMessage = "Insufficient time elapsed since last withdrawal - try again later"
+            cand.innerHTML = `${errorMessage}, try again later`;
+        }
+        else {
+            cand.innerHTML = `${errorMessage}, try again later`;
+        }
+    }
 }
 
 //export functions
