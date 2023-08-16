@@ -4,12 +4,12 @@ const hre = require("hardhat");
 const private_key = process.env.PRIVATE_KEY
 
 async function main() {
-  const Faucet = await hre.ethers.getContractFactory("Faucet2");
-  const faucet = await Faucet.deploy("0xFC2Aa4EEC439FbAF8315c4FF9443692d8970579c");
+  const Faucet = await hre.ethers.getContractFactory("Faucet");
+  const faucet = await Faucet.deploy();
 
   await faucet.deployed();
 
-  console.log("SubspaceTestToken Faucet2 contract deployed: ", faucet.address);
+  console.log("Faucet contract deployed: ", faucet.address);
 }
 
 main().catch((error) => {
