@@ -7,12 +7,12 @@ contract MinterRole is AccessControlEnumerable {
   bytes32 public constant MINTER_ROLE = keccak256('MINTER_ROLE');
 
   modifier hasAdminRole() {
-    require(isAdmin(msg.sender), 'MinterRole: Not a admin');
+    require(isAdmin(msg.sender), 'MinterRole: Only admin can call this function');
     _;
   }
 
   modifier hasMinterRole() {
-    require(isMinter(msg.sender), 'MinterRole: Not a minter');
+    require(isMinter(msg.sender), 'MinterRole: Only minter can call this function');
     _;
   }
 
