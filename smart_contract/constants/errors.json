@@ -1,0 +1,16 @@
+{
+  "FaucetRole": {
+    "NotAdmin": "FaucetRole: Not a admin",
+    "NotMinter": "FaucetRole: Not a faucet"
+  },
+  "MinterRole": {
+    "NotAdmin": "MinterRole: Not a admin",
+    "NotMinter": "MinterRole: Not a minter"
+  },
+  "Faucet": {
+    "FailSendingNativeToken": "Faucet: Failed to send native tokens",
+    "NoNativeTokenLeft": "Faucet: No balance left in the contract",
+    "InsufficientNativeTokenBalance": "Faucet: Insufficient balance in faucet for withdrawal request",
+    "InsufficientTimeElapsed": "Faucet: Insufficient time elapsed since last withdrawal"
+  }
+}
