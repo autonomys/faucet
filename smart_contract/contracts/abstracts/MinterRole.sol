@@ -37,7 +37,7 @@ contract MinterRole is AccessControlEnumerable {
     revokeRole(DEFAULT_ADMIN_ROLE, admin);
   }
 
-  /// @notice Return if a address has minter role
+  /// @notice Return if an address has minter role
   /// @param minter The address to verify
   /// @return True if the address has minter role
   function isMinter(address minter) public view returns (bool) {
