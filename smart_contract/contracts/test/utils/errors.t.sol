@@ -17,12 +17,6 @@ contract Errors is DSTest {
     SUCCESS,
     SKIP_VALIDATION,
     ANY_REVERT,
-    // FaucetRole
-    FaucetRolee_NotAdmin,
-    FaucetRole_NotMinter,
-    // MinterRole
-    MinterRole_NotAdmin,
-    MinterRole_NotMinter,
     // Faucet
     Faucet_FailSendingNativeToken,
     Faucet_NoNativeTokenLeft,
@@ -33,15 +27,7 @@ contract Errors is DSTest {
   constructor() {
     string memory json = vm.readFile('./constants/errors.json');
 
-    // FaucetRole
-    _errors[RevertStatus.FaucetRolee_NotAdmin] = json.readString('.FaucetRole.NotAdmin');
-    _errors[RevertStatus.FaucetRole_NotMinter] = json.readString('.FaucetRole.NotMinter');
-
-    // MinterRole
-    _errors[RevertStatus.MinterRole_NotAdmin] = json.readString('.MinterRole.NotAdmin');
-    _errors[RevertStatus.MinterRole_NotMinter] = json.readString('.MinterRole.NotMinter');
-
-    // DataPool
+    // Faucet
     _errors[RevertStatus.Faucet_FailSendingNativeToken] = json.readString('.Faucet.FailSendingNativeToken');
     _errors[RevertStatus.Faucet_NoNativeTokenLeft] = json.readString('.Faucet.NoNativeTokenLeft');
     _errors[RevertStatus.Faucet_InsufficientTimeElapsed] = json.readString('.Faucet.InsufficientTimeElapsed');
@@ -56,7 +42,7 @@ contract Errors is DSTest {
   function verify_revertCall(RevertStatus revertType_) public {
     if (revertType_ == RevertStatus.ANY_REVERT) vm.expectRevert();
     else if (revertType_ != RevertStatus.SUCCESS && revertType_ != RevertStatus.SKIP_VALIDATION)
-      vm.expectRevert(bytes(_verify_revertCall(revertType_)));
+      vm.expectRevert(bytes4(keccak256(bytes(_verify_revertCall(revertType_)))));
   }
 
   function test_coverageIgnore() internal pure virtual {}

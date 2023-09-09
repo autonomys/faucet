@@ -3,16 +3,19 @@ pragma solidity ^0.8.19;
 
 import '@openzeppelin/contracts/access/AccessControlEnumerable.sol';
 
+error MinterRole_FunctionRestrictedToAdmin();
+error MinterRole_FunctionRestrictedToMinter();
+
 contract MinterRole is AccessControlEnumerable {
   bytes32 public constant MINTER_ROLE = keccak256('MINTER_ROLE');
 
   modifier hasAdminRole() {
-    require(isAdmin(msg.sender), 'MinterRole: Only admin can call this function');
+    if (!isAdmin(msg.sender)) revert MinterRole_FunctionRestrictedToAdmin();
     _;
   }
 
   modifier hasMinterRole() {
-    require(isMinter(msg.sender), 'MinterRole: Only minter can call this function');
+    if (!isMinter(msg.sender)) revert MinterRole_FunctionRestrictedToMinter();
     _;
   }
 

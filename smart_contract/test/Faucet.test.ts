@@ -149,7 +149,8 @@ describe('Faucet', function () {
       const withdrawalAmount = await faucet.withdrawalAmount()
       await deployer.sendTransaction({ to: faucetAddress, value: withdrawalAmount.toString() })
 
-      await expect(faucet.connect(wallet2).requestTokens(wallet2Address)).to.be.revertedWith(
+      await expect(faucet.connect(wallet2).requestTokens(wallet2Address)).to.be.revertedWithCustomError(
+        faucet,
         errors.MinterRole.NotMinter,
       )
       await expect(await wallet2.provider.getBalance(wallet2Address)).to.be.lessThanOrEqual(currentWallet2Balance)
@@ -165,7 +166,8 @@ describe('Faucet', function () {
       const withdrawalAmount = await faucet.withdrawalAmount()
       const newWithdrawalAmount = withdrawalAmount + BigInt(10)
 
-      await expect(faucet.connect(wallet2).setWithdrawalAmount(newWithdrawalAmount)).to.be.revertedWith(
+      await expect(faucet.connect(wallet2).setWithdrawalAmount(newWithdrawalAmount)).to.be.revertedWithCustomError(
+        faucet,
         errors.MinterRole.NotAdmin,
       )
 
@@ -180,7 +182,10 @@ describe('Faucet', function () {
       const lockTime = await faucet.lockTime()
       const newLockTime = lockTime + BigInt(10)
 
-      await expect(faucet.connect(wallet2).setLockTime(newLockTime)).to.be.revertedWith(errors.MinterRole.NotAdmin)
+      await expect(faucet.connect(wallet2).setLockTime(newLockTime)).to.be.revertedWithCustomError(
+        faucet,
+        errors.MinterRole.NotAdmin,
+      )
 
       await expect(await faucet.lockTime()).to.be.equal(lockTime)
     })
@@ -195,7 +200,7 @@ describe('Faucet', function () {
 
       const currentDeployerBalance = await deployer.provider.getBalance(deployerAddress)
 
-      await expect(faucet.connect(wallet2).withdraw()).to.be.revertedWith(errors.MinterRole.NotAdmin)
+      await expect(faucet.connect(wallet2).withdraw()).to.be.revertedWithCustomError(faucet, errors.MinterRole.NotAdmin)
 
       await expect(await deployer.provider.getBalance(deployerAddress)).to.be.lessThanOrEqual(currentDeployerBalance)
     })
@@ -206,7 +211,10 @@ describe('Faucet', function () {
 
       const { faucet, deployer } = await loadFixture(deploy)
 
-      await expect(faucet.connect(wallet2).addMinter(wallet2Address)).to.be.revertedWith(errors.MinterRole.NotAdmin)
+      await expect(faucet.connect(wallet2).addMinter(wallet2Address)).to.be.revertedWithCustomError(
+        faucet,
+        errors.MinterRole.NotAdmin,
+      )
 
       await expect(await faucet.isMinter(wallet2Address)).to.be.false
     })
@@ -221,7 +229,10 @@ describe('Faucet', function () {
 
       await expect(await faucet.isMinter(wallet3Address)).to.be.true
 
-      await expect(faucet.connect(wallet2).removeMinter(wallet3Address)).to.be.revertedWith(errors.MinterRole.NotAdmin)
+      await expect(faucet.connect(wallet2).removeMinter(wallet3Address)).to.be.revertedWithCustomError(
+        faucet,
+        errors.MinterRole.NotAdmin,
+      )
 
       await expect(await faucet.isMinter(wallet3Address)).to.be.true
     })
@@ -232,7 +243,10 @@ describe('Faucet', function () {
 
       const { faucet, deployer } = await loadFixture(deploy)
 
-      await expect(faucet.connect(wallet2).addAdmin(wallet2Address)).to.be.revertedWith(errors.MinterRole.NotAdmin)
+      await expect(faucet.connect(wallet2).addAdmin(wallet2Address)).to.be.revertedWithCustomError(
+        faucet,
+        errors.MinterRole.NotAdmin,
+      )
 
       await expect(await faucet.isAdmin(wallet2Address)).to.be.false
     })
@@ -247,7 +261,10 @@ describe('Faucet', function () {
 
       await expect(await faucet.isAdmin(wallet3Address)).to.be.true
 
-      await expect(faucet.connect(wallet2).removeAdmin(wallet3Address)).to.be.revertedWith(errors.MinterRole.NotAdmin)
+      await expect(faucet.connect(wallet2).removeAdmin(wallet3Address)).to.be.revertedWithCustomError(
+        faucet,
+        errors.MinterRole.NotAdmin,
+      )
 
       await expect(await faucet.isAdmin(wallet3Address)).to.be.true
     })

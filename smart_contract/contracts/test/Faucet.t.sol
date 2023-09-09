@@ -26,12 +26,19 @@ contract FaucetTest is Constants {
         vm.stopPrank();
         vm.warp(1 hours);
     }
+
+    function receiverCheck(address to_) private view {
+        vm.assume(to_ != address(0));
+        vm.assume(to_ != address(1));
+        vm.assume(to_ != address(faucet));
+        vm.assume(to_.code.length == 0);
+    }
     
     function test_Native_mint(
         address to_
     ) public {
-        vm.assume(to_ != address(0));
-        vm.assume(to_.code.length == 0);
+        receiverCheck(to_);
+
         uint256 currentBalance = address(to_).balance;
         uint256 expectedBalance = currentBalance + BASIC_MINT_AMOUNT;
 
@@ -47,7 +54,7 @@ contract FaucetTest is Constants {
     function test_requestTokenBeforeLockTime(
         address to_
     ) public {
-        vm.assume(to_ != address(0));
+        receiverCheck(to_);
 
         faucet.requestTokens(to_);
 
@@ -56,8 +63,11 @@ contract FaucetTest is Constants {
         faucet.requestTokens(to_);
     }
 
-    function test_requestTokenAfterBalanceIsEmpty() public {
-        address to_ = address(100);
+    function test_requestTokenAfterBalanceIsEmpty(
+        address to_
+    ) public {
+        receiverCheck(to_);
+
         uint256 currentBalance = address(to_).balance;
         uint256 expectedBalance = currentBalance + BASIC_MINT_AMOUNT;
 
@@ -73,8 +83,11 @@ contract FaucetTest is Constants {
         assertEq(address(faucet).balance, 0);
     }
 
-    function test_requestTokens_then_requestToken_onSameBlock() public {
-        address to_ = address(100);
+    function test_requestTokens_then_requestToken_onSameBlock(
+        address to_
+    ) public {
+        receiverCheck(to_);
+
         uint256 currentBalance = address(to_).balance;
         uint256 expectedBalance = currentBalance + BASIC_MINT_AMOUNT;
 
@@ -89,8 +102,11 @@ contract FaucetTest is Constants {
         assertEq(address(faucet).balance, 0);
     }
 
-    function test_dispatchAllToken_thenFailToWithdrawLeftOver() public {
-        address to_ = address(100);
+    function test_dispatchAllToken_thenFailToWithdrawLeftOver(
+        address to_
+    ) public {
+        receiverCheck(to_);
+
         uint256 currentBalance = address(to_).balance;
         uint256 expectedBalance = currentBalance + BASIC_MINT_AMOUNT;
 
@@ -106,8 +122,11 @@ contract FaucetTest is Constants {
         assertEq(address(faucet).balance, 0);
     }
 
-    function test_dispatchAllToken_thenSucceedToWithdrawLeftOver() public {
-        address to_ = address(100);
+    function test_dispatchAllToken_thenSucceedToWithdrawLeftOver(
+        address to_
+    ) public {
+        receiverCheck(to_);
+
         uint256 currentBalance = address(to_).balance;
         uint256 expectedBalance = currentBalance + BASIC_MINT_AMOUNT;
 
@@ -124,8 +143,11 @@ contract FaucetTest is Constants {
         assertEq(address(faucet).balance, 0);
     }
 
-    function test_Faucet_dispatch_then_setWithdrawalAmount_and_dispatchAgain() public {
-        address to_ = address(100);
+    function test_Faucet_dispatch_then_setWithdrawalAmount_and_dispatchAgain(
+        address to_
+    ) public {
+        receiverCheck(to_);
+
         uint256 currentBalance = address(to_).balance;
         uint256 expectedBalance = currentBalance + BASIC_MINT_AMOUNT;
 
@@ -150,8 +172,11 @@ contract FaucetTest is Constants {
         assertEq(address(faucet).balance, 0);
     }
 
-    function test_Faucet_dispatch_then_setLockTime_and_dispatchAgain() public {
-        address to_ = address(100);
+    function test_Faucet_dispatch_then_setLockTime_and_dispatchAgain(
+        address to_
+    ) public {
+        receiverCheck(to_);
+
         uint256 currentBalance = address(to_).balance;
         uint256 expectedBalance = currentBalance + BASIC_MINT_AMOUNT;
 

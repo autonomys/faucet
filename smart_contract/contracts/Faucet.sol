@@ -4,6 +4,10 @@ pragma solidity ^0.8.19;
 
 import './abstracts/MinterRole.sol';
 
+error Faucet_InsufficientTimeElapsed();
+error Faucet_SendingTokensFailed();
+error Faucet_ContractBalanceIsZero();
+
 contract Faucet is MinterRole {
     uint256 public withdrawalAmount = 0.0006 * (10**18);
     uint256 public lockTime = 1 minutes;
@@ -20,16 +24,13 @@ contract Faucet is MinterRole {
     /// @notice Allow faucet owner to dispatch native tokens to the given address.
     /// @param recipient The address to send tokens to.
     function requestTokens(address recipient) public hasMinterRole {
-        require(
-            nextAccessTime(recipient) <= block.timestamp,
-            "Faucet: Insufficient time elapsed since last withdrawal"
-        );
+        if (nextAccessTime(recipient) > block.timestamp) revert Faucet_InsufficientTimeElapsed();
 
         // If check pass set the next access time
         _lastAccessTime[recipient] = block.timestamp;
 
         // If check pass transfer the tokens
-        require(payable(recipient).send(withdrawalAmount), "Faucet: Failed to send native tokens");
+        if (!payable(recipient).send(withdrawalAmount)) revert Faucet_SendingTokensFailed();
     }
 
     /// @notice Show the next access time for the given addres
@@ -53,10 +54,7 @@ contract Faucet is MinterRole {
 
     /// @notice Allow faucet owner to withdraw the native tokens from the contract.
     function withdraw() external hasAdminRole {
-        require(
-            address(this).balance > 0,
-            "Faucet: No balance left in the contract"
-        );
+        if (address(this).balance == 0) revert Faucet_ContractBalanceIsZero();
         address payable receiver = payable(_msgSender());
         receiver.transfer(address(this).balance);
     }

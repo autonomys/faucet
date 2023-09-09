@@ -1,15 +1,5 @@
 {
   "Faucet": {
     "CONTRACT_FILE_NAME": "Faucet"
-  },
-  "MockERC20": {
-    "CONTRACT_FILE_NAME": "MockERC20",
-    "CONTRACT_NAME": "MockERC20",
-    "CONTRACT_SYMBOL": "MOCK"
-  },
-  "MockERC721": {
-    "CONTRACT_FILE_NAME": "MockERC721",
-    "CONTRACT_NAME": "MockERC721",
-    "CONTRACT_SYMBOL": "MOCK"
   }
 }
