@@ -7,8 +7,6 @@ Project to facilitate work on Subspace Faucet, including discord bot, HTTP API s
 ## Functionality
 
 - Request tokens from faucet
-- Request Mock ERC20 tokens from faucet
-- Request Mock ERC721 tokens from faucet
 
 ## Setup smart contract project
 
