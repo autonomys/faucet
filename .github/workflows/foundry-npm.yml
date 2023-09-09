@@ -14,9 +14,7 @@ jobs:
         uses: onbjerg/foundry-toolchain@v1
         with:
           version: nightly
-      - name: Move to Smart Contracts folder
-        run: cd smart_contract
       - name: NPM Clean Install
-        run: npm ci
+        run: cd smart_contract && npm ci
       - name: Run Forge Test
         run: forge test
