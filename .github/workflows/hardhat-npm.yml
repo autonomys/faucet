@@ -9,13 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Move to Smart Contracts folder
-        run: cd smart_contract
       - name: NPM Clean Install
-        run: npm ci
+        run: cd smart_contract && npm ci
       - name: Hardhat Compile
-        run: npx hardhat compile
+        run: cd smart_contract && npx hardhat compile
       - name: Hardhat Test
-        run: npx hardhat test
+        run: cd smart_contract && npx hardhat test
       - name: Hardhat Coverage Result
-        run: npx hardhat coverage
+        run: cd smart_contract && npx hardhat coverage
