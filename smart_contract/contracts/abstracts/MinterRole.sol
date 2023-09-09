@@ -16,7 +16,7 @@ contract MinterRole is AccessControlEnumerable {
     _;
   }
 
-  /// @notice Return if a address has admin role
+  /// @notice Return if an address has admin role
   /// @param admin The address to verify
   /// @return True if the address has admin role
   function isAdmin(address admin) public view returns (bool) {
