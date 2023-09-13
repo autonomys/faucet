@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Faucet",
+    "address": "0x74377fe8209015Bf6e58e52CC0fe2F1bDA8102B3",
+    "network": "gemini",
+    "deployer": "0x2576D47e177d9B875237db3d35e4fEd0ad05ED2c",
+    "deploymentDate": "Fri Sep 08 2023 20:52:48 GMT-0400 (Eastern Daylight Saving Time)",
+    "chainId": 1002,
+    "blockHash": "",
+    "blockNumber": 0,
+    "tag": "Faucet deployed by deploy script",
+    "extra": {}
+  }
+]

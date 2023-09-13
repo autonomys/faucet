@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "JuanBlanco.solidity",
+    "tintinweb.solidity-visual-auditor",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "streetsidesoftware.code-spell-checker"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "MinterRole": {
+    "NotAdmin": "MinterRole_FunctionRestrictedToAdmin()",
+    "NotMinter": "MinterRole_FunctionRestrictedToMinter()"
+  },
+  "Faucet": {
+    "FailSendingNativeToken": "Faucet_SendingTokensFailed()",
+    "NoNativeTokenLeft": "Faucet_ContractBalanceIsZero()",
+    "InsufficientTimeElapsed": "Faucet_InsufficientTimeElapsed()"
+  }
+}
