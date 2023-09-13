@@ -34,18 +34,14 @@ const nextAccessTime = async (address: string): Promise<BigNumber> => {
   return await contract.nextAccessTime(address)
 }
 
-const requestTokens = async (address: string): Promise<Transaction> => {
-  const contract = await getFaucetWithSigner()
-  return await contract.requestTokens(address)
-}
-
 const verifyFaucetBalance = async (): Promise<BigNumber> => {
   const provider = await getProvider()
   return await provider.getBalance(config.CONTRACT_ADDRESS)
 }
 
-export const transactions = {
-  requestTokens,
+export const requestTokens = async (address: string): Promise<Transaction> => {
+  const contract = await getFaucetWithSigner()
+  return await contract.requestTokens(address)
 }
 
 export const queries = {

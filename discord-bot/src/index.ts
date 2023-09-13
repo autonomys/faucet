@@ -2,7 +2,7 @@ import { Client, IntentsBitField } from 'discord.js'
 import {
   config,
   CommandNames,
-  transactions,
+  requestTokens,
   queries,
   log,
   sendSlackMessage,
@@ -21,24 +21,27 @@ const client = new Client({
 })
 
 let faucetRequestsCount = 0
+const requesterAddresses: string[] = []
 let slackMessageId: string | undefined = undefined
 let lastLowWarningMessage: Date | undefined = undefined
 
-const incrementFaucetRequestsCount = async () => {
+const incrementFaucetRequestsCount = async (address: string) => {
   faucetRequestsCount++
+  if (!requesterAddresses.find((a) => a === address)) requesterAddresses.push(address)
   // If it's Monday and there was requests, send a new slack message with the stats from last week and reset the counter
   // If it's not Monday, update the slack message with the new stats
   if (new Date().getDay() === 1 && faucetRequestsCount > 0) {
     slackMessageId = undefined
     slackMessageId = await sendSlackMessage(
       'Last week evm-faucet requests',
-      buildSlackStatsMessage('weekRecap', faucetRequestsCount),
+      buildSlackStatsMessage('weekRecap', faucetRequestsCount, requesterAddresses.length),
     )
     faucetRequestsCount = 0
+    requesterAddresses.length = 0
   } else {
     slackMessageId = await sendSlackMessage(
       'Last week evm-faucet requests',
-      buildSlackStatsMessage('update', faucetRequestsCount),
+      buildSlackStatsMessage('update', faucetRequestsCount, requesterAddresses.length),
       slackMessageId,
     )
   }
@@ -100,7 +103,7 @@ client.on('interactionCreate', async (interaction) => {
               log('withdrawalAmount', formattedAmount)
 
               // request tokens
-              const tx = await transactions.requestTokens(addressOption.value)
+              const tx = await requestTokens(addressOption.value)
               if (tx && tx.hash) {
                 interaction.followUp(
                   'We just sent you ' +
@@ -112,7 +115,7 @@ client.on('interactionCreate', async (interaction) => {
                     '/tx/' +
                     tx.hash,
                 )
-                await incrementFaucetRequestsCount()
+                await incrementFaucetRequestsCount(addressOption.value)
               } else interaction.followUp('Transaction failed')
             } else {
               const timeToWait = nextAccessTime.sub(currentTime)

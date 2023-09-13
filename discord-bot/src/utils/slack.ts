@@ -34,17 +34,25 @@ export const sendSlackMessage = async (message: string, blocks: TBlocks, message
   }
 }
 
-export const buildSlackStatsMessage = (type: 'weekRecap' | 'update', requestCount: number): TBlocks => {
+export const buildSlackStatsMessage = (
+  type: 'weekRecap' | 'update',
+  requestCount: number,
+  uniqueAddresses: number,
+): TBlocks => {
   const blocks = [slackBuilder.buildSimpleSlackHeaderMsg('Faucet stats')]
   switch (type) {
     case 'weekRecap':
-      blocks.push(slackBuilder.buildSimpleSectionMsg(`Last week total requests: ${requestCount} :subspace-hype:`))
+      blocks.push(
+        slackBuilder.buildSimpleSectionMsg(`Last week total requests: ${requestCount} :subspace-hype:`),
+        slackBuilder.buildSimpleSectionMsg(`Unique addresses: ${uniqueAddresses} :subheart-white:`),
+      )
       return blocks
     case 'update':
       blocks.push(
         slackBuilder.buildSimpleSectionMsg(
           `Current total requests: ${requestCount} ${requestCount > 100 ? ':subspace-hype:' : ':subheart-black:'}`,
         ),
+        slackBuilder.buildSimpleSectionMsg(`Unique addresses: ${uniqueAddresses} :subheart-white:`),
       )
       return blocks
   }
