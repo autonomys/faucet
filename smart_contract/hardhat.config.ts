@@ -56,10 +56,10 @@ const config: HardhatUserConfig = {
     customChains: [
       {
         network: 'gemini',
-        chainId: 0, // TODO: Update
+        chainId: 1002,
         urls: {
-          apiURL: '', // TODO: Update
-          browserURL: '', // TODO: Update
+          apiURL: 'https://blockscout.subspace.network/api',
+          browserURL: 'https://blockscout.subspace.network/',
         },
       },
     ],
