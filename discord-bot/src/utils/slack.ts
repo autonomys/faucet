@@ -1,4 +1,4 @@
-import { slackUtils, slackBuilder, TBlocks } from 'slack-utility'
+import { TBlocks, slackBuilder, slackUtils } from 'slack-utility'
 import { config, log } from './config'
 
 export const sendSlackMessage = async (message: string, blocks: TBlocks, messageIdToEdit?: string) => {
@@ -38,12 +38,15 @@ export const buildSlackStatsMessage = (
   type: 'weekRecap' | 'update',
   requestCount: number,
   uniqueAddresses: number,
+  requestsByType?: {
+    [key: string]: number
+  },
 ): TBlocks => {
   const blocks = [slackBuilder.buildSimpleSlackHeaderMsg('Faucet stats')]
   switch (type) {
     case 'weekRecap':
       blocks.push(
-        slackBuilder.buildSimpleSectionMsg(`Last week total requests: ${requestCount} :subspace-hype:`),
+        slackBuilder.buildSimpleSectionMsg(`This week total requests: ${requestCount} :subspace-hype:`),
         slackBuilder.buildSimpleSectionMsg(`Unique addresses: ${uniqueAddresses} :subheart-white:`),
       )
       return blocks
@@ -54,6 +57,20 @@ export const buildSlackStatsMessage = (
         ),
         slackBuilder.buildSimpleSectionMsg(`Unique addresses: ${uniqueAddresses} :subheart-white:`),
       )
+      requestsByType &&
+        blocks.push(
+          slackBuilder.buildSimpleSectionMsg(
+            'Requests by type:',
+            `\`\`\`${JSON.stringify(
+              {
+                ...requestsByType,
+                discord: requestsByType.discord ? requestsByType.discord + 1 : 1,
+              },
+              null,
+              2,
+            )}\`\`\``,
+          ),
+        )
       return blocks
   }
 }

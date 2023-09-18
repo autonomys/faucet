@@ -1,9 +1,11 @@
 {
   "editor.codeActionsOnSave": {
+    "source.sortImports": true,
     "source.fixAll.eslint": true,
     "source.fixAll.tslint": true
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "javascript.updateImportsOnFileMove.enabled": "always",
   "eslint.workingDirectories": [{ "mode": "auto" }],
   "javascript.format.enable": false,
   "window.zoomLevel": -1,
