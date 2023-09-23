@@ -22,7 +22,7 @@ export const ConnectWallet: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    if (isConnected && chain && chain.id !== 31337 && switchNetwork) switchNetwork(31337)
+    if (isConnected && chain && chain.id !== 1002 && switchNetwork) switchNetwork(1002)
   }, [isConnected, chain, switchNetwork])
 
   if (!clientSide) return null
