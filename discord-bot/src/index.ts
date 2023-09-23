@@ -91,7 +91,7 @@ const finishInteraction = () => {
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   const CURRENT_TIME = new Date()
   // Keeping only the date and minutes to avoid spamming the faucet (reduce the number of digit to reduce time between requests)
-  const REQUEST_DATE = CURRENT_TIME.toISOString().slice(0, 16) // Minutes precision
+  const REQUEST_DATE = CURRENT_TIME.toISOString().slice(0, 10) // Daily precision
   const STATS_DATE = CURRENT_TIME.toISOString().slice(0, 10) // Daily precision
 
   const ed25519 = event.headers['x-signature-ed25519']

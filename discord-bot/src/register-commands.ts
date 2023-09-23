@@ -1,5 +1,8 @@
+import * as dotenv from 'dotenv'
+dotenv.config()
+
 import { REST, Routes } from 'discord.js'
-import { config, commands } from './utils'
+import { commands, config } from './utils'
 
 //interact with API
 const rest = new REST({ version: '10' }).setToken(config.TOKEN)
