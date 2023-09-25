@@ -93,14 +93,14 @@ const RequestTokenButton: React.FC<RequestTokenButtonProps> = ({ contract, addre
   const handleRequestToken = async () => {
     if (chain && !dataIsError && data && data[0] && data[1] && session != null && session.user != null) {
       setIsLoading(true)
-      const withdrawalAmount = data[0].result as bigint
-      const nextAccessTime = data[1].result as bigint
+      const withdrawalAmount = data[0].status === 'success' ? (data[0].result as bigint) : BigInt(0)
+      const nextAccessTime = data[1].status === 'success' ? (data[1].result as bigint) : BigInt(0)
       const now = BigInt(Math.floor(Date.now() / 1000))
       switch (true) {
         case now < nextAccessTime:
           toast({
             title: 'Error requesting token',
-            description: `You can request token again in ${Number(nextAccessTime - now)} seconds.`,
+            description: `You can request token again in ${(BigInt(nextAccessTime) - BigInt(now)).toString()} seconds.`,
             status: 'error',
             duration: 9000,
             isClosable: true
@@ -136,8 +136,8 @@ const RequestTokenButton: React.FC<RequestTokenButtonProps> = ({ contract, addre
                             Token requested
                           </Heading>
                           <Text color='white'>
-                            We&apos;ve requested {Number(withdrawalAmount) / 10 ** 18} {chain.nativeCurrency.symbol} for
-                            you.
+                            We&apos;ve requested {(BigInt(withdrawalAmount) / BigInt(10 ** 18)).toString()}{' '}
+                            {chain.nativeCurrency.symbol} for you.
                           </Text>
                           <Link href={`${chain.blockExplorers?.default.url}/tx/${res.txResponse.hash}`} target='_blank'>
                             <Button variant='outline' colorScheme='brand' ml='2' size='sm' color='white'>
