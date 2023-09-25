@@ -1,7 +1,3 @@
-import * as dotenv from 'dotenv'
-
-dotenv.config()
-
 const loadEnv = (key: string): string => {
   if (!process.env[key]) throw new Error(`${key} is not defined`)
   return process.env[key] || ''
@@ -9,6 +5,7 @@ const loadEnv = (key: string): string => {
 
 export const config = {
   TOKEN: loadEnv('TOKEN'),
+  PUBLIC_KEY: loadEnv('PUBLIC_KEY'),
   GUILD_ID: loadEnv('GUILD_ID'),
   CLIENT_ID: loadEnv('CLIENT_ID'),
   CONTRACT_ADDRESS: loadEnv('CONTRACT_ADDRESS'),
@@ -21,6 +18,7 @@ export const config = {
   SLACK_BALANCE_NOTIFICATION_THRESHOLD: loadEnv('SLACK_BALANCE_NOTIFICATION_THRESHOLD'),
   SLACK_TOKEN: loadEnv('SLACK_TOKEN'),
   SLACK_CONVERSATION_ID: loadEnv('SLACK_CONVERSATION_ID'),
+  FAUNA_DB_SECRET: loadEnv('FAUNA_DB_SECRET'),
 }
 
 export const log = (message?: any, ...optionalParams: any[]) =>

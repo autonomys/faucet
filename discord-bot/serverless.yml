@@ -1,0 +1,19 @@
+service: discordFaucet
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-west-1
+
+functions:
+  faucet:
+    handler: src/index.handler
+    events:
+      - http:
+          path: discordFaucet/index
+          method: post
