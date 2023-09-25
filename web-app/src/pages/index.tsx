@@ -278,8 +278,8 @@ const Page: React.FC = () => {
               <ListItem>
                 <Checked isChecked={isConnected && isGitHubFollower} />
                 Follow us on GitHub
-                {isConnected && !isGitHubFollower && (
-                  <Link href='https://github.com/subspace' target='_blank'>
+                {isConnected && !isGitHubFollower && process.env.NEXT_PUBLIC_GITHUB_ACCOUNT_URL && (
+                  <Link href={process.env.NEXT_PUBLIC_GITHUB_ACCOUNT_URL} target='_blank'>
                     <Button variant='outline' colorScheme='brand' ml='2' size='sm'>
                       Subspace GitHub
                     </Button>
@@ -309,11 +309,13 @@ const Page: React.FC = () => {
               <ListItem>
                 <Checked isChecked={isConnected && isDiscordGuildMember} />
                 Join Subspace Discord server
-                <Link href='https://discord.gg/DqMJHzwK' target='_blank'>
-                  <Button variant='outline' colorScheme='brand' ml='2' size='sm'>
-                    Join Discord
-                  </Button>
-                </Link>
+                {process.env.NEXT_PUBLIC_DISCORD_INVITE_URL && (
+                  <Link href={process.env.NEXT_PUBLIC_DISCORD_INVITE_URL} target='_blank'>
+                    <Button variant='outline' colorScheme='brand' ml='2' size='sm'>
+                      Join Discord
+                    </Button>
+                  </Link>
+                )}
               </ListItem>
               <ListItem>
                 <Checked isChecked={isConnected && isDiscordGuildMember} />
