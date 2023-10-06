@@ -11,6 +11,10 @@
     {
       "name": "smart-contracts",
       "path": "../smart_contract"
+    },
+    {
+      "name": "web-app",
+      "path": "../web-app"
     }
   ],
   "settings": {
