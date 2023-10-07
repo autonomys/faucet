@@ -6,7 +6,3 @@
   base = "./web-app"
 [dev]
   framework = "next"
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200

@@ -62,7 +62,7 @@
     "@babel/core": "^7.21.0",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.21.0",
-    "@netlify/plugin-nextjs": "^4.40.2",
+    "@netlify/plugin-nextjs": "4.32.2",
     "@next/bundle-analyzer": "^13.2.4",
     "@types/file-loader": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.3",
