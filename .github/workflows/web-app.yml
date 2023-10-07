@@ -1,0 +1,16 @@
+name: Run Web App Build
+
+on: [push]
+
+jobs:
+  test_foundry_npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Yarn Clean Install
+        run: cd web-app && yarn --frozen-lockfile
+      - name: Build
+        run: cd web-app && yarn build
