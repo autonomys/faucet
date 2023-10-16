@@ -23,6 +23,7 @@ import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React, { useEffect, useMemo, useState } from 'react'
 import { BsCheckCircle } from 'react-icons/bs'
+import { formatUnits } from 'viem'
 import { useAccount, useContractReads, useNetwork } from 'wagmi'
 import { Contract, contracts } from '../constants/contracts'
 
@@ -136,8 +137,8 @@ const RequestTokenButton: React.FC<RequestTokenButtonProps> = ({ contract, addre
                             Token requested
                           </Heading>
                           <Text color='white'>
-                            We&apos;ve requested {(BigInt(withdrawalAmount) / BigInt(10 ** 18)).toString()}{' '}
-                            {chain.nativeCurrency.symbol} for you.
+                            We&apos;ve requested {formatUnits(withdrawalAmount, 18)} {chain.nativeCurrency.symbol} for
+                            you.
                           </Text>
                           <Link href={`${chain.blockExplorers?.default.url}/tx/${res.txResponse.hash}`} target='_blank'>
                             <Button variant='outline' colorScheme='brand' ml='2' size='sm' color='white'>
