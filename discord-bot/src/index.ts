@@ -140,6 +140,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
                 `:warning: ${tagUser(body.member.user.id)} Please provide an address`,
               )
               return finishInteraction()
+            } else if (!utils.isAddress(addressOption.value)) {
+              await postDiscordMessage(
+                rest,
+                body.channel_id,
+                `:warning: ${tagUser(body.member.user.id)} Please provide a valid EVM address`,
+              )
+              return finishInteraction()
             } else {
               const currentTime = BigNumber.from(Math.floor(Date.now() / 1000))
               const nextAccessTime = await queries.nextAccessTime(addressOption.value)
