@@ -16,4 +16,4 @@ jobs:
       - name: NPM Clean Install
         run: cd discord-bot && npm ci
       - name: Deploy Serverless Bot on AWS
-        run: cd discord-bot && npm deloy
+        run: cd discord-bot && npm deploy
