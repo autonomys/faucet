@@ -144,7 +144,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
               await postDiscordMessage(
                 rest,
                 body.channel_id,
-                `:warning: ${tagUser(body.member.user.id)} Please provide an valid EVM address`,
+                `:warning: ${tagUser(body.member.user.id)} Please provide a valid EVM address`,
               )
               return finishInteraction()
             } else {
