@@ -405,7 +405,7 @@ const Page: React.FC = () => {
               <ListItem>5. Changes to Terms</ListItem>
               <ListItem>
                 5.1. The Provider reserves the right to modify or update these terms and conditions at any time. Changes
-                will be effective upon posting the updated terms on the Faucet's website.
+                will be effective upon posting the updated terms on the Faucet&apos;s website.
               </ListItem>
               <ListItem>6. Privacy and Data Protection </ListItem>
               <ListItem>
