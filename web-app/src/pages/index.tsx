@@ -345,13 +345,14 @@ const Page: React.FC = () => {
               By accessing or using the Faucet, you agree to be bound by these terms and conditions.
             </Text>
             <Text size='lg' fontWeight='800' fontSize='1rem' pb='4'>
-              Last Updated: October 10, 2023
+              Last Updated: October 26, 2023
             </Text>
             <Text size='lg' fontWeight='800' fontSize='1rem' pb='4'>
-              These Terms and Conditions ("Agreement") govern your use of the Subspace Faucet ("Faucet") provided by
+              These Terms and Conditions (&quot;Agreement&quot;) govern your use of the Subspace Faucet
+              (&quot;Faucet&quot;) provided by
               <span> </span>
               <Link color='blue' href='https://subspace.network/' target='_blank'>
-                Subspace Labs ("Provider")
+                Subspace Labs (&quot;Provider&quot;)
               </Link>
             </Text>
             <Text size='lg' fontWeight='800' fontSize='1rem' pb='4'>
@@ -391,9 +392,9 @@ const Page: React.FC = () => {
               </ListItem>
               <ListItem>4. Disclaimer</ListItem>
               <ListItem>
-                4.1. No Warranty: The Faucet is provided "as is" and without any warranties, express or implied,
-                including but not limited to, implied warranties of merchantability, fitness for a particular purpose,
-                or non-infringement.
+                4.1. No Warranty: The Faucet is provided &quot;as is&quot; and without any warranties, express or
+                implied, including but not limited to, implied warranties of merchantability, fitness for a particular
+                purpose, or non-infringement.
               </ListItem>
               <ListItem>
                 4.2. Limitation of Liability: To the fullest extent permitted by applicable law, the Provider shall not
