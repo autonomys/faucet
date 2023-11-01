@@ -95,6 +95,23 @@ const RequestTokenButton: React.FC<RequestTokenButtonProps> = ({ contract, addre
 
   const handleRequestToken = async () => {
     if (chain && !dataIsError && data && data[0] && data[1] && session != null && session.user != null) {
+      if (session.user.accountType === 'github' && !session.user.isGitHubFollower)
+        return toast({
+          title: 'Error requesting token',
+          description:
+            'Please make sure you are following Subspace GitHub account and connect your GitHub account again.',
+          status: 'error',
+          duration: 9000,
+          isClosable: true
+        })
+      if (session.user.accountType === 'discord' && !session.user.isDiscordGuildMember)
+        return toast({
+          title: 'Error requesting token',
+          description: 'Please make sure you are member of the Discord server and connect your Discord account again.',
+          status: 'error',
+          duration: 9000,
+          isClosable: true
+        })
       setIsLoading(true)
       const withdrawalAmount = data[0].status === 'success' ? (data[0].result as bigint) : BigInt(0)
       const nextAccessTime = data[1].status === 'success' ? (data[1].result as bigint) : BigInt(0)
