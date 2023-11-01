@@ -27,6 +27,7 @@ import { BsCheckCircle } from 'react-icons/bs'
 import { formatUnits } from 'viem'
 import { useAccount, useContractReads, useNetwork } from 'wagmi'
 import { Contract, contracts } from '../constants/contracts'
+import { formatSeconds } from '../utils'
 
 interface CheckedOrNotProps {
   isChecked: boolean
@@ -102,7 +103,9 @@ const RequestTokenButton: React.FC<RequestTokenButtonProps> = ({ contract, addre
         case now < nextAccessTime:
           toast({
             title: 'Error requesting token',
-            description: `You can request token again in ${(BigInt(nextAccessTime) - BigInt(now)).toString()} seconds.`,
+            description: `You can request token again in ${formatSeconds(
+              Number(BigInt(nextAccessTime) - BigInt(now))
+            )}.`,
             status: 'error',
             duration: 9000,
             isClosable: true
