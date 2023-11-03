@@ -53,11 +53,12 @@ export const Header: React.FC = () => {
         <Image src='/logo.svg' alt='Subspace Network Logo' w='20vw' h='8vh' />
       </Link>
       <Spacer />
-      <Box position='relative' w='12vw'>
+      <Box position='relative' w='20vw'>
         <AbsoluteCenter axis='both'>
           <Heading size='xl' whiteSpace='nowrap'>
             Faucet
           </Heading>
+          <Text fontWeight={600}>Gemini 3g Nova</Text>
         </AbsoluteCenter>
       </Box>
       <Spacer />
