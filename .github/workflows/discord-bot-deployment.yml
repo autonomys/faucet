@@ -17,3 +17,30 @@ jobs:
         run: cd discord-bot && npm ci
       - name: Deploy Serverless Bot on AWS
         run: cd discord-bot && npm run deploy
+        env:
+          # Discord Bot Token, Guild ID and Client ID
+          TOKEN: ${{ secrets.TOKEN }}
+          PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          GUILD_ID: ${{ secrets.GUILD_ID }}
+
+          # Faucet Contract Address and Minter Private Key
+          CONTRACT_ADDRESS: '0x872f3534a525023F9E42Ad69b788B44fc958D5aa'
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+
+          # Subspace EVM-Domain Token Symbol, RPC Endpoint and Blockscout Explorer URL
+          TOKEN_SYMBOL: 'tSSC'
+          RPC_ENDPOINT: 'https://nova.gemini-3g.subspace.network/w'
+          EXPLORER_URL: 'https://nova.subspace.network'
+
+          # Debug Mode (true/false)
+          DEBUG_MODE: 'true'
+
+          # Slack integration
+          SLACK_ENABLED: 'true'
+          SLACK_BALANCE_NOTIFICATION_THRESHOLD: '10' # This amount * the withdraw amount is the threshold
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          SLACK_CONVERSATION_ID: ${{ secrets.SLACK_CONVERSATION_ID }}
+
+          # FaunaDB integration
+          FAUNA_DB_SECRET: ${{ secrets.FAUNA_DB_SECRET }}
