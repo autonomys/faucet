@@ -30,7 +30,7 @@ jobs:
 
           # Subspace EVM-Domain Token Symbol, RPC Endpoint and Blockscout Explorer URL
           TOKEN_SYMBOL: 'tSSC'
-          RPC_ENDPOINT: 'https://nova.gemini-3g.subspace.network/w'
+          RPC_ENDPOINT: 'https://nova.gemini-3g.subspace.network/ws'
           EXPLORER_URL: 'https://nova.subspace.network'
 
           # Debug Mode (true/false)
