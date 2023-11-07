@@ -72,7 +72,7 @@ export const contracts: Contract[] = [
   {
     chainId: 1002,
     name: 'Faucet',
-    address: `0x872f3534a525023F9E42Ad69b788B44fc958D5aa`,
+    address: `0x238060160E04D938a34bDf425396384dC878F5E8`,
     abi: FAUCET
   }
 ]
