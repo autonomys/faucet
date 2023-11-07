@@ -1,10 +1,17 @@
+import { CopyIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
   Card,
   Center,
+  FormControl,
+  FormLabel,
   Heading,
+  IconButton,
   Image,
+  Input,
+  InputGroup,
+  InputRightElement,
   ListIcon,
   ListItem,
   OrderedList,
@@ -22,11 +29,12 @@ import {
 import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { BsCheckCircle } from 'react-icons/bs'
 import { formatUnits } from 'viem'
 import { useAccount, useContractReads, useNetwork } from 'wagmi'
 import { Contract, contracts } from '../constants/contracts'
+import { nova } from '../constants/networks'
 import { formatSeconds } from '../utils'
 
 interface CheckedOrNotProps {
@@ -40,6 +48,11 @@ interface Web2SocialButtonProps {
 interface RequestTokenButtonProps {
   contract: Contract
   address: string
+}
+
+interface ReadOnlyInputProps {
+  label: string
+  value: string
 }
 
 const ConnectWalletButton: React.FC = () => {
@@ -235,6 +248,48 @@ const RequestTokenButton: React.FC<RequestTokenButtonProps> = ({ contract, addre
   )
 }
 
+const ReadOnlyInput: React.FC<ReadOnlyInputProps> = ({ label, value }) => {
+  const toast = useToast()
+
+  const handleCopyToClipboard = useCallback(
+    (value: string) => {
+      navigator.clipboard.writeText(value)
+      toast({
+        status: 'success',
+        isClosable: true,
+        render: () => (
+          <Box color='white' p={3} bg='brand.500' w='50vh'>
+            <Center>
+              <VStack>
+                <Text color='white'>&apos;{value}&apos; copied to clipboard</Text>
+              </VStack>
+            </Center>
+          </Box>
+        )
+      })
+    },
+    [toast]
+  )
+
+  return (
+    <FormControl>
+      <FormLabel>{label}</FormLabel>
+      <InputGroup size='md'>
+        <Input defaultValue={value} isReadOnly />
+        <InputRightElement pr={0}>
+          <IconButton
+            variant='outline'
+            colorScheme='brand'
+            aria-label='Copy'
+            icon={<CopyIcon />}
+            onClick={() => handleCopyToClipboard(value)}
+          />
+        </InputRightElement>
+      </InputGroup>
+    </FormControl>
+  )
+}
+
 const Page: React.FC = () => {
   const [clientSide, setClientSide] = useState(false)
   const { isConnected, address } = useAccount()
@@ -277,6 +332,11 @@ const Page: React.FC = () => {
             <Image src='/images/discord.svg' alt='X' w='10' />
             <Heading size='lg' pl='4'>
               Discord
+            </Heading>
+          </Tab>
+          <Tab>
+            <Heading size='lg' pl='4'>
+              Network Settings
             </Heading>
           </Tab>
           <Tab>
@@ -356,6 +416,16 @@ const Page: React.FC = () => {
                 {contract && address && <RequestTokenButton contract={contract} address={address} />}
               </ListItem>
             </OrderedList>
+          </TabPanel>
+          <TabPanel>
+            <Text size='lg' fontWeight='800' fontSize='1.4rem' pb='4'>
+              Network Settings
+            </Text>
+            <ReadOnlyInput label='Network Name' value={nova.name} />
+            <ReadOnlyInput label='RPC URL' value={nova.rpcUrls.default.http[0]} />
+            <ReadOnlyInput label='Chain Id' value={nova.id.toString()} />
+            <ReadOnlyInput label='Currency symbol' value={nova.nativeCurrency.symbol} />
+            <ReadOnlyInput label='Block explorer URL' value={nova.blockExplorers?.default.url ?? ''} />
           </TabPanel>
           <TabPanel>
             <Text size='lg' fontWeight='800' fontSize='1rem' pb='4'>

@@ -1,8 +1,8 @@
 import { Chain, hardhat, mainnet } from 'wagmi/chains'
 
-const gemini: Chain = {
+export const nova: Chain = {
   id: 1002,
-  name: 'Gemini - Subspace Testnet',
+  name: 'Gemini 3g Nova - Subspace Testnet',
   network: 'gemini',
   nativeCurrency: {
     decimals: 18,
@@ -25,4 +25,4 @@ const gemini: Chain = {
   }
 }
 
-export const networks: Chain[] = [gemini, mainnet, hardhat]
+export const networks: Chain[] = [nova, mainnet, hardhat]
