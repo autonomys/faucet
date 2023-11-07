@@ -2,6 +2,8 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
@@ -17,3 +19,30 @@ jobs:
         run: cd discord-bot && npm ci
       - name: Deploy Serverless Bot on AWS
         run: cd discord-bot && npm run deploy
+        env:
+          # Discord Bot Token, Guild ID and Client ID
+          TOKEN: ${{ secrets.TOKEN }}
+          PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          GUILD_ID: ${{ secrets.GUILD_ID }}
+
+          # Faucet Contract Address and Minter Private Key
+          CONTRACT_ADDRESS: ${{ secrets.CONTRACT_ADDRESS }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+
+          # Subspace EVM-Domain Token Symbol, RPC Endpoint and Blockscout Explorer URL
+          TOKEN_SYMBOL: ${{ secrets.TOKEN_SYMBOL }}
+          RPC_ENDPOINT: ${{ secrets.RPC_ENDPOINT }}
+          EXPLORER_URL: ${{ secrets.EXPLORER_URL }}
+
+          # Debug Mode (true/false)
+          DEBUG_MODE: ${{ secrets.DEBUG_MODE }}
+
+          # Slack integration
+          SLACK_ENABLED: ${{ secrets.SLACK_ENABLED }}
+          SLACK_BALANCE_NOTIFICATION_THRESHOLD: ${{ secrets.SLACK_BALANCE_NOTIFICATION_THRESHOLD }} # This amount * the withdraw amount is the threshold
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          SLACK_CONVERSATION_ID: ${{ secrets.SLACK_CONVERSATION_ID }}
+
+          # FaunaDB integration
+          FAUNA_DB_SECRET: ${{ secrets.FAUNA_DB_SECRET }}
