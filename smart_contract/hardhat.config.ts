@@ -71,8 +71,8 @@ const config: HardhatUserConfig = {
         network: 'nova',
         chainId: 1002,
         urls: {
-          apiURL: 'https://blockscout.subspace.network/api',
-          browserURL: 'https://blockscout.subspace.network/',
+          apiURL: 'https://nova.subspace.network/api',
+          browserURL: 'https://nova.subspace.network/',
         },
       },
       {
