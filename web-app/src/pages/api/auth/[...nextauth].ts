@@ -40,7 +40,6 @@ export const authOptions = (): AuthOptions => {
       }
     }),
     DiscordProvider({
-      // authorization: { params: { scope: 'identify guilds' } },
       clientId: process.env.DISCORD_CLIENT_ID || '',
       clientSecret: process.env.DISCORD_CLIENT_SECRET || '',
       authorization: { params: { scope: 'identify guilds guilds.members.read' } },
@@ -52,9 +51,6 @@ export const authOptions = (): AuthOptions => {
           headers: {
             Authorization: `Bearer ${token.access_token}`
           }
-          // body: JSON.stringify({
-          //   target_user_id: '1382564789444964354'
-          // })
         })
           .then((res) => res.json())
           .then((json) => {

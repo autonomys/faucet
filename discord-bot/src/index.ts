@@ -10,6 +10,7 @@ import {
   faucetBalanceLowSlackMessage,
   findRequest,
   findStats,
+  formatSeconds,
   log,
   queries,
   requestTokens,
@@ -200,14 +201,14 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
                 }
               } else {
                 const timeToWait = nextAccessTime.sub(currentTime)
-                const formattedTime = timeToWait.toString()
+                const formattedTime = timeToWait.toNumber()
                 log('nextAccessTime', formattedTime)
                 await postDiscordMessage(
                   rest,
                   body.channel_id,
-                  `:clock1: ${tagUser(
-                    body.member.user.id,
-                  )} Please wait ${formattedTime} seconds before requesting again`,
+                  `:clock1: ${tagUser(body.member.user.id)} Please wait ${formatSeconds(
+                    formattedTime,
+                  )} before requesting again`,
                 )
                 return finishInteraction()
               }
