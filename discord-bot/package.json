@@ -23,7 +23,6 @@
     "discord.js": "^14.12.1",
     "ethers": "^5.7.2",
     "faunadb": "^4.8.0",
-    "slack-utility": "^0.1.29",
     "tweetnacl": "^1.0.3"
   },
   "devDependencies": {

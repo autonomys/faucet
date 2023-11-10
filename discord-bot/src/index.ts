@@ -4,10 +4,8 @@ import { BigNumber, utils } from 'ethers'
 import nacl from 'tweetnacl'
 import {
   CommandNames,
-  buildSlackStatsMessage,
   config,
   createStats,
-  faucetBalanceLowSlackMessage,
   findRequest,
   findStats,
   formatSeconds,
@@ -15,7 +13,6 @@ import {
   queries,
   requestTokens,
   saveRequest,
-  sendSlackMessage,
   updateStats,
 } from './utils'
 
@@ -23,30 +20,13 @@ const incrementFaucetRequestsCount = async (address: string, requestDate: string
   const stats = await findStats(requestDate)
   log('stats', stats)
   if (!stats || stats === null || stats.length === 0) {
-    const slackMessageId = await sendSlackMessage(
-      'Current week evm-faucet requests',
-      buildSlackStatsMessage('update', 1, 1),
-    )
-    await createStats(address, slackMessageId, requestDate)
+    await createStats(address, requestDate)
   } else {
     const statsFound = stats[0].data
     const isExistingAddresses = statsFound.addresses.find((a: string) => a === address)
-    await sendSlackMessage(
-      'Current week evm-faucet requests',
-      buildSlackStatsMessage(
-        'update',
-        statsFound.requests + 1,
-        isExistingAddresses ? statsFound.uniqueAddresses : statsFound.uniqueAddresses + 1,
-        statsFound.requestsByType,
-      ),
-      statsFound.slackMessageId,
-    )
     await updateStats(stats[0].ref, statsFound, address)
   }
 }
-
-const sendLowBalanceWarning = async (faucetBalance: BigNumber) =>
-  await faucetBalanceLowSlackMessage(utils.formatEther(faucetBalance))
 
 const tagUser = (userId: string) => '<@' + userId + '>'
 
@@ -156,10 +136,6 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
               if (currentTime.gte(nextAccessTime)) {
                 const withdrawalAmount = await queries.withdrawalAmount()
                 const faucetBalance = await queries.verifyFaucetBalance()
-
-                // if faucetBalance is lower than withdrawalAmount * SLACK_BALANCE_NOTIFICATION_THRESHOLD, then send a slack message
-                if (faucetBalance.lt(withdrawalAmount.mul(BigNumber.from(config.SLACK_BALANCE_NOTIFICATION_THRESHOLD))))
-                  await sendLowBalanceWarning(faucetBalance)
 
                 // if faucetBalance is lower than withdrawalAmount, then the faucet needs to be refilled
                 if (faucetBalance.lt(withdrawalAmount)) {
