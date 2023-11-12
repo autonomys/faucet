@@ -12,6 +12,7 @@ provider:
 
 functions:
   faucet:
+    timeout: 10 # optional, in seconds, default is 6
     handler: src/index.handler
     events:
       - http:

@@ -151,9 +151,11 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
                 log('withdrawalAmount', formattedAmount)
 
                 const previousRequestFound = await findRequest(body.member.user.id, REQUEST_DATE)
+                log('previousRequestFound', previousRequestFound)
                 if (!previousRequestFound) {
                   // request tokens
                   const tx = await requestTokens(addressOption.value)
+                  log('tx', tx)
                   if (tx && tx.hash) {
                     log('tx.hash', tx.hash)
                     await saveRequest(addressOption.value, body.member.user.id, REQUEST_DATE, tx.hash)
