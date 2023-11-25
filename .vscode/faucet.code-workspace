@@ -17,8 +17,8 @@
       "path": "../web-app"
     },
     {
-      "name": "subhraphs",
-      "path": "../subhraphs"
+      "name": "subgraph",
+      "path": "../subgraph"
     }
   ],
   "settings": {
