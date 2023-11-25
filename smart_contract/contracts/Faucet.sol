@@ -13,6 +13,7 @@ contract Faucet is MinterRole {
     uint256 public lockTime = 1 minutes;
 
     event Withdrawal(address indexed to, uint256 indexed amount);
+    event Send(address indexed to, uint256 indexed amount);
     event Deposit(address indexed from, uint256 indexed amount);
 
     mapping(address => uint256) private _lastAccessTime;
@@ -31,6 +32,8 @@ contract Faucet is MinterRole {
 
         // If check pass transfer the tokens
         if (!payable(recipient).send(withdrawalAmount)) revert Faucet_SendingTokensFailed();
+
+        emit Send(recipient, withdrawalAmount);
     }
 
     /// @notice Show the next access time for the given addres
