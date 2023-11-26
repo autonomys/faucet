@@ -1,36 +1,105 @@
-## Setup Instructions:
+# Subspace Testnet Faucet
 
-### 1. **Environment Configuration:**
-* Set up the environment file.
-* Define `Guild ID`: 
-  - Navigate to Activate Developer Mode in Discord.
-  - Copy the Server ID.
+## Workspace Setup
 
-### 2. **Bot Token:**
-* Navigate to Discord Developer Portal.
-* Under the bot section, grab the `Token`.
-  * _Note_: This token is a one-time use token.
+- [Faucet Smart Contract](./smart_contract) - The Faucet Smart Contract, tests, deployment scripts and other related files. (HardHat&Foundry)
+- [Web App](./web-app) - The Web App, tests, request token with a GitHub&Discord Next-Auth integration. (React&Next.js)
+- [Discord Bot](./discord-bot) - The Discord Bot, request token on Discord (Node.js&AWL Lambda)
+- [Subgraph](./subgraph) - The Subgraph, faucet smart contract events indexed on Alchemy&The Graph (Alchemy&The Graph)
 
-### 3. **Client ID:**
-* Right-click the bot in your server.
-* Select and copy the `ID` for the Client ID.
+## Faucet Smart Contract
 
-### 4. **Dependencies Installation:**
+### Move to the smart contract directory and install dependencies
+
 ```bash
-npm install discord.js ethers nodemon
+cd smart_contract
+npm install
 ```
 
-### 5. **Register Commands:**
+### Compile the smart contract
+
 ```bash
-node src/register-commands.js
+npx hardhat compile
 ```
 
-### 6. **Run The Project:**
+### Run tests
+
 ```bash
-nodemon src/index.js
+npx hardhat test
 ```
 
-### 7. **Execute Bot Command:**
-* Go to your Discord server.
-* Run the command /request_tokens_guild_specific.
-* Provide an Ethereum Address when prompted.
+### Deploy the smart contract
+
+```bash
+npx hardhat run scripts/deploy.js --network <networkName>
+```
+
+## Web App
+
+### Live Working Web App
+
+- [Subspace Faucet](https://https://subspacefaucet.com//)
+
+### Move to the web app directory and install dependencies
+
+```bash
+cd web-app
+yarn
+```
+
+### Run the web app
+
+```bash
+yarn dev
+```
+
+## Discord Bot
+
+### Move to the discord bot directory and install dependencies
+
+```bash
+cd discord-bot
+npm install
+```
+
+### Register the Discord commands
+
+```bash
+npm run register
+```
+
+### Deploy the Discord bot
+
+```bash
+npm run deploy
+```
+
+## Subgraph
+
+## Deployed Subgraph
+
+- [Subgraph on Alchemy for Faucet Contract on Goerli](https://subgraphs.alchemy.com/subgraphs/2634)
+- [Subgraph on TheGraph for Faucet Contract on Goerli](https://thegraph.com/studio/subgraph/faucet-goerli/)
+
+### Move to the subgraph directory and install dependencies
+
+```bash
+cd subgraph
+yarn global add @graphprotocol/graph-cli
+yarn
+```
+
+### Initialize the subgraph
+
+```bash
+graph init --studio faucet-goerli
+```
+
+### Deploy the subgraph
+
+```bash
+graph auth --studio <studio-access-token>
+cd faucet-goerli
+graph codegen && graph build
+graph deploy --studio faucet-goerli
+```
