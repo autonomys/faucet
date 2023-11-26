@@ -76,7 +76,7 @@ npm run deploy
 
 ## Subgraph
 
-## Deployed Subgraph
+### Deployed Subgraph
 
 - [Subgraph on Alchemy for Faucet Contract on Goerli](https://subgraphs.alchemy.com/subgraphs/2634)
 - [Subgraph on TheGraph for Faucet Contract on Goerli](https://thegraph.com/studio/subgraph/faucet-goerli/)
