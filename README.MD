@@ -40,7 +40,7 @@ npx hardhat run scripts/deploy.js --network <networkName>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/53c4ebc2-182b-4b31-820e-9e4fb006f574/deploy-status)](https://app.netlify.com/sites/subspacefaucet/deploys)
 
-- [Subspace Faucet](https://https://subspacefaucet.com//)
+- [Subspace Faucet](https://subspacefaucet.com/)
 
 ### Move to the web app directory and install dependencies
 
