@@ -15,6 +15,10 @@
     {
       "name": "web-app",
       "path": "../web-app"
+    },
+    {
+      "name": "subgraph",
+      "path": "../subgraph"
     }
   ],
   "settings": {

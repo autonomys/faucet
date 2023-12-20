@@ -1,0 +1,8 @@
+{
+  "goerli": {
+    "Faucet": {
+      "address": "0x8EeD66B1A3f08c23b1bDd7000755C2A36B094761",
+      "startBlock": 10107459
+    }
+  }
+}

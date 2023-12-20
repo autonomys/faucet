@@ -34,5 +34,17 @@
     "blockNumber": 0,
     "tag": "Faucet deployed by deploy script",
     "extra": {}
+  },
+  {
+    "name": "Faucet",
+    "address": "0x8EeD66B1A3f08c23b1bDd7000755C2A36B094761",
+    "network": "goerli",
+    "deployer": "0xC89F6C6DF2f2e29AfFA81E19515CC08579a93980",
+    "deploymentDate": "Sat Nov 25 2023 18:20:12 GMT-0500 (Eastern Standard Time)",
+    "chainId": 0,
+    "blockHash": "",
+    "blockNumber": 0,
+    "tag": "Faucet deployed by deploy script",
+    "extra": {}
   }
 ]
