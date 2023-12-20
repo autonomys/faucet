@@ -1,0 +1,8 @@
+{
+  "subspace-gemini": {
+    "Faucet": {
+      "address": "0x238060160E04D938a34bDf425396384dC878F5E8",
+      "startBlock": 10107459
+    }
+  }
+}
