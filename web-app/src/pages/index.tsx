@@ -24,6 +24,7 @@ import {
   UnorderedList,
   VStack,
   useColorMode,
+  useMediaQuery,
   useToast
 } from '@chakra-ui/react'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
@@ -306,6 +307,7 @@ const Page: React.FC = () => {
     () => !!(session && session.user != null && session.user.isDiscordGuildMember),
     [session]
   )
+  const [isLargerThan800] = useMediaQuery('(min-width: 800px)', { ssr: true, fallback: false })
 
   useEffect(() => {
     setClientSide(true)
@@ -318,29 +320,33 @@ const Page: React.FC = () => {
   if (!clientSide) return null
 
   return (
-    <Card minW='60vw' maxW='50vw' mt='10' p='4'>
-      <Heading p='4'>How to get Testnet token</Heading>
+    <Card minW='60vw' maxW={['100vw', '70vw', '50vw']} mt={[2, 6, 10]} p={[0, 2, 4]}>
+      <Heading p={['0', '2', '4']}>How to get Testnet token</Heading>
       <Tabs>
-        <TabList pt='4'>
+        <TabList pt={['0', '2', '4']}>
           <Tab>
             <Image src='/images/github.svg' alt='X' w='10' />
-            <Heading size='lg' pl='4'>
-              GitHub
-            </Heading>
+            {isLargerThan800 && (
+              <Heading size='lg' pl='4'>
+                GitHub
+              </Heading>
+            )}
           </Tab>
           <Tab>
             <Image src='/images/discord.svg' alt='X' w='10' />
-            <Heading size='lg' pl='4'>
-              Discord
-            </Heading>
+            {isLargerThan800 && (
+              <Heading size='lg' pl='4'>
+                Discord
+              </Heading>
+            )}
           </Tab>
           <Tab>
-            <Heading size='lg' pl='4'>
+            <Heading size={['sm', 'md', 'lg']} pl='4'>
               Network Settings
             </Heading>
           </Tab>
           <Tab>
-            <Heading size='lg' pl='4'>
+            <Heading size={['sm', 'md', 'lg']} pl='4'>
               Terms and Conditions
             </Heading>
           </Tab>
