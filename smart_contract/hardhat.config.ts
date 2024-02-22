@@ -58,8 +58,8 @@ const config: HardhatUserConfig = {
         network: 'nova',
         chainId: 490000,
         urls: {
-          apiURL: 'https://nova.subspace.network/api',
-          browserURL: 'https://nova.subspace.network/',
+          apiURL: 'https://nova.gemini-3h.subspace.network/api',
+          browserURL: 'https://nova.gemini-3h.subspace.network/',
         },
       },
     ],
