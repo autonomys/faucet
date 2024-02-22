@@ -1,11 +1,14 @@
-import { ethers, addressBook, network } from 'hardhat'
+import { addressBook, ethers, network } from 'hardhat'
 
 async function main() {
   const [deployer] = await ethers.getSigners()
   const deployerAddress = await deployer.getAddress()
   const deployerBalance = await deployer.provider.getBalance(deployerAddress)
 
-  const AMOUNT_TO_FUND = ethers.parseEther('0.1')
+  console.log('deployerAddress', deployerAddress)
+  console.log('deployerBalance', deployerBalance.toString())
+
+  const AMOUNT_TO_FUND = ethers.parseEther('1')
 
   let faucetAddressIfDeployed: string | undefined = undefined
   faucetAddressIfDeployed = addressBook.retrieveContract('Faucet', network.name)
@@ -30,6 +33,9 @@ async function main() {
   } else {
     console.error('Not enough funds')
   }
+
+  const endDeployerBalance = await deployer.provider.getBalance(deployerAddress)
+  console.log('endDeployerBalance', endDeployerBalance.toString())
 }
 
 main().catch((error) => {
