@@ -70,9 +70,9 @@ const FAUCET: Abi = [
 
 export const contracts: Contract[] = [
   {
-    chainId: 1002,
+    chainId: 490000,
     name: 'Faucet',
-    address: `0xAe7b1b1e458D8EbC8e656A2B87fcbE989831e692`,
+    address: `0x2296dbb90C714c1355Ff9cbcB70D5AB29060b454`,
     abi: FAUCET
   }
 ]

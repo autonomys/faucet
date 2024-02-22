@@ -20,7 +20,7 @@ const {
 if (RPC_URL_NOVA && PRIVATE_KEY_NOVA) {
   networks.nova = {
     url: RPC_URL_NOVA,
-    chainId: 1002,
+    chainId: 490000,
     accounts: [PRIVATE_KEY_NOVA],
   }
 }
