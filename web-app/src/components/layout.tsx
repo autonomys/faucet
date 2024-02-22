@@ -56,7 +56,7 @@ export const Header: React.FC = () => {
       <Heading size={['md', 'lg', 'xl']} whiteSpace='nowrap'>
         Faucet
       </Heading>
-      <Text fontWeight={[400, 500, 600]}>Nova - Subspace Testnet</Text>
+      <Text fontWeight={[400, 500, 600]}>Gemini 3h Nova - Subspace Testnet</Text>
       <Spacer />
       <ConnectWallet />
       <Spacer />
