@@ -3,6 +3,7 @@ import { useAccountModal, useConnectModal } from '@rainbow-me/rainbowkit'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { useAccount, useEnsName, useNetwork, useSwitchNetwork } from 'wagmi'
+import { nova } from '../constants/networks'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -22,7 +23,7 @@ export const ConnectWallet: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    if (isConnected && chain && chain.id !== 1002 && switchNetwork) switchNetwork(1002)
+    if (isConnected && chain && chain.id !== nova.id && switchNetwork) switchNetwork(nova.id)
   }, [isConnected, chain, switchNetwork])
 
   if (!clientSide) return null
@@ -56,7 +57,7 @@ export const Header: React.FC = () => {
       <Heading size={['md', 'lg', 'xl']} whiteSpace='nowrap'>
         Faucet
       </Heading>
-      <Text fontWeight={[400, 500, 600]}>Gemini 3h Nova - Subspace Testnet</Text>
+      <Text fontWeight={[400, 500, 600]}>{nova.name}</Text>
       <Spacer />
       <ConnectWallet />
       <Spacer />
