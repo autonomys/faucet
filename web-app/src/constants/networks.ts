@@ -2,7 +2,7 @@ import { Chain, hardhat, mainnet } from 'wagmi/chains'
 
 export const nova: Chain = {
   id: 490000,
-  name: 'Nova - Testnet Subspace',
+  name: 'Gemini 3h Nova - Subspace Testnet',
   network: 'nova',
   nativeCurrency: {
     decimals: 18,
