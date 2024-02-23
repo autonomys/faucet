@@ -1,9 +1,9 @@
 import { Chain, hardhat, mainnet } from 'wagmi/chains'
 
 export const nova: Chain = {
-  id: 1002,
-  name: 'Gemini 3g Nova - Subspace Testnet',
-  network: 'gemini',
+  id: 490000,
+  name: 'Nova - Testnet Subspace',
+  network: 'nova',
   nativeCurrency: {
     decimals: 18,
     name: 'tSSC',
@@ -19,8 +19,8 @@ export const nova: Chain = {
   },
   blockExplorers: {
     default: {
-      name: 'BlockScout',
-      url: 'https://blockscout.subspace.network'
+      name: 'Nova Explorer',
+      url: 'https://nova.gemini-3h.subspace.network'
     }
   }
 }

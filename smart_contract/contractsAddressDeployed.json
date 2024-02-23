@@ -13,14 +13,14 @@
   },
   {
     "name": "Faucet",
-    "address": "0xAe7b1b1e458D8EbC8e656A2B87fcbE989831e692",
+    "address": "0x2296dbb90C714c1355Ff9cbcB70D5AB29060b454",
     "network": "nova",
     "deployer": "0xC89F6C6DF2f2e29AfFA81E19515CC08579a93980",
-    "deploymentDate": "Wed Dec 20 2023 22:43:58 GMT-0500 (Eastern Standard Time)",
-    "chainId": 1002,
+    "deploymentDate": "Thu Feb 22 2024 16:32:50 GMT-0500 (Eastern Standard Time)",
+    "chainId": 490000,
     "blockHash": "",
     "blockNumber": 0,
-    "tag": "Faucet deployed by deploy script",
+    "tag": "Faucet deployed by deploy script for Gemini-3h",
     "extra": {}
   },
   {

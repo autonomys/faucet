@@ -11,10 +11,6 @@ const {
   RPC_URL_NOVA,
   PRIVATE_KEY_NOVA,
   NOVA_SCAN_API_KEY,
-  // Gemini 3
-  RPC_URL_GEMINI,
-  PRIVATE_KEY_GEMINI,
-  GEMINI_SCAN_API_KEY,
   // Goerli
   RPC_URL_GOERLI,
   PRIVATE_KEY_GOERLI,
@@ -24,16 +20,8 @@ const {
 if (RPC_URL_NOVA && PRIVATE_KEY_NOVA) {
   networks.nova = {
     url: RPC_URL_NOVA,
-    chainId: 1002,
+    chainId: 490000,
     accounts: [PRIVATE_KEY_NOVA],
-  }
-}
-
-if (RPC_URL_GEMINI && PRIVATE_KEY_GEMINI) {
-  networks.gemini = {
-    url: RPC_URL_GEMINI,
-    chainId: 1002,
-    accounts: [PRIVATE_KEY_GEMINI],
   }
 }
 
@@ -63,24 +51,15 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
       nova: `${NOVA_SCAN_API_KEY}`,
-      gemini: `${GEMINI_SCAN_API_KEY}`,
       goerli: `${ETHERSCAN_API_KEY}`,
     },
     customChains: [
       {
         network: 'nova',
-        chainId: 1002,
+        chainId: 490000,
         urls: {
-          apiURL: 'https://nova.subspace.network/api',
-          browserURL: 'https://nova.subspace.network/',
-        },
-      },
-      {
-        network: 'gemini',
-        chainId: 1002,
-        urls: {
-          apiURL: 'https://blockscout.subspace.network/api',
-          browserURL: 'https://blockscout.subspace.network/',
+          apiURL: 'https://nova.gemini-3h.subspace.network/api',
+          browserURL: 'https://nova.gemini-3h.subspace.network/',
         },
       },
     ],
