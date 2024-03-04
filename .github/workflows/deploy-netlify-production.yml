@@ -1,0 +1,29 @@
+name: Build and Deploy Netlify
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'web-app/**'
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'web-app/**'
+jobs:
+  deploy:
+    concurrency: ci-${{ github.ref }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./web-app
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+      - name: Deploy to Netlify Action 🚀
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          args: deploy --dir=web-app/build
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
