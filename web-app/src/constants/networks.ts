@@ -20,7 +20,7 @@ export const nova: Chain = {
   blockExplorers: {
     default: {
       name: 'Nova Explorer',
-      url: 'https://nova.gemini-3h.subspace.network'
+      url: 'https://nova.subspace.network'
     }
   }
 }
