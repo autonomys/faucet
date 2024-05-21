@@ -55,7 +55,7 @@
     "react-icons": "^4.11.0",
     "react-merge-refs": "^2.0.1",
     "ethers": "5.7.2",
-    "slack-utility": "^0.1.28",
+    "slack-utility": "0.1.32",
     "styled-components": "^6.0.0",
     "viem": "^1.10.14",
     "wagmi": "^1.4.2"
