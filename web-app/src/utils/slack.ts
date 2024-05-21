@@ -1,32 +1,59 @@
-import { TBlocks, slackBuilder, slackUtils } from 'slack-utility'
+interface SlackBlock {
+  type: string
+  text: {
+    type: string
+    text: string
+  }
+}
 
-export const sendSlackMessage = async (message: string, blocks: TBlocks, messageIdToEdit?: string) => {
+interface RequestsByType {
+  [key: string]: number
+}
+
+interface SlackPayload {
+  channel: string
+  text: string
+  blocks: SlackBlock[]
+  ts?: string
+}
+
+export const sendSlackMessage = async (
+  message: string,
+  blocks: SlackBlock[],
+  messageIdToEdit?: string
+): Promise<string | undefined> => {
   if (process.env.SLACK_ENABLED) {
+    const token = process.env.SLACK_TOKEN || ''
+    const conversationId = process.env.SLACK_CONVERSATION_ID || ''
+    const url = messageIdToEdit ? 'https://slack.com/api/chat.update' : 'https://slack.com/api/chat.postMessage'
+
+    const payload: SlackPayload = {
+      channel: conversationId,
+      text: message,
+      blocks: blocks
+    }
+
+    if (messageIdToEdit) {
+      payload.ts = messageIdToEdit
+    }
+
     try {
-      if (messageIdToEdit) {
-        const slackMsg = await slackUtils.slackUpdateMessage(
-          process.env.SLACK_TOKEN || '',
-          process.env.SLACK_CONVERSATION_ID || '',
-          message,
-          messageIdToEdit,
-          blocks,
-          false,
-          false,
-          false
-        )
-        return slackMsg.ts ?? undefined
-      } else {
-        const slackMsg = await slackUtils.slackPostMessage(
-          process.env.SLACK_TOKEN || '',
-          process.env.SLACK_CONVERSATION_ID || '',
-          message,
-          blocks,
-          false,
-          false,
-          false
-        )
-        return slackMsg.resultPostMessage.ts ?? undefined
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(payload)
+      })
+
+      const data = await response.json()
+
+      if (!data.ok) {
+        throw new Error(data.error)
       }
+
+      return data.ts || undefined
     } catch (e) {
       console.error('Error sending slack message', e)
     }
@@ -37,42 +64,88 @@ export const buildSlackStatsMessage = (
   type: 'weekRecap' | 'update',
   requestCount: number,
   uniqueAddresses: number,
-  requestsByType?: {
-    [key: string]: number
-  }
-): TBlocks => {
-  const blocks = [slackBuilder.buildSimpleSlackHeaderMsg('Faucet stats')]
+  requestsByType?: RequestsByType
+): SlackBlock[] => {
+  const blocks: SlackBlock[] = [
+    {
+      type: 'header',
+      text: {
+        type: 'plain_text',
+        text: 'Faucet stats'
+      }
+    }
+  ]
+
   switch (type) {
     case 'weekRecap':
       blocks.push(
-        slackBuilder.buildSimpleSectionMsg(`This week total requests: ${requestCount} :subspace-hype:`),
-        slackBuilder.buildSimpleSectionMsg(`Unique addresses: ${uniqueAddresses} :subheart-white:`)
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `This week total requests: ${requestCount} :subspace-hype:`
+          }
+        },
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `Unique addresses: ${uniqueAddresses} :subheart-white:`
+          }
+        }
       )
-      return blocks
+      break
+
     case 'update':
       blocks.push(
-        slackBuilder.buildSimpleSectionMsg(
-          `Current total requests: ${requestCount} ${requestCount > 100 ? ':subspace-hype:' : ':subheart-black:'}`
-        ),
-        slackBuilder.buildSimpleSectionMsg(`Unique addresses: ${uniqueAddresses} :subheart-white:`)
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `Current total requests: ${requestCount} ${
+              requestCount > 100 ? ':subspace-hype:' : ':subheart-black:'
+            }`
+          }
+        },
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `Unique addresses: ${uniqueAddresses} :subheart-white:`
+          }
+        }
       )
-      requestsByType &&
-        blocks.push(
-          slackBuilder.buildSimpleSectionMsg(
-            'Requests by type:',
-            `\`\`\`${JSON.stringify(requestsByType, null, 2)}\`\`\``
-          )
-        )
-      return blocks
+      if (requestsByType) {
+        blocks.push({
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `Requests by type:\n\`\`\`${JSON.stringify(requestsByType, null, 2)}\`\`\``
+          }
+        })
+      }
+      break
   }
+
+  return blocks
 }
 
 export const faucetBalanceLowSlackMessage = async (balance: string) => {
-  const blocks = [
-    slackBuilder.buildSimpleSlackHeaderMsg('Faucet balance is low'),
-    slackBuilder.buildSimpleSectionMsg(
-      `The faucet balance is ${balance} ${process.env.TOKEN_SYMBOL}, please refill the faucet.`
-    )
+  const blocks: SlackBlock[] = [
+    {
+      type: 'header',
+      text: {
+        type: 'plain_text',
+        text: 'Faucet balance is low'
+      }
+    },
+    {
+      type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text: `The faucet balance is ${balance} ${process.env.TOKEN_SYMBOL}, please refill the faucet.`
+      }
+    }
   ]
   await sendSlackMessage('Faucet balance low', blocks)
 }
