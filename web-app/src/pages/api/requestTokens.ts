@@ -35,7 +35,7 @@ export const findRequest = async (accountType: AccountType, accountId: string, r
       return true
     })
     .catch((error: FaunaHttpErrorResponseContent) => {
-      console.log('error', error)
+      console.error('error', error)
     })
 }
 
@@ -62,7 +62,7 @@ export const saveRequest = async (
       })
     )
     .catch((error: FaunaHttpErrorResponseContent) => {
-      console.log('error', error)
+      console.error('error', error)
     })
 }
 
@@ -124,7 +124,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       accountType: AccountType
       accountId: string
     }
-    console.log('data', { chainId, address, accountType, accountId })
 
     const rpc = networks.find((network) => network.id === chainId)?.rpcUrls?.default?.http[0]
     if (!rpc) throw new Error('Unknown chainId')
