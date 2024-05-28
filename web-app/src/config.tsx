@@ -9,7 +9,21 @@ const author = 'Subspace Network'
 const twitter = '@NetworkSubspace'
 const icon = 'logo.png'
 const svgIcon = 'logo.svg'
-const shareImage = 'share.png'
+const shareImage = url + '/images/share.png'
+const request_url = url + '/api/requestTokens'
+
+export const metadata = {
+  title: titleDefault,
+  url,
+  description,
+  keywords,
+  author,
+  twitter,
+  icon,
+  svgIcon,
+  shareImage,
+  request_url
+}
 
 const Header = ({ title = titleDefault }) => {
   return (
@@ -34,6 +48,17 @@ const Header = ({ title = titleDefault }) => {
       <meta name='og:image' content={shareImage} />
       <meta name='og:site_name' content={title} />
       <meta name='og:description' content={description} />
+
+      {/* Frames Interactive metadata */}
+      <meta property='fc:frame' content='vNext' />
+      <meta property='fc:frame:image' content={shareImage} />
+      <meta property='fc:frame:image:aspect_ratio' content='1.91:1' />
+      <meta property='fc:frame:post_url' content={request_url} />
+      <meta property={`fc:frame:button:1`} content={'Request Nova Testnet Token'} />
+      <meta property={`fc:frame:button:1:action`} content={'post'} />
+      <meta property={`fc:frame:button:1:target`} content={request_url} />
+      {/* <meta property={`fc:frame:button:1`} content={'View transaction'} />
+      <meta property={`fc:frame:button:2`} content={'View your wallet'} /> */}
 
       <link rel='manifest' href='/manifest.json' />
       <link rel='mask-icon' color='#000000' href={svgIcon} />
