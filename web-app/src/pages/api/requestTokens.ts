@@ -5,7 +5,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { metadata } from '../../config'
 import { contracts } from '../../constants/contracts'
 import { networks, nova } from '../../constants/networks'
-import { createStats, findStats, updateStats } from '../../utils'
+import { buildSlackStatsMessage, createStats, findStats, sendSlackMessage, updateStats } from '../../utils'
 
 type AccountType = 'github' | 'discord' | 'farcaster'
 
@@ -70,9 +70,27 @@ const incrementFaucetRequestsCount = async (address: string, accountType: Accoun
   const stats = await findStats(requestDate)
   console.log('stats', stats)
   if (!stats || stats === null || stats.length === 0) {
-    await createStats(address, accountType, requestDate)
+    const slackMessageId = await sendSlackMessage(
+      'Current week evm-faucet requests',
+      buildSlackStatsMessage('update', 1, 1)
+    )
+    await createStats(address, accountType, slackMessageId, requestDate)
   } else {
     const statsFound = stats[0].data
+    const isExistingAddresses = statsFound.addresses.find((a: string) => a === address)
+    await sendSlackMessage(
+      'Current week evm-faucet requests',
+      buildSlackStatsMessage(
+        'update',
+        statsFound.requests + 1,
+        isExistingAddresses ? statsFound.uniqueAddresses : statsFound.uniqueAddresses + 1,
+        {
+          ...statsFound.requestsByType,
+          [accountType]: statsFound.requestsByType[accountType] ? statsFound.requestsByType[accountType] + 1 : 1
+        }
+      ),
+      statsFound.slackMessageId
+    )
     await updateStats(stats[0].ref, accountType, statsFound, address)
   }
 }
