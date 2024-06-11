@@ -86,7 +86,7 @@ export const findStats = async (
   return stats
 }
 
-export const createStats = async (address: string, requestDate: string) => {
+export const createStats = async (address: string, slackMessageId: string | undefined, requestDate: string) => {
   await faunaDbClient
     .query(
       faunaQuery.Create(faunaQuery.Ref('classes/stats'), {
@@ -98,7 +98,7 @@ export const createStats = async (address: string, requestDate: string) => {
             discord: 1,
           },
           requestDate,
-          slackMessageId: '',
+          slackMessageId: slackMessageId || '',
           createdAt: faunaQuery.Now(),
         },
       }),
