@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/subspace/faucet.git"
+    "url": "git+https://github.com/autonomys/faucet.git"
   },
   "author": {
     "name": "Subspace.network",
@@ -29,9 +29,9 @@
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/subspace/faucet/issues"
+    "url": "https://github.com/autonomys/faucet/issues"
   },
-  "homepage": "https://github.com/subspace/faucet#readme",
+  "homepage": "https://github.com/autonomys/faucet#readme",
   "dependencies": {
     "@openzeppelin/contracts": "^4.9.2"
   },

@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/subspace/faucet.git"
+    "url": "git+https://github.com/autonomys/faucet.git"
   },
   "license": "ISC",
   "author": {
     "name": "Subspace.network",
     "url": "https://subspace.network"
   },
-  "homepage": "https://github.com/subspace/faucet#readme",
+  "homepage": "https://github.com/autonomys/faucet#readme",
   "dependencies": {
     "discord.js": "^14.12.1",
     "ethers": "^5.7.2",
