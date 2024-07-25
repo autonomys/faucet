@@ -35,5 +35,6 @@
     "editor.tabSize": 2,
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
     "editor.formatOnSave": true
-  }
+  },
+  "cSpell.words": ["autonomys"]
 }
