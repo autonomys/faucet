@@ -72,11 +72,11 @@ export const Footer: React.FC = () => {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <Box>
-      <Link href='https://forum.subspace.network/t/incentivized-testnet-launch-announcement/1713'>
+      <Link href='https://forum.autonomys.xyz/t/autonomys-mainnet-lifts-off/4566'>
         <Box position='relative' w='100%' h='4vh' bg='brand.500' _hover={{ bg: 'brand.600' }}>
           <AbsoluteCenter axis='both'>
             <Text fontSize={[10, 14, 16]} color='white'>
-              The Gemini Incentivized Testnet is LIVE!
+              The Autonomys Network Mainnet - Consensus Chain is LIVE!
             </Text>
           </AbsoluteCenter>
         </Box>
