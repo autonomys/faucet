@@ -83,14 +83,14 @@ export const buildSlackStatsMessage = (
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `This week total requests: ${requestCount} :subspace-hype:`
+            text: `This week total requests: ${requestCount} :autonomys:`
           }
         },
         {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `Unique addresses: ${uniqueAddresses} :subheart-white:`
+            text: `Unique addresses: ${uniqueAddresses} :auto-heart:`
           }
         }
       )
@@ -102,16 +102,14 @@ export const buildSlackStatsMessage = (
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `Current total requests: ${requestCount} ${
-              requestCount > 100 ? ':subspace-hype:' : ':subheart-black:'
-            }`
+            text: `Current total requests: ${requestCount} ${requestCount > 100 ? ':autonomys:' : ':auto-heart:'}`
           }
         },
         {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `Unique addresses: ${uniqueAddresses} :subheart-white:`
+            text: `Unique addresses: ${uniqueAddresses} :auto-heart:`
           }
         }
       )

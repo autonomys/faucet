@@ -11,7 +11,7 @@ export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
   const { chains, publicClient } = configureChains(networks, [publicProvider()])
 
   const { connectors } = getDefaultWallets({
-    appName: 'Subspace Faucet',
+    appName: 'Autonomys Faucet',
     projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID ?? 'project-id',
     chains
   })
