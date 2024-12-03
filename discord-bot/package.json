@@ -1,6 +1,6 @@
 {
   "name": "discord-bot",
-  "description": "Discord bot to interact with the Subspace faucet",
+  "description": "Discord bot to interact with the Autonomys faucet",
   "version": "1.0.0",
   "keywords": [],
   "main": "src/index.js",
@@ -15,8 +15,8 @@
   },
   "license": "ISC",
   "author": {
-    "name": "Subspace.network",
-    "url": "https://subspace.network"
+    "name": "Autonomys Network",
+    "url": "https://autonomys.xyz"
   },
   "homepage": "https://github.com/autonomys/faucet#readme",
   "dependencies": {
