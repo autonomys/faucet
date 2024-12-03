@@ -33,7 +33,8 @@
   },
   "homepage": "https://github.com/autonomys/faucet#readme",
   "dependencies": {
-    "@openzeppelin/contracts": "^4.9.2"
+    "@openzeppelin/contracts": "^4.9.2",
+    "ethers": "^6.13.4"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.2",
