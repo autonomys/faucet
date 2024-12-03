@@ -70,5 +70,17 @@
     "blockNumber": 0,
     "tag": "Faucet deployed by deploy script for Gemini-3h",
     "extra": {}
+  },
+  {
+    "name": "Faucet",
+    "address": "0x2296dbb90C714c1355Ff9cbcB70D5AB29060b454",
+    "network": "taurus",
+    "deployer": "0xC89F6C6DF2f2e29AfFA81E19515CC08579a93980",
+    "deploymentDate": "Tue Dec 03 2024 09:44:20 GMT-0500 (Eastern Standard Time)",
+    "chainId": 490000,
+    "blockHash": "",
+    "blockNumber": 0,
+    "tag": "Faucet deployed by deploy script",
+    "extra": {}
   }
 ]
