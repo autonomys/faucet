@@ -30,7 +30,7 @@ jobs:
           CONTRACT_ADDRESS: ${{ secrets.CONTRACT_ADDRESS }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
 
-          # Subspace EVM-Domain Token Symbol, RPC Endpoint and Blockscout Explorer URL
+          # Autonomys EVM-Domain Token Symbol, RPC Endpoint and Blockscout Explorer URL
           TOKEN_SYMBOL: ${{ secrets.TOKEN_SYMBOL }}
           RPC_ENDPOINT: ${{ secrets.RPC_ENDPOINT }}
           EXPLORER_URL: ${{ secrets.EXPLORER_URL }}

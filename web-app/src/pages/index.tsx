@@ -113,7 +113,7 @@ const RequestTokenButton: React.FC<RequestTokenButtonProps> = ({ contract, addre
         return toast({
           title: 'Error requesting token',
           description:
-            'Please make sure you are following Subspace GitHub account and connect your GitHub account again.',
+            'Please make sure you are following Autonomys GitHub account and connect your GitHub account again.',
           status: 'error',
           duration: 9000,
           isClosable: true
@@ -175,11 +175,11 @@ const RequestTokenButton: React.FC<RequestTokenButtonProps> = ({ contract, addre
                             We&apos;ve requested {formatUnits(withdrawalAmount, 18)} {chain.nativeCurrency.symbol} for
                             you.
                           </Text>
-                          <Link href={`${chain.blockExplorers?.default.url}/tx/${res.txResponse.hash}`} target='_blank'>
+                          {/* <Link href={`${chain.blockExplorers?.default.url}/tx/${res.txResponse.hash}`} target='_blank'>
                             <Button variant='outline' colorScheme='brand' ml='2' size='sm' color='white'>
                               View on Subspace Explorer
                             </Button>
-                          </Link>
+                          </Link> */}
                         </VStack>
                       </Center>
                     </Box>
@@ -213,7 +213,8 @@ const RequestTokenButton: React.FC<RequestTokenButtonProps> = ({ contract, addre
     } else
       toast({
         title: 'Error requesting token',
-        description: "We couldn't request token for you. Make sure you are on Subspace network and try again.",
+        description:
+          "We couldn't request token for you. Make sure you are on Autonomys Auto-EVM network and try again.",
         status: 'error',
         duration: 9000,
         isClosable: true
@@ -375,7 +376,7 @@ const Page: React.FC = () => {
                 {isConnected && !isGitHubFollower && process.env.NEXT_PUBLIC_GITHUB_ACCOUNT_URL && (
                   <Link href={process.env.NEXT_PUBLIC_GITHUB_ACCOUNT_URL} target='_blank'>
                     <Button variant='outline' colorScheme='brand' ml='2' size='sm'>
-                      Subspace GitHub
+                      Autonomys GitHub
                     </Button>
                   </Link>
                 )}
@@ -403,7 +404,7 @@ const Page: React.FC = () => {
               </ListItem>
               <ListItem>
                 <Checked isChecked={isConnected && isDiscordGuildMember} />
-                Join Subspace Discord server
+                Join Autonomys Discord server
                 {process.env.NEXT_PUBLIC_DISCORD_INVITE_URL && (
                   <Link href={process.env.NEXT_PUBLIC_DISCORD_INVITE_URL} target='_blank'>
                     <Button variant='outline' colorScheme='brand' ml='2' size='sm'>
@@ -435,7 +436,7 @@ const Page: React.FC = () => {
           </TabPanel>
           <TabPanel>
             <Text size='lg' fontWeight='800' fontSize='1rem' pb='4'>
-              Terms and Conditions for Subspace Test Token Faucet
+              Terms and Conditions for Autonomys Test Token Faucet
             </Text>
             <Text size='lg' fontWeight='800' fontSize='1rem' pb='4'>
               By accessing or using the Faucet, you agree to be bound by these terms and conditions.
@@ -444,11 +445,11 @@ const Page: React.FC = () => {
               Last Updated: October 26, 2023
             </Text>
             <Text size='lg' fontWeight='800' fontSize='1rem' pb='4'>
-              These Terms and Conditions (&quot;Agreement&quot;) govern your use of the Subspace Faucet
+              These Terms and Conditions (&quot;Agreement&quot;) govern your use of the Autonomys Faucet
               (&quot;Faucet&quot;) provided by
               <span> </span>
-              <Link color='blue' href='https://subspace.network/' target='_blank'>
-                Subspace Labs (&quot;Provider&quot;)
+              <Link color='blue' href='https://autonomys.xyz/' target='_blank'>
+                Autonomys Labs (&quot;Provider&quot;)
               </Link>
             </Text>
             <Text size='lg' fontWeight='800' fontSize='1rem' pb='4'>
@@ -519,12 +520,11 @@ const Page: React.FC = () => {
               <ListItem>8. Contact Information</ListItem>
               <ListItem>
                 8.1. If you have any questions or concerns regarding these terms and conditions, please contact us at
-                hello@subspace.network
+                hello@autonomys.xyz
               </ListItem>
               <ListItem>
                 By using the Test Token Faucet, you acknowledge that you have read, understood, and agreed to these
-                terms and conditions and the conditions listed on the page:
-                https://subspace.network/subspace-terms-of-use.
+                terms and conditions and the conditions listed on the page: https://www.autonomys.xyz/terms-of-usee.
               </ListItem>
             </UnorderedList>
           </TabPanel>
@@ -559,7 +559,7 @@ const Page: React.FC = () => {
 }
 
 export async function getStaticProps() {
-  return { props: { title: 'Subspace Faucet' } }
+  return { props: { title: 'Autonomys Faucet' } }
 }
 
 export default Page

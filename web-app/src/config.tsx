@@ -1,12 +1,12 @@
 import Head from 'next/head'
 
-const titleDefault = 'Subspace Testnet Faucet'
-const url = 'https://faucet.subspace.network'
+const titleDefault = 'Autonomys Testnet Faucet'
+const url = 'https://subspacefaucet.com'
 const description =
-  'Subspace Testnet Faucet - Get testnet tokens for the Subspace Network. Subspace is a fourth generation blockchain built for the next wave of crypto creators'
-const keywords = 'subspace,faucet,testnet'
-const author = 'Subspace Network'
-const twitter = '@NetworkSubspace'
+  'Autonomys Testnet Faucet - Get testnet tokens for the Autonomys Network. Autonomys is a fourth generation blockchain built for the next wave of crypto creators'
+const keywords = 'autonomys,subspace,faucet,testnet'
+const author = 'Autonomys Network'
+const twitter = '@AutonomysNet'
 const icon = 'logo.png'
 const svgIcon = 'logo.svg'
 const shareImage = url + '/images/share.png'

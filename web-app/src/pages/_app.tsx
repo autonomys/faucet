@@ -8,7 +8,7 @@ import { Web3Provider } from '../components/web3Provider'
 import Header from '../config'
 import theme from '../styles/theme'
 
-const App: React.FC<AppProps> = ({ Component, pageProps = { title: 'Subspace Faucet' } }) => {
+const App: React.FC<AppProps> = ({ Component, pageProps = { title: 'Autonomys Faucet' } }) => {
   return (
     <ChakraProvider theme={theme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
