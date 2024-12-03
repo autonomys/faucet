@@ -7,21 +7,21 @@ import { NetworksUserConfig } from 'hardhat/types'
 let networks: NetworksUserConfig = {}
 
 const {
-  // Nova
-  RPC_URL_NOVA,
-  PRIVATE_KEY_NOVA,
-  NOVA_SCAN_API_KEY,
+  // Taurus
+  RPC_URL_TAURUS,
+  PRIVATE_KEY_TAURUS,
+  TAURUS_SCAN_API_KEY,
   // Goerli
   RPC_URL_GOERLI,
   PRIVATE_KEY_GOERLI,
   ETHERSCAN_API_KEY,
 } = process.env
 
-if (RPC_URL_NOVA && PRIVATE_KEY_NOVA) {
-  networks.nova = {
-    url: RPC_URL_NOVA,
+if (RPC_URL_TAURUS && PRIVATE_KEY_TAURUS) {
+  networks.taurus = {
+    url: RPC_URL_TAURUS,
     chainId: 490000,
-    accounts: [PRIVATE_KEY_NOVA],
+    accounts: [PRIVATE_KEY_TAURUS],
   }
 }
 
@@ -50,16 +50,16 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
-      nova: `${NOVA_SCAN_API_KEY}`,
+      taurus: `${TAURUS_SCAN_API_KEY}`,
       goerli: `${ETHERSCAN_API_KEY}`,
     },
     customChains: [
       {
-        network: 'nova',
+        network: 'taurus',
         chainId: 490000,
         urls: {
-          apiURL: 'https://nova.gemini-3h.subspace.network/api',
-          browserURL: 'https://nova.gemini-3h.subspace.network/',
+          apiURL: 'https://auto-evm.taurus.subspace.network/api',
+          browserURL: 'https://auto-evm.taurus.subspace.network/',
         },
       },
     ],
