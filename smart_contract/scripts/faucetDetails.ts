@@ -14,6 +14,10 @@ async function main() {
 
   const withdrawalAmount = await faucet.withdrawalAmount()
   console.log('withdrawalAmount', withdrawalAmount.toString())
+
+  const faucetBalance = await deployer.provider.getBalance(faucetAddressIfDeployed)
+  console.log('faucetBalance', faucetBalance.toString())
+  console.log('formatted', ethers.formatEther(faucetBalance))
 }
 
 main().catch((error) => {
