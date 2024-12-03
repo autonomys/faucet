@@ -7,13 +7,26 @@ on:
 jobs:
   test_hardhat_npm:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: smart_contract
+    name: Hardhat Test
     steps:
-      - uses: actions/checkout@v2
-      - name: NPM Clean Install
-        run: cd smart_contract && npm ci
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: yarn install
+
       - name: Hardhat Compile
-        run: cd smart_contract && npx hardhat compile
+        run: npx hardhat compile
+
       - name: Hardhat Test
-        run: cd smart_contract && npx hardhat test
+        run: npx hardhat test
       - name: Hardhat Coverage Result
-        run: cd smart_contract && npx hardhat coverage
+        run: npx hardhat coverage
