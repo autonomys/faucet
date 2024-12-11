@@ -4,5 +4,5 @@
 
 This workspace has 2 subgraphs:
 
-- [Faucet Contract on Gemini Nova (using Alchemy)](./faucet-nova/README.MD)
+- [Faucet Contract on Taurus Auto EVM (using Alchemy)](./faucet-taurus/README.MD)
 - [Faucet Contract on Goerli (using TheGraph & Alchemy)](./faucet-goerli/README.MD)
