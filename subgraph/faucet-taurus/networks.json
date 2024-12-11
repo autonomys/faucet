@@ -1,0 +1,8 @@
+{
+  "autonomys-taurus": {
+    "Faucet": {
+      "address": "0x2296dbb90C714c1355Ff9cbcB70D5AB29060b454",
+      "startBlock": 1
+    }
+  }
+}
