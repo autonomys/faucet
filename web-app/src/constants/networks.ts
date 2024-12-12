@@ -16,13 +16,13 @@ export const nova: Chain = {
     public: {
       http: [process.env.NEXT_PUBLIC_RPC_ENDPOINT || '']
     }
+  },
+  blockExplorers: {
+    default: {
+      name: 'Autonomys Taurus Blockscout Explorer',
+      url: 'https://blockscout.taurus.autonomys.xyz/'
+    }
   }
-  // blockExplorers: {
-  //   default: {
-  //     name: 'Nova Explorer',
-  //     url: 'https://nova.subspace.network'
-  //   }
-  // }
 }
 
 export const networks: Chain[] = [nova, mainnet, hardhat]
