@@ -1,8 +1,8 @@
 # Subgraph
 
-## Faucet Contract on Gemini Nova
+## Faucet Contract on Taurus Auto EVM
 
-Faucet contract deployed on Gemini Nova with Alchemy.
+Faucet contract deployed on Taurus Auto EVM with Alchemy.
 
 ### Deployed Subgraph
 
@@ -19,7 +19,7 @@ yarn
 ### Deploy the subgraph
 
 ```bash
-cd faucet-nova
+cd faucet-taurus
 graph codegen && graph build
-graph deploy faucet-nova --version-label <versionTag> --node https://subgraphs.alchemy.com/api/subgraphs/deploy --deploy-key <deploymentKey> --ipfs https://ipfs.satsuma.xyz
+graph deploy faucet-taurus --version-label <versionTag> --node https://subgraphs.alchemy.com/api/subgraphs/deploy --deploy-key <deploymentKey> --ipfs https://ipfs.satsuma.xyz
 ```

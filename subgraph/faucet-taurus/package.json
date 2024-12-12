@@ -1,5 +1,5 @@
 {
-  "name": "faucet-nova",
+  "name": "faucet-taurus",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
