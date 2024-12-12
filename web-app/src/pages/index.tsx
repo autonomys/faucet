@@ -175,11 +175,11 @@ const RequestTokenButton: React.FC<RequestTokenButtonProps> = ({ contract, addre
                             We&apos;ve requested {formatUnits(withdrawalAmount, 18)} {chain.nativeCurrency.symbol} for
                             you.
                           </Text>
-                          {/* <Link href={`${chain.blockExplorers?.default.url}/tx/${res.txResponse.hash}`} target='_blank'>
+                          <Link href={`${chain.blockExplorers?.default.url}/tx/${res.txResponse.hash}`} target='_blank'>
                             <Button variant='outline' colorScheme='brand' ml='2' size='sm' color='white'>
                               View on Subspace Explorer
                             </Button>
-                          </Link> */}
+                          </Link>
                         </VStack>
                       </Center>
                     </Box>

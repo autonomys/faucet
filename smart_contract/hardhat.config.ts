@@ -58,8 +58,8 @@ const config: HardhatUserConfig = {
         network: 'taurus',
         chainId: 490000,
         urls: {
-          apiURL: 'https://auto-evm.taurus.subspace.network/api',
-          browserURL: 'https://auto-evm.taurus.subspace.network/',
+          apiURL: 'https://blockscout.taurus.autonomys.xyz/api',
+          browserURL: 'https://blockscout.taurus.autonomys.xyz/',
         },
       },
     ],
