@@ -47,17 +47,17 @@
     "@types/next-pwa": "^5.6.4",
     "faunadb": "^4.8.0",
     "jsonwebtoken": "^9.0.2",
-    "next": "13.2.4",
-    "next-auth": "^4.22.1",
+    "next": "14.2.15",
+    "next-auth": "^4.24.9",
     "next-pwa": "^5.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
     "react-merge-refs": "^2.0.1",
-    "ethers": "5.7.2",
-    "styled-components": "^6.0.0",
-    "viem": "^1.10.14",
-    "wagmi": "^1.4.2"
+    "ethers": "6.0.0",
+    "styled-components": "^6.1.0",
+    "viem": "^2.15.1",
+    "wagmi": "^2.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
