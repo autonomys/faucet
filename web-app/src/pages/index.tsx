@@ -462,7 +462,7 @@ const Page: React.FC = () => {
                 respective terms of service.
               </ListItem>
               <ListItem>
-                1.2. Test Tokens (TSSC): The tokens distributed by the Faucet have no real monetary value and are solely
+                1.2. Test Tokens (tAI3): The tokens distributed by the Faucet have no real monetary value and are solely
                 for testing and experimentation purposes.
               </ListItem>
               <ListItem>
@@ -524,7 +524,7 @@ const Page: React.FC = () => {
               </ListItem>
               <ListItem>
                 By using the Test Token Faucet, you acknowledge that you have read, understood, and agreed to these
-                terms and conditions and the conditions listed on the page: https://www.autonomys.xyz/terms-of-usee.
+                terms and conditions and the conditions listed on the page: https://www.autonomys.xyz/terms-of-use.
               </ListItem>
             </UnorderedList>
           </TabPanel>
