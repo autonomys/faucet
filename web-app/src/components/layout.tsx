@@ -1,9 +1,11 @@
-import { AbsoluteCenter, Box, Button, Center, HStack, Heading, Image, Spacer, Text, VStack } from '@chakra-ui/react'
+import { AbsoluteCenter, Box, Button, Center, Text, VStack } from '@chakra-ui/react'
 import { useAccountModal, useConnectModal } from '@rainbow-me/rainbowkit'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { useAccount, useEnsName, useNetwork, useSwitchNetwork } from 'wagmi'
 import { nova } from '../constants/networks'
+import { Footer } from './Footer'
+import { Header } from './Header'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -45,28 +47,6 @@ export const ConnectWallet: React.FC = () => {
       Connect Wallet
     </Button>
   )
-}
-
-export const Header: React.FC = () => {
-  return (
-    <HStack w={['100%', '70%', '50%']} h='10vh' display='flex' flexDir='row' m='auto' align='center'>
-      <Link href='/'>
-        <Image src='/logo.svg' alt='Subspace Network Logo' w={[20, 36, 60]} h='8vh' />
-      </Link>
-      <Spacer />
-      <Heading size={['md', 'lg', 'xl']} whiteSpace='nowrap'>
-        Faucet
-      </Heading>
-      <Text fontWeight={[400, 500, 600]}>{nova.name}</Text>
-      <Spacer />
-      <ConnectWallet />
-      <Spacer />
-    </HStack>
-  )
-}
-
-export const Footer: React.FC = () => {
-  return <Box> </Box>
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
