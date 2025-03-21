@@ -1,3 +1,5 @@
+'use client'
+
 import { Text } from '@chakra-ui/react'
 import { nova } from '../constants/networks'
 import { ReadOnlyInput } from './ReadOnlyInput'
@@ -16,3 +18,5 @@ export const NetworkSettings: React.FC = () => {
     </>
   )
 }
+
+export default NetworkSettings

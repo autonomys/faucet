@@ -1,3 +1,5 @@
+'use client'
+
 import { Button, Link, ListItem, OrderedList, Text } from '@chakra-ui/react'
 import { Contract } from '../constants/contracts'
 import { Checked } from './Checked'
@@ -48,3 +50,5 @@ export const Discord: React.FC<DiscordProps> = ({ isConnected, isDiscordGuildMem
     </>
   )
 }
+
+export default Discord

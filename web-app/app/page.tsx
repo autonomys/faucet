@@ -1,13 +1,16 @@
+'use client'
+
+import { contracts } from '@/constants/contracts'
 import { Card, Heading, Tab, TabList, TabPanel, TabPanels, Tabs, useColorMode, useMediaQuery } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
+import dynamic from 'next/dynamic'
 import React, { useEffect, useMemo, useState } from 'react'
 import { FaCog, FaDiscord, FaGithub, FaRegFileAlt } from 'react-icons/fa'
 import { useAccount, useNetwork } from 'wagmi'
-import { Discord } from '../components/Discord'
-import { GitHub } from '../components/GitHub'
-import { NetworkSettings } from '../components/NetworkSettings'
-import { TermsAndConditions } from '../components/TermsAndConditions'
-import { contracts } from '../constants/contracts'
+const GitHub = dynamic(() => import('@/components/GitHub'), { ssr: false })
+const Discord = dynamic(() => import('@/components/Discord'), { ssr: false })
+const NetworkSettings = dynamic(() => import('@/components/NetworkSettings'), { ssr: false })
+const TermsAndConditions = dynamic(() => import('@/components/TermsAndConditions'), { ssr: false })
 
 const Page: React.FC = () => {
   const [clientSide, setClientSide] = useState(false)
@@ -25,7 +28,7 @@ const Page: React.FC = () => {
     () => !!(session && session.user != null && session.user.isDiscordGuildMember),
     [session]
   )
-  const [isLargerThan800] = useMediaQuery('(min-width: 800px)', { ssr: true, fallback: false })
+  const [isLargerThan800] = useMediaQuery('(min-width: 800px)', { ssr: false, fallback: false })
 
   useEffect(() => {
     setClientSide(true)
@@ -102,10 +105,6 @@ const Page: React.FC = () => {
       </Tabs>
     </Card>
   )
-}
-
-export async function getStaticProps() {
-  return { props: { title: 'Autonomys Faucet' } }
 }
 
 export default Page

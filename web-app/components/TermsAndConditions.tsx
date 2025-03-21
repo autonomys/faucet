@@ -1,3 +1,5 @@
+'use client'
+
 import { Box, Link, ListItem, Text, UnorderedList, VStack } from '@chakra-ui/react'
 
 export const TermsAndConditions: React.FC = () => {
@@ -202,3 +204,5 @@ export const TermsAndConditions: React.FC = () => {
     </>
   )
 }
+
+export default TermsAndConditions

@@ -1,3 +1,5 @@
+'use client'
+
 import { Box, Button, Link, ListItem, OrderedList, Text } from '@chakra-ui/react'
 import { Contract } from '../constants/contracts'
 import { Checked } from './Checked'
@@ -47,3 +49,5 @@ export const GitHub: React.FC<GitHubProps> = ({ isConnected, isGitHubFollower, c
     </Box>
   )
 }
+
+export default GitHub

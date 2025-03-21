@@ -11,8 +11,12 @@ const withPWA = require('next-pwa')({
 
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {},
-  images: {}
+  experimental: {
+    appDir: true
+  },
+  images: {
+    domains: ['your-image-domain.com'] // Customize as needed
+  }
 }
 
 const KEYS_TO_OMIT = ['webpackDevMiddleware', 'configOrigin', 'target', 'analyticsId', 'webpack5', 'amp', 'assetPrefix']

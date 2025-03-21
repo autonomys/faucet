@@ -1,3 +1,5 @@
+'use client'
+
 import { AbsoluteCenter, Box, Button, Center, Text, VStack } from '@chakra-ui/react'
 import { useAccountModal, useConnectModal } from '@rainbow-me/rainbowkit'
 import Link from 'next/link'
