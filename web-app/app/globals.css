@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-brand: #5870b3;
+  --color-brand-hover: #405991;
+  --color-brand-secondary: #1d2c57;
+  --color-muted: hsl(240 4.8% 95.9%);
+  --color-muted-foreground: hsl(240 3.8% 46.1%);
+  --color-brand-secondary-hover: #1d2c57;
+  --color-brand-success: #07bc0c;
+  --color-brand-success-hover: #059a0a;
+}
