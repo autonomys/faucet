@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-brand: #5870b3;
   --color-brand-hover: #405991;
@@ -9,4 +11,19 @@
   --color-brand-secondary-hover: #1d2c57;
   --color-brand-success: #07bc0c;
   --color-brand-success-hover: #059a0a;
+
+  /* background */
+  --color-background-light: #ebeffc;
+  --color-background-dark: #3654a6;
+  --color-background-darker: #27355d;
+  --color-background-darkest: #050d26;
+
+  /* box */
+  --color-box-light: #ffffff;
+  --color-box-dark: #2a2c38;
+  --color-box-darker: #1f202a;
+  /* gray */
+  --color-gray-dark: #2a2c38;
+  --color-gray-darker: #27355d;
+  --color-gray-light: #ebeffc;
 }

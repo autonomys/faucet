@@ -1,6 +1,7 @@
 import Providers from '@/app/providers'
 import '@rainbow-me/rainbowkit/styles.css'
 import type { Metadata } from 'next'
+import { ThemeProvider } from 'next-themes'
 import { Inter } from 'next/font/google'
 import type React from 'react'
 import { ToastContainer } from 'react-toastify'
@@ -63,8 +64,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta property='fc:frame:button:1:target' content='https://autonomysfaucet.com/api/requestTokens' />
       </head>
       <body className={inter.className}>
-        <Providers>
-          {children}
+        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+          <Providers>{children}</Providers>
           <ToastContainer
             position='bottom-center'
             autoClose={9000}
@@ -78,7 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             theme='colored'
             toastClassName='!w-100'
           />
-        </Providers>
+        </ThemeProvider>
       </body>
     </html>
   )

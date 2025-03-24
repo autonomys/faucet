@@ -1,24 +1,29 @@
-'use client'
-
-import { ConnectWalletButton } from '@/components/ConnectWallet'
+import { ConnectWalletButton } from '@/components/ConnectWalletButton'
 import { RequestTokenButton } from '@/components/RequestTokenButton'
 import { Web2SocialButton } from '@/components/Web2SocialButton'
 import { Contract } from '@/constants/contracts'
-import { Check, ExternalLink, Github } from 'lucide-react'
+import { Check, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
+import { RxDiscordLogo } from 'react-icons/rx'
 
-interface GitHubProps {
+interface DiscordProps {
   isConnected: boolean
-  isGitHubFollower: boolean
+  isDiscordGuildMember: boolean
   contract?: Contract
   address?: string
   setActiveTab: (tab: string) => void
 }
 
-export const GitHub: React.FC<GitHubProps> = ({ isConnected, isGitHubFollower, contract, address, setActiveTab }) => {
+export const Discord: React.FC<DiscordProps> = ({
+  isConnected,
+  isDiscordGuildMember,
+  contract,
+  address,
+  setActiveTab
+}) => {
   return (
     <div className='space-y-6'>
-      <h3 className='text-xl font-semibold mb-4'>Request token via GitHub</h3>
+      <h3 className='text-xl font-semibold mb-4'>Request token via Discord</h3>
       <ol className='space-y-5'>
         <li className='flex items-start gap-4'>
           <div className='flex-1 pt-1'>
@@ -33,13 +38,12 @@ export const GitHub: React.FC<GitHubProps> = ({ isConnected, isGitHubFollower, c
             </div>
           </div>
         </li>
-
         <li className='flex items-start gap-4'>
           <div className='my-auto flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white'>
             {isConnected ? (
               <Check className='h-4 w-4 text-green-500' />
             ) : (
-              <span className='text-sm font-medium'>1</span>
+              <span className='text-sm font-medium dark:text-background-darkest'>1</span>
             )}
           </div>
           <div className='flex-1 pt-1'>
@@ -52,20 +56,20 @@ export const GitHub: React.FC<GitHubProps> = ({ isConnected, isGitHubFollower, c
 
         <li className='flex items-start gap-4'>
           <div className='my-auto flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white'>
-            {isConnected && isGitHubFollower ? (
+            {isConnected && isDiscordGuildMember ? (
               <Check className='h-4 w-4 text-green-500' />
             ) : (
-              <span className='text-sm font-medium'>2</span>
+              <span className='text-sm font-medium dark:text-background-darkest'>2</span>
             )}
           </div>
           <div className='flex-1 pt-1'>
             <div className='flex items-center justify-between'>
-              <p className='font-medium'>Follow us on GitHub</p>
-              {isConnected && !isGitHubFollower && process.env.NEXT_PUBLIC_GITHUB_ACCOUNT_URL && (
-                <Link href={process.env.NEXT_PUBLIC_GITHUB_ACCOUNT_URL} target='_blank'>
-                  <button className='cursor-pointer px-3 py-1 text-sm border border-gray-300 bg-white hover:bg-gray-50 rounded inline-flex items-center'>
-                    <Github className='h-4 w-4 mr-2' />
-                    Follow
+              <p className='font-medium'>Join Autonomys Discord server</p>
+              {isConnected && !isDiscordGuildMember && process.env.NEXT_PUBLIC_DISCORD_INVITE_URL && (
+                <Link href={process.env.NEXT_PUBLIC_DISCORD_INVITE_URL} target='_blank'>
+                  <button className='cursor-pointer px-3 py-1 text-sm border border-gray-300 bg-white hover:bg-gray-50 rounded inline-flex items-center dark:bg-box-dark dark:text-gray-100 dark:hover:bg-box-darker'>
+                    <RxDiscordLogo className='h-4 w-4 mr-2' />
+                    Join Discord
                   </button>
                 </Link>
               )}
@@ -75,27 +79,27 @@ export const GitHub: React.FC<GitHubProps> = ({ isConnected, isGitHubFollower, c
 
         <li className='flex items-start gap-4'>
           <div className='my-auto flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white'>
-            {isConnected && isGitHubFollower ? (
+            {isConnected && isDiscordGuildMember ? (
               <Check className='h-4 w-4 text-green-500' />
             ) : (
-              <span className='text-sm font-medium'>3</span>
+              <span className='text-sm font-medium dark:text-background-darkest'>3</span>
             )}
           </div>
           <div className='flex-1 pt-1'>
             <div className='flex items-center justify-between'>
-              <p className='font-medium'>Connect your GitHub account</p>
-              {isConnected && !isGitHubFollower && <Web2SocialButton provider='github' />}
+              <p className='font-medium'>Connect your Discord account</p>
+              {isConnected && !isDiscordGuildMember && <Web2SocialButton provider='discord' />}
             </div>
           </div>
         </li>
 
         <li className='flex items-start gap-4'>
           <div className='my-auto flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white'>
-            <span className='text-sm font-medium'>4</span>
+            <span className='text-sm font-medium dark:text-background-darkest'>4</span>
           </div>
           <div className='flex-1 pt-1'>
             <div className='flex items-center justify-between'>
-              <p className='font-medium'>Request token</p>
+              <p className='font-medium'>Request token with the Faucet bot on Discord or here</p>
               {contract && address && <RequestTokenButton contract={contract} address={address} />}
             </div>
           </div>

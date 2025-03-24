@@ -2,8 +2,10 @@ export const Terms: React.FC = () => {
   return (
     <div className='py-8 space-y-6'>
       <h3 className='text-xl font-semibold mb-4'>Terms and Conditions</h3>
-      <span className='text-xs text-muted-foreground flex justify-end'>Last Updated: October 26, 2023</span>
-      <div className='bg-muted p-4 rounded-lg text-sm'>
+      <span className='text-xs text-muted-foreground flex justify-end dark:text-gray-400'>
+        Last Updated: October 26, 2023
+      </span>
+      <div className='bg-muted p-4 rounded-lg text-sm dark:bg-background-darkest'>
         <ul className='list-none space-y-4'>
           <li className='font-semibold text-lg'>1. Use of the Faucet</li>
           <li className='pl-6'>

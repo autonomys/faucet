@@ -49,7 +49,7 @@ export const TokenCard: React.FC = () => {
   if (!clientSide) return null
 
   return (
-    <div className='bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden'>
+    <div className='bg-box-light dark:bg-box-dark rounded-xl shadow-lg border border-gray-light overflow-hidden dark:border-box-dark'>
       <div className='p-6 pb-4'>
         <h3 className='font-semibold tracking-tight text-2xl'>How to get Testnet token</h3>
       </div>
@@ -61,7 +61,9 @@ export const TokenCard: React.FC = () => {
             <button
               key={tab.id}
               className={`cursor-pointer flex justify-center items-center gap-2 px-4 py-1.5 font-medium text-sm transition-colors ${
-                activeTab === tab.id ? 'text-gray-900 bg-white rounded-sm' : 'text-gray-500 hover:text-gray-700'
+                activeTab === tab.id
+                  ? 'text-gray-900 bg-white rounded-sm dark:bg-box-dark dark:text-gray-100'
+                  : 'text-gray-500 hover:text-gray-700'
               }`}
               onClick={() => setActiveTab(tab.id)}>
               {tab.icon}
@@ -102,11 +104,11 @@ export const TokenCard: React.FC = () => {
       </div>
 
       <div className='flex justify-between border-t border-gray-200 p-6'>
-        <Link href='mailto:hello@autonomys.xyz'>
-          <p className='text-sm text-gray-500'>Need help? Contact support</p>
+        <Link href='https://autonomys.xyz/discord'>
+          <p className='text-sm text-gray-500 dark:text-gray-400'>Need help? Contact support</p>
         </Link>
         <Link href='https://docs.autonomys.xyz/' target='_blank'>
-          <button className='px-3 py-1 text-sm border border-gray-300 bg-white hover:bg-gray-50 rounded cursor-pointer'>
+          <button className='px-3 py-1 text-sm border border-gray-300 bg-white hover:bg-gray-50 rounded cursor-pointer dark:bg-box-dark dark:text-gray-100 dark:hover:bg-box-darker'>
             Documentation
           </button>
         </Link>

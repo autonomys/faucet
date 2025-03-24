@@ -19,7 +19,7 @@ const getIcon = (provider: string) => {
 
 export const Web2SocialButton: React.FC<Web2SocialButtonProps> = ({ provider }) => (
   <button
-    className='cursor-pointer px-3 py-1 text-sm border border-gray-300 bg-white hover:bg-gray-50 rounded inline-flex items-center'
+    className='cursor-pointer px-3 py-1 text-sm border border-gray-300 bg-white hover:bg-gray-50 rounded inline-flex items-center dark:bg-box-dark dark:text-gray-100 dark:hover:bg-box-darker'
     onClick={async () => await signIn(provider)}>
     {getIcon(provider)}
     Sign in with {provider.charAt(0).toUpperCase() + provider.slice(1)}

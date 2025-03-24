@@ -1,11 +1,15 @@
 import { ConnectWallet } from '@/components/ConnectWallet'
-import Image from 'next/image'
+import { LogoIcon } from './LogoIcon'
 export const Navbar: React.FC = () => {
   return (
     <header className='container mx-auto py-6 px-4 flex justify-between items-center'>
       <div className='flex items-center gap-3'>
         <div className='p-2'>
-          <Image src='logo.svg' alt='Autonomys' className='h-8 w-auto' width={32} height={300} />
+          <LogoIcon
+            className='w-auto h-8'
+            iconTextClassName='fill-[#181826] dark:fill-white'
+            iconClassName='fill-[#5672b7] dark:fill-white'
+          />
         </div>
       </div>
       <div className='relative group'>

@@ -1,5 +1,5 @@
-import { TokenRequested } from '@/components/RequestTokenButton'
 import { ToastContent } from '@/components/ToastContent'
+import { TokenRequested } from '@/components/TokenRequested'
 import { Contract } from '@/constants/contracts'
 import { formatSeconds } from '@/utils/time'
 import { useSession } from 'next-auth/react'
@@ -129,7 +129,7 @@ export const RequestTokenButton: React.FC<RequestTokenButtonProps> = ({ contract
   return (
     <div className='flex flex-row gap-x-2'>
       <button
-        className='cursor-pointer px-3 py-1 text-sm border border-gray-300 bg-brand hover:bg-brand-hover rounded inline-flex items-center text-white disabled:opacity-50 disabled:cursor-not-allowed'
+        className='cursor-pointer px-3 py-1 text-sm border border-gray-300 bg-brand hover:bg-brand-hover rounded inline-flex items-center text-white disabled:opacity-50 disabled:cursor-not-allowed dark:bg-brand-secondary dark:hover:bg-brand-secondary-hover dark:border-brand-hover'
         onClick={async () => await handleRequestToken()}
         disabled={isLoading || isError || isSuccess}>
         {isLoading && <ImSpinner2 className='animate-spin h-5 w-5 mr-2' />}
@@ -137,7 +137,7 @@ export const RequestTokenButton: React.FC<RequestTokenButtonProps> = ({ contract
       </button>
       {(isLoading || isError || isSuccess) && (
         <button
-          className='cursor-pointer px-3 py-1 text-sm border border-gray-300 bg-brand hover:bg-brand-hover rounded inline-flex items-center text-white'
+          className='cursor-pointer px-3 py-1 text-sm border border-gray-300 bg-brand hover:bg-brand-hover rounded inline-flex items-center text-white dark:bg-brand-secondary dark:hover:bg-brand-secondary-hover dark:border-brand-hover'
           onClick={reset}>
           Reset request
         </button>

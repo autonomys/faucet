@@ -55,7 +55,7 @@ export const NetworkSettings: React.FC = () => {
 
       <div className='grid gap-4'>
         {networkData.map((item) => (
-          <div key={item.id} className='bg-gray-100 dark:bg-gray-800 p-4 rounded-lg'>
+          <div key={item.id} className='bg-muted dark:bg-background-darkest p-4 rounded-lg'>
             <h4 className='font-medium mb-2'>{item.name}</h4>
             <div className='flex items-center justify-between'>
               <p className={item.value.length > 30 ? 'text-sm' : ''}>{item.value}</p>

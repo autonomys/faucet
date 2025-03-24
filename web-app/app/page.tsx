@@ -8,7 +8,7 @@ import { TokenCard } from '@/components/TokenCard'
 
 const AutonomysFaucet: React.FC = () => {
   return (
-    <div className='min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900'>
+    <div className='min-h-screen bg-background-light dark:bg-background-darkest'>
       <Banner />
       <Navbar />
       <main className='container mx-auto p-4'>

@@ -4,7 +4,7 @@ export const Header: React.FC = () => {
   return (
     <div className='mb-10 text-center'>
       <h2 className='text-4xl font-bold mb-4'>Faucet</h2>
-      <p className='text-lg text-muted-foreground mb-2'>
+      <p className='text-lg text-muted-foreground mb-2 dark:text-gray-400'>
         Get free testnet tokens for building applications on the Autonomys Network.
       </p>
       <Link href='https://docs.autonomys.network/mainnet/overview' target='_blank'>
