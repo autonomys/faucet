@@ -1,7 +1,7 @@
+import { networks } from '@/constants/networks'
 import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit'
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'
-import { networks } from '../constants/networks'
 
 interface Web3ProviderProps {
   children: React.ReactNode
