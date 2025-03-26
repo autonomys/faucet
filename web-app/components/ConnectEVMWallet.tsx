@@ -6,7 +6,7 @@ import { Check, Copy } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useAccount, useEnsName, useNetwork, useSwitchNetwork } from 'wagmi'
 
-export const ConnectWallet: React.FC = () => {
+export const ConnectEVMWallet: React.FC = () => {
   const [clientSide, setClientSide] = useState(false)
   const [copied, setCopied] = useState(false)
   const [tooltipVisible, setTooltipVisible] = useState(false)

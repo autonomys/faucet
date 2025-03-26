@@ -1,5 +1,4 @@
 import type { NextConfig } from 'next'
-import { PHASE_DEVELOPMENT_SERVER } from 'next/constants'
 
 // Import plugins in a CommonJS-compatible way
 // since many Next.js plugins still use CommonJS under the hood
@@ -11,7 +10,8 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 // @ts-ignore
 const withPWA = require('next-pwa')({
   dest: 'public',
-  disable: process.env.NODE_ENV === 'development'
+  disable: process.env.NODE_ENV === 'development',
+  buildExcludes: [/\/_not-found\/page-.*\.js$/]
 })
 
 const baseConfig: NextConfig = {
@@ -21,6 +21,12 @@ const baseConfig: NextConfig = {
   },
   images: {
     // e.g. domains: ['example.com']
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = { fs: false }
+    }
+    return config
   }
 }
 

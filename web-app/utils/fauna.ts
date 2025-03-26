@@ -22,13 +22,13 @@ const faunaDbClient = new Client({
   scheme: 'https'
 })
 
-export const findRequest = async (accountId: string, requestedAt: string) => {
+export const findRequest = async (accountId: string, requestedAt: string, accountType: string = 'discord') => {
   return await faunaDbClient
     .query(
       faunaQuery.Paginate(
         faunaQuery.Match(
           faunaQuery.Index('requestTokens_by_accountWithTimestamp'),
-          'discord-' + accountId + '-' + requestedAt
+          `${accountType}-${accountId}-${requestedAt}`
         )
       )
     )
@@ -42,16 +42,22 @@ export const findRequest = async (accountId: string, requestedAt: string) => {
     })
 }
 
-export const saveRequest = async (address: string, accountId: string, requestedAt: string, txHash: string) => {
+export const saveRequest = async (
+  address: string,
+  accountId: string,
+  requestedAt: string,
+  txHash: string,
+  accountType: string = 'discord'
+) => {
   await faunaDbClient
     .query(
       faunaQuery.Create(faunaQuery.Ref('classes/requestTokens'), {
         data: {
           address,
-          account: 'discord-' + accountId,
-          accountType: 'discord',
+          account: `${accountType}-${accountId}`,
+          accountType,
           accountId,
-          accountWithTimestamp: 'discord-' + accountId + '-' + requestedAt,
+          accountWithTimestamp: `${accountType}-${accountId}-${requestedAt}`,
           txHash,
           requestedAt,
           createdAt: faunaQuery.Now()

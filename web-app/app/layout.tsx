@@ -1,4 +1,5 @@
 import Providers from '@/app/providers'
+import { WalletProvider } from '@/providers/WalletProvider'
 import '@rainbow-me/rainbowkit/styles.css'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
@@ -65,7 +66,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={inter.className}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-          <Providers>{children}</Providers>
+          <WalletProvider>
+            <Providers>{children}</Providers>
+          </WalletProvider>
           <ToastContainer
             position='bottom-center'
             autoClose={9000}
