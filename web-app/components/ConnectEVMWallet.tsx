@@ -37,7 +37,7 @@ export const ConnectEVMWallet: React.FC = () => {
 
   if (isConnected)
     return (
-      <div className='relative group flex items-center gap-2 bg-brand text-white px-4 py-2 rounded-md dark:bg-brand-secondary dark:hover:bg-brand-secondary-hover'>
+      <div className='shadow h-10 relative group flex items-center gap-2 bg-brand text-white px-4 py-2 rounded-md dark:bg-brand-secondary dark:hover:bg-brand-secondary-hover'>
         <button onClick={openAccountModal} className='flex items-center gap-1 cursor-pointer'>
           {ensName != null ? (
             ensName
@@ -71,7 +71,7 @@ export const ConnectEVMWallet: React.FC = () => {
 
   return (
     <button
-      className='bg-brand hover:bg-brand-hover text-white px-4 py-2 rounded-md cursor-pointer dark:bg-brand-secondary dark:hover:bg-brand-secondary-hover'
+      className='shadow bg-brand hover:bg-brand-hover text-white px-4 py-2 rounded-md cursor-pointer dark:bg-brand-secondary dark:hover:bg-brand-secondary-hover'
       onClick={openConnectModal}>
       Connect Wallet
     </button>

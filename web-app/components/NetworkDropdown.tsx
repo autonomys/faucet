@@ -43,7 +43,7 @@ const NetworkDropdown: React.FC<NetworkDropdownProps> = ({ options, onSelect, pl
     <div className='relative w-54 my-auto' ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className='shadow flex w-full items-center justify-between py-2 px-3 bg-white text-gray-900 rounded-full cursor-pointer dark:bg-brand-secondary dark:text-white'>
+        className='shadow flex w-full items-center justify-between py-2 px-3 bg-white text-gray-900 rounded-md cursor-pointer dark:bg-brand-secondary dark:text-white'>
         <div className='flex items-center gap-2'>
           <AutonomysSymbol fill='currentColor' />
           <span className='text-sm my-auto'>{selectedLabel}</span>

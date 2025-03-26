@@ -25,4 +25,54 @@ export const autoEVM: Chain = {
   }
 }
 
-export const networks: Chain[] = [autoEVM, mainnet, hardhat]
+type ConsensusChain = {
+  id: string
+  name: string
+  network: string
+  nativeCurrency: {
+    decimals: number
+    name: string
+    symbol: string
+  }
+  rpcUrls: {
+    default: {
+      http: string[]
+    }
+    public: {
+      http: string[]
+    }
+  }
+  blockExplorers: {
+    default: {
+      name: string
+      url: string
+    }
+  }
+}
+
+export const consensus: ConsensusChain = {
+  id: '-',
+  name: 'Consensus - Autonomys Taurus Testnet',
+  network: 'consensus-taurus',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'tAI3',
+    symbol: 'tAI3'
+  },
+  rpcUrls: {
+    default: {
+      http: ['wss://rpc-0.taurus.autonomys.xyz/ws']
+    },
+    public: {
+      http: ['wss://rpc-0.taurus.autonomys.xyz/ws']
+    }
+  },
+  blockExplorers: {
+    default: {
+      name: 'Autonomys Astral Explorer',
+      url: 'https://explorer.autonomys.xyz/taurus/consensus/'
+    }
+  }
+}
+
+export const networks: (Chain | ConsensusChain)[] = [autoEVM, consensus, mainnet, hardhat]

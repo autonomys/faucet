@@ -46,7 +46,10 @@ export const POST = async (req: NextRequest) => {
 
     // Get wallet free balance
     const { free } = await balance(api as unknown as ApiPromise, wallet.address)
-    if (BigInt(free) < BigInt(process.env.CLAIM_WALLET_LOW_FUND_WARNING || 1000 * 10 ** 18)) {
+    if (
+      BigInt(free) <
+      BigInt((Number(process.env.SLACK_BALANCE_NOTIFICATION_THRESHOLD) * Number(process.env.CONSENSUS_AMOUNT)) / 100)
+    ) {
       await walletBalanceLowSlackMessage(free.toString(), wallet.address)
     }
 

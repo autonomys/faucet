@@ -3,8 +3,8 @@ import { Network, networks } from '@autonomys/auto-utils'
 import { create } from 'zustand'
 
 export enum NetworkOptions {
-  AUTO_EVM = 'autoEVM',
-  CONSENSUS = 'consensus'
+  AUTO_EVM = 'auto-evm-taurus',
+  CONSENSUS = 'consensus-taurus'
 }
 
 interface NetworkState {

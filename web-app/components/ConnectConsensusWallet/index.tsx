@@ -22,7 +22,7 @@ export const ConnectConsensusWallet: React.FC<ConnectConsensusWalletProps> = ({ 
       <button
         onClick={onClick}
         className={cn(
-          'bg-brand hover:bg-brand-hover text-white px-4 py-2 rounded-md cursor-pointer dark:bg-brand-secondary dark:hover:bg-brand-secondary-hover',
+          'shadow bg-brand hover:bg-brand-hover text-white px-4 py-2 rounded-md cursor-pointer dark:bg-brand-secondary dark:hover:bg-brand-secondary-hover',
           className
         )}>
         Connect Wallet
