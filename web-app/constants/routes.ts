@@ -1,3 +1,3 @@
-export enum CLAIM_TYPES {
-  OperatorDisbursement = 'operator-disbursement'
+export enum REQUEST_TYPES {
+  Consensus = 'consensus'
 }

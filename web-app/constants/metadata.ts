@@ -8,7 +8,7 @@ const twitter = '@AutonomysNet'
 const icon = 'logo.png'
 const svgIcon = 'logo.svg'
 const shareImage = url + '/images/share.png'
-const request_url = url + '/api/requestTokens'
+const request_url = url + '/api/request-tokens'
 
 export const metadata = {
   title: titleDefault,

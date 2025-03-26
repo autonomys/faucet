@@ -11,7 +11,8 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const withPWA = require('next-pwa')({
   dest: 'public',
   disable: process.env.NODE_ENV === 'development',
-  buildExcludes: [/\/_not-found\/page-.*\.js$/]
+  buildExcludes: [/\/_not-found\/page-.*\.js$/],
+  maximumFileSizeToCacheInBytes: 5 * 1024 * 1024
 })
 
 const baseConfig: NextConfig = {

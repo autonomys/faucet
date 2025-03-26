@@ -97,7 +97,7 @@ export const RequestTokenButton: React.FC<RequestTokenButtonProps> = ({ contract
       let response
       if (network === NetworkOptions.CONSENSUS) {
         // Consensus network API call
-        response = await fetch(`/api/claim/taurus/operator-disbursement`, {
+        response = await fetch(`/api/request-tokens/taurus/consensus`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -115,7 +115,7 @@ export const RequestTokenButton: React.FC<RequestTokenButtonProps> = ({ contract
           return
         }
         // Auto-EVM network API call
-        response = await fetch('/api/requestTokens', {
+        response = await fetch('/api/request-tokens', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

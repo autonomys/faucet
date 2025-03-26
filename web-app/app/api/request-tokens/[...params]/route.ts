@@ -1,4 +1,4 @@
-import { CLAIM_TYPES, indexers } from '@/constants'
+import { indexers, REQUEST_TYPES } from '@/constants'
 import { buildSlackStatsMessage, sendSlackMessage } from '@/utils'
 import { verifyToken } from '@/utils/auth/verifyToken'
 import { createStats, findRequest, findStats, saveRequest, updateStats } from '@/utils/fauna'
@@ -14,24 +14,23 @@ export const POST = async (req: NextRequest) => {
   const ACCOUNT_TYPE = 'consensus'
 
   try {
-    if (!process.env.WALLET_CLAIM_OPERATOR_DISBURSEMENT_URI)
-      throw new Error('Missing WALLET_CLAIM_OPERATOR_DISBURSEMENT_URI')
-    if (!process.env.CLAIM_OPERATOR_DISBURSEMENT_AMOUNT && process.env.CLAIM_OPERATOR_DISBURSEMENT_AMOUNT !== '0')
-      throw new Error('Missing CLAIM_OPERATOR_DISBURSEMENT_AMOUNT')
+    if (!process.env.WALLET_CONSENSUS_URI) throw new Error('Missing WALLET_CONSENSUS_URI')
+    if (!process.env.CONSENSUS_AMOUNT && process.env.CONSENSUS_AMOUNT !== '0')
+      throw new Error('Missing CONSENSUS_AMOUNT')
 
     const session = await verifyToken()
 
     const pathname = req.nextUrl.pathname
     const chain = pathname.split('/').slice(3)[0]
-    const claimType = pathname.split('/').slice(4)[0]
-    if (claimType !== CLAIM_TYPES.OperatorDisbursement)
-      return NextResponse.json({ error: 'Invalid claim type' }, { status: 400 })
+    const requestType = pathname.split('/').slice(4)[0]
+    if (requestType !== REQUEST_TYPES.Consensus)
+      return NextResponse.json({ error: 'Invalid request type' }, { status: 400 })
 
     const chainMatch = indexers.find((c) => c.network === chain)
     if (!chainMatch) return NextResponse.json({ error: 'Invalid chain' }, { status: 400 })
 
-    const claim = await req.json()
-    const { address } = claim
+    const request = await req.json()
+    const { address } = request
 
     // Check if already requested
     const alreadyRequested = await findRequest(session.id, REQUEST_DATE, ACCOUNT_TYPE)
@@ -41,7 +40,7 @@ export const POST = async (req: NextRequest) => {
       api,
       accounts: [wallet]
     } = await activateWallet({
-      uri: process.env.WALLET_CLAIM_OPERATOR_DISBURSEMENT_URI,
+      uri: process.env.WALLET_CONSENSUS_URI,
       networkId: chainMatch.network
     } as ActivateWalletParams)
 
@@ -51,11 +50,11 @@ export const POST = async (req: NextRequest) => {
       await walletBalanceLowSlackMessage(free.toString(), wallet.address)
     }
 
-    if (BigInt(free) <= BigInt(process.env.CLAIM_OPERATOR_DISBURSEMENT_AMOUNT))
+    if (BigInt(free) <= BigInt(process.env.CONSENSUS_AMOUNT))
       return NextResponse.json({ error: 'Insufficient funds' }, { status: 400 })
 
     // Create and sign the transfer transaction
-    const tx = await transfer(api as unknown as ApiPromise, address, process.env.CLAIM_OPERATOR_DISBURSEMENT_AMOUNT)
+    const tx = await transfer(api as unknown as ApiPromise, address, process.env.CONSENSUS_AMOUNT)
     const txResponse = await tx.signAndSend(wallet)
 
     // Save request to database
@@ -65,7 +64,7 @@ export const POST = async (req: NextRequest) => {
     const stats = await findStats(STATS_DATE)
     if (!stats || stats.length === 0) {
       const slackMessageId = await sendSlackMessage(
-        'Current week consensus-disbursement requests',
+        'Current week consensus requests',
         buildSlackStatsMessage('update', 1, 1)
       )
       await createStats(address, ACCOUNT_TYPE, slackMessageId, STATS_DATE)
@@ -74,7 +73,7 @@ export const POST = async (req: NextRequest) => {
       const isExisting = statsFound.addresses.includes(address)
 
       await sendSlackMessage(
-        'Current week consensus-disbursement requests',
+        'Current week consensus requests',
         buildSlackStatsMessage(
           'update',
           statsFound.requests + 1,

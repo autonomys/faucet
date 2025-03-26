@@ -1,6 +1,6 @@
 'use client'
 
-import { nova } from '@/constants/networks'
+import { autoEVM } from '@/constants/networks'
 import { Check, Copy } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
@@ -34,17 +34,17 @@ export const NetworkSettings: React.FC = () => {
   }, [])
 
   const networkData = [
-    { name: 'Network Name', value: nova.name, id: 'network' },
-    { name: 'RPC URL', value: nova.rpcUrls.default.http[0], id: 'rpc' },
-    { name: 'Chain ID', value: nova.id.toString(), id: 'chainId' },
+    { name: 'Network Name', value: autoEVM.name, id: 'network' },
+    { name: 'RPC URL', value: autoEVM.rpcUrls.default.http[0], id: 'rpc' },
+    { name: 'Chain ID', value: autoEVM.id.toString(), id: 'chainId' },
     {
       name: 'Currency Symbol',
-      value: nova.nativeCurrency.symbol,
+      value: autoEVM.nativeCurrency.symbol,
       id: 'currency'
     },
     {
       name: 'Block explorer URL',
-      value: nova.blockExplorers?.default.url ?? '',
+      value: autoEVM.blockExplorers?.default.url ?? '',
       id: 'explorer'
     }
   ]

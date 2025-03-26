@@ -1,6 +1,6 @@
 'use client'
 
-import { nova } from '@/constants/networks'
+import { autoEVM } from '@/constants/networks'
 import { useAccountModal, useConnectModal } from '@rainbow-me/rainbowkit'
 import { Check, Copy } from 'lucide-react'
 import { useEffect, useState } from 'react'
@@ -23,7 +23,7 @@ export const ConnectEVMWallet: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    if (isConnected && chain && chain.id !== nova.id && switchNetwork) switchNetwork(nova.id)
+    if (isConnected && chain && chain.id !== autoEVM.id && switchNetwork) switchNetwork(autoEVM.id)
   }, [isConnected, chain, switchNetwork])
 
   const copyToClipboard = () => {

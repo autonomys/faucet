@@ -59,10 +59,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta property='fc:frame' content='vNext' />
         <meta property='fc:frame:image' content='/images/share.png' />
         <meta property='fc:frame:image:aspect_ratio' content='1.91:1' />
-        <meta property='fc:frame:post_url' content='https://autonomysfaucet.com/api/requestTokens' />
-        <meta property='fc:frame:button:1' content='Request Nova Testnet Token' />
+        <meta property='fc:frame:post_url' content='https://autonomysfaucet.com/api/request-tokens' />
+        <meta property='fc:frame:button:1' content='Request Auto-EVM Testnet Token' />
         <meta property='fc:frame:button:1:action' content='post' />
-        <meta property='fc:frame:button:1:target' content='https://autonomysfaucet.com/api/requestTokens' />
+        <meta property='fc:frame:button:1:target' content='https://autonomysfaucet.com/api/request-tokens' />
       </head>
       <body className={inter.className}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>

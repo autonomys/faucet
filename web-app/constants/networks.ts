@@ -1,6 +1,6 @@
 import { Chain, hardhat, mainnet } from 'wagmi/chains'
 
-export const nova: Chain = {
+export const autoEVM: Chain = {
   id: 490000,
   name: 'Auto-EVM - Autonomys Taurus Testnet',
   network: 'auto-evm-taurus',
@@ -25,4 +25,4 @@ export const nova: Chain = {
   }
 }
 
-export const networks: Chain[] = [nova, mainnet, hardhat]
+export const networks: Chain[] = [autoEVM, mainnet, hardhat]

@@ -1,5 +1,5 @@
 // constants/serverNetworks.ts
-export const nova = {
+export const autoEVM = {
   id: 490000,
   name: 'Auto-EVM - Autonomys Taurus Testnet',
   network: 'auto-evm-taurus',
@@ -25,4 +25,4 @@ export const nova = {
 }
 
 // Optionally, add more server-safe networks if needed
-export const networks = [nova]
+export const networks = [autoEVM]

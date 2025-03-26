@@ -1,15 +1,12 @@
 // types/next-auth.d.ts
 import { DefaultSession, DefaultUser } from 'next-auth'
 import { JWT as DefaultJWT } from 'next-auth/jwt'
-import type { DiscordToken, SubspaceToken } from './jwt'
 declare module 'next-auth' {
   interface User extends DefaultUser {
     id: string
     accountType: string
     isGitHubFollower?: boolean
     isDiscordGuildMember?: boolean
-    subspace?: SubspaceToken
-    discord?: DiscordToken
   }
 
   interface Session extends DefaultSession {
@@ -29,7 +26,5 @@ declare module 'next-auth/jwt' {
     accountType: string
     isGitHubFollower?: boolean
     isDiscordGuildMember?: boolean
-    subspace?: SubspaceToken
-    discord?: DiscordToken
   }
 }

@@ -1,8 +1,8 @@
-// app/api/requestTokens/route.ts
+// app/api/request-tokens/route.ts
 
 import { contracts } from '@/constants/contracts'
 import { metadata } from '@/constants/metadata'
-import { networks, nova } from '@/constants/serverNetworks'
+import { autoEVM, networks } from '@/constants/serverNetworks'
 import {
   buildSlackStatsMessage,
   createStats,
@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
 
     const data = await validationRes.json()
 
-    body.chainId = nova.id
+    body.chainId = autoEVM.id
     body.address = data.action.interactor.verified_addresses.eth_addresses[0] || data.action.interactor.custody_address
     body.accountType = 'farcaster'
     body.accountId = data.action.interactor.fid
@@ -144,10 +144,10 @@ function generateSuccessHTML(address: string, hash: string) {
   <meta property='fc:frame:post_url' content='request_url' />
   <meta property='fc:frame:button:1' content='View transaction' />
   <meta property='fc:frame:button:1:action' content='link' />
-  <meta property='fc:frame:button:1:target' content='${nova.blockExplorers?.default.url}/tx/${hash}' />
+  <meta property='fc:frame:button:1:target' content='${autoEVM.blockExplorers?.default.url}/tx/${hash}' />
   <meta property='fc:frame:button:2' content='View your wallet' />
   <meta property='fc:frame:button:2:action' content='link' />
-  <meta property='fc:frame:button:2:target' content='${nova.blockExplorers?.default.url}/address/${address}' />
+  <meta property='fc:frame:button:2:target' content='${autoEVM.blockExplorers?.default.url}/address/${address}' />
   </head></html>`
 }
 
@@ -160,6 +160,6 @@ function generateErrorHTML() {
   <meta property='fc:frame:post_url' content='request_url' />
   <meta property='fc:frame:button:1' content='Try again' />
   <meta property='fc:frame:button:1:action' content='post' />
-  <meta property='fc:frame:button:1:target' content='${metadata.url}/api/requestTokens' />
+  <meta property='fc:frame:button:1:target' content='${metadata.url}/api/request-tokens' />
   </head></html>`
 }
