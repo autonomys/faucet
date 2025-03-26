@@ -5,7 +5,6 @@ import { RequestTokenButton } from '@/components/RequestTokenButton'
 import { Web2SocialButton } from '@/components/Web2SocialButton'
 import { Contract } from '@/constants/contracts'
 import { Check, ExternalLink, Github } from 'lucide-react'
-import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 
 interface GitHubProps {
@@ -19,8 +18,6 @@ interface GitHubProps {
 export const GitHub: React.FC<GitHubProps> = ({ isConnected, isGitHubFollower, contract, address, setActiveTab }) => {
   return (
     <div className='space-y-6'>
-      <button onClick={() => signOut()}>Sign out</button>
-
       <h3 className='text-xl font-semibold mb-4'>Request token via GitHub</h3>
       <ol className='space-y-5'>
         <li className='flex items-start gap-4'>
