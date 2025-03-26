@@ -75,4 +75,6 @@ export const consensus: ConsensusChain = {
   }
 }
 
-export const networks: (Chain | ConsensusChain)[] = [autoEVM, consensus, mainnet, hardhat]
+export const evmNetworks: Chain[] = [autoEVM, mainnet, hardhat]
+export const consensusNetworks: ConsensusChain[] = [consensus]
+export const networks: (Chain | ConsensusChain)[] = [...evmNetworks, ...consensusNetworks]

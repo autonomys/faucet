@@ -25,4 +25,4 @@ export const autoEVM = {
 }
 
 // Optionally, add more server-safe networks if needed
-export const networks = [autoEVM]
+export const evmNetworks = [autoEVM]

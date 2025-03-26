@@ -2,7 +2,7 @@
 
 import { contracts } from '@/constants/contracts'
 import { metadata } from '@/constants/metadata'
-import { autoEVM, networks } from '@/constants/serverNetworks'
+import { autoEVM, evmNetworks } from '@/constants/serverNetworks'
 import {
   buildSlackStatsMessage,
   createStats,
@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
       accountId: string
     }
 
-    const rpc = networks.find((n) => n.id === chainId)?.rpcUrls?.default?.http[0]
+    const rpc = evmNetworks.find((n) => n.id === chainId)?.rpcUrls?.default?.http[0]
     if (!rpc) throw new Error('Unknown chainId')
 
     const provider = new providers.JsonRpcProvider({
