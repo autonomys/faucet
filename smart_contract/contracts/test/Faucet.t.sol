@@ -31,6 +31,7 @@ contract FaucetTest is Constants {
         vm.assume(to_ != address(0));
         vm.assume(to_ != address(1));
         vm.assume(to_ != address(faucet));
+        vm.assume(uint160(to_) > 9);
         vm.assume(to_.code.length == 0);
     }
     
