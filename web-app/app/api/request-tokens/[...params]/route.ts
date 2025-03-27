@@ -96,7 +96,7 @@ export const POST = async (req: NextRequest) => {
 
     return NextResponse.json({
       message: 'Token requested successfully',
-      txResponse: { hash: txResponse.hash.toString() }
+      txResponse: { hash: txResponse.toString() }
     })
   } catch (error) {
     console.error('Error processing token request:', error)
