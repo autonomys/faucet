@@ -61,7 +61,7 @@ export const POST = async (req: NextRequest) => {
     const txResponse = await tx.signAndSend(wallet)
 
     // Save request to database
-    await saveRequest(address, session.id, REQUEST_DATE, txResponse.hash.toString(), ACCOUNT_TYPE)
+    await saveRequest(address, session.id, REQUEST_DATE, txResponse.toString(), ACCOUNT_TYPE)
 
     // Update stats
     const stats = await findStats(STATS_DATE)
