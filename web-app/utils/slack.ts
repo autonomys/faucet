@@ -60,6 +60,26 @@ export const sendSlackMessage = async (
   }
 }
 
+export const sendSlackStatsMessage = async (requestCount: number, messageIdToEdit?: string) => {
+  const blocks: SlackBlock[] = [
+    {
+      type: 'header',
+      text: {
+        type: 'plain_text',
+        text: 'Claim stats'
+      }
+    },
+    {
+      type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text: `Total requests: ${requestCount} :autonomys: `
+      }
+    }
+  ]
+  return await sendSlackMessage('Wallet balance low', blocks, messageIdToEdit)
+}
+
 export const buildSlackStatsMessage = (
   type: 'weekRecap' | 'update',
   requestCount: number,
@@ -146,4 +166,24 @@ export const faucetBalanceLowSlackMessage = async (balance: string) => {
     }
   ]
   await sendSlackMessage('Faucet balance low', blocks)
+}
+
+export const walletBalanceLowSlackMessage = async (balance: string, wallet: string) => {
+  const blocks: SlackBlock[] = [
+    {
+      type: 'header',
+      text: {
+        type: 'plain_text',
+        text: 'Wallet balance is low'
+      }
+    },
+    {
+      type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text: `The wallet balance has ${balance} ${process.env.TOKEN_SYMBOL}, please refill the wallet. \`${wallet}\``
+      }
+    }
+  ]
+  return await sendSlackMessage('Wallet balance low', blocks)
 }

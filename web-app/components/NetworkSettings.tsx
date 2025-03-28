@@ -1,6 +1,7 @@
 'use client'
 
-import { nova } from '@/constants/networks'
+import { networks } from '@/constants/networks'
+import { useNetworkStore } from '@/store/useStore'
 import { Check, Copy } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
@@ -8,6 +9,9 @@ export const NetworkSettings: React.FC = () => {
   const [copiedField, setCopiedField] = useState<string | null>(null)
   const [tooltipVisible, setTooltipVisible] = useState<string | null>(null)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  const { network } = useNetworkStore()
+  const chain = networks.find((n) => n.network === network)
 
   const copyToClipboard = (value: string, fieldName: string) => {
     navigator.clipboard.writeText(value)
@@ -34,17 +38,17 @@ export const NetworkSettings: React.FC = () => {
   }, [])
 
   const networkData = [
-    { name: 'Network Name', value: nova.name, id: 'network' },
-    { name: 'RPC URL', value: nova.rpcUrls.default.http[0], id: 'rpc' },
-    { name: 'Chain ID', value: nova.id.toString(), id: 'chainId' },
+    { name: 'Network Name', value: chain?.name, id: 'network' },
+    { name: 'RPC URL', value: chain?.rpcUrls.default.http[0], id: 'rpc' },
+    { name: 'Chain ID', value: chain?.id.toString(), id: 'chainId' },
     {
       name: 'Currency Symbol',
-      value: nova.nativeCurrency.symbol,
+      value: chain?.nativeCurrency.symbol,
       id: 'currency'
     },
     {
       name: 'Block explorer URL',
-      value: nova.blockExplorers?.default.url ?? '',
+      value: chain?.blockExplorers?.default.url ?? '',
       id: 'explorer'
     }
   ]
@@ -58,11 +62,11 @@ export const NetworkSettings: React.FC = () => {
           <div key={item.id} className='bg-muted dark:bg-background-darkest p-4 rounded-lg'>
             <h4 className='font-medium mb-2'>{item.name}</h4>
             <div className='flex items-center justify-between'>
-              <p className={item.value.length > 30 ? 'text-sm' : ''}>{item.value}</p>
+              <p className='text-sm'>{item.value}</p>
               <div className='relative'>
                 <button
                   className='text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer p-1 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors'
-                  onClick={() => copyToClipboard(item.value, item.id)}
+                  onClick={() => copyToClipboard(item.value ?? '', item.id)}
                   onMouseEnter={() => setTooltipVisible(item.id)}
                   onMouseLeave={() => setTooltipVisible(null)}
                   aria-label={`Copy ${item.name}`}>

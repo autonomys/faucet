@@ -1,4 +1,4 @@
-import { networks } from '@/constants/networks'
+import { evmNetworks } from '@/constants/networks'
 import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit'
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'
@@ -8,7 +8,7 @@ interface Web3ProviderProps {
 }
 
 export const Web3Provider: React.FC<Web3ProviderProps> = ({ children }) => {
-  const { chains, publicClient } = configureChains(networks, [publicProvider()])
+  const { chains, publicClient } = configureChains(evmNetworks, [publicProvider()])
 
   const { connectors } = getDefaultWallets({
     appName: 'Autonomys Faucet',

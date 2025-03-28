@@ -1,6 +1,11 @@
+import { NetworkOptions, useNetworkStore } from '@/store/useStore'
 import Link from 'next/link'
 
 export const Header: React.FC = () => {
+  const { network } = useNetworkStore()
+
+  const networkText = network === NetworkOptions.CONSENSUS ? 'Consensus' : 'Auto-EVM'
+
   return (
     <div className='mb-10 text-center'>
       <h2 className='text-4xl font-bold mb-4'>Faucet</h2>
@@ -9,7 +14,7 @@ export const Header: React.FC = () => {
       </p>
       <Link href='https://docs.autonomys.network/mainnet/overview' target='_blank'>
         <span className='inline-flex items-center rounded-full border border-gray-300 dark:border-gray-700 px-3 py-1 text-sm font-medium cursor-pointer'>
-          Auto-EVM - Autonomys Taurus Testnet
+          {networkText} - Autonomys Taurus Testnet
         </span>
       </Link>
     </div>

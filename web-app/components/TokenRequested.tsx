@@ -1,3 +1,4 @@
+import { NetworkOptions, useNetworkStore } from '@/store/useStore'
 import React from 'react'
 import { formatUnits } from 'viem'
 
@@ -13,6 +14,10 @@ interface TokenRequestedProps {
 }
 
 export const TokenRequested: React.FC<TokenRequestedProps> = ({ withdrawalAmount, chain, res }) => {
+  const { network } = useNetworkStore()
+
+  const AstralExplorerUrl = 'https://explorer.autonomys.xyz/taurus/consensus/extrinsics'
+
   return (
     <div className='bg-brand-500 text-white px-4 py-2 w-[40vh]'>
       <div className='flex justify-center'>
@@ -21,14 +26,25 @@ export const TokenRequested: React.FC<TokenRequestedProps> = ({ withdrawalAmount
           <p>
             We&apos;ve requested {formatUnits(withdrawalAmount, 18)} {chain.nativeCurrency.symbol} for you.
           </p>
-          <a
-            href={`${chain.blockExplorers?.default.url}/tx/${res.txResponse.hash}`}
-            target='_blank'
-            rel='noopener noreferrer'>
-            <button className='border border-white text-white text-sm px-3 py-1 rounded hover:bg-brand-success-hover cursor-pointer'>
-              View on Subspace Explorer
-            </button>
-          </a>
+          {network === NetworkOptions.AUTO_EVM ? (
+            <a
+              href={`${chain.blockExplorers?.default.url}/tx/${res.txResponse.hash}`}
+              target='_blank'
+              rel='noopener noreferrer'>
+              <button className='border border-white text-white text-sm px-3 py-1 rounded hover:bg-brand-success-hover cursor-pointer'>
+                View on Subspace Explorer
+              </button>
+            </a>
+          ) : (
+            <a
+              href={`${AstralExplorerUrl}/${res.txResponse.hash.toString()}`}
+              target='_blank'
+              rel='noopener noreferrer'>
+              <button className='border border-white text-white text-sm px-3 py-1 rounded hover:bg-brand-success-hover cursor-pointer'>
+                View on Autonomys Astral Explorer
+              </button>
+            </a>
+          )}
         </div>
       </div>
     </div>

@@ -3,6 +3,8 @@ import { GitHub } from '@/components/GitHub'
 import { NetworkSettings } from '@/components/NetworkSettings'
 import { Terms } from '@/components/Terms'
 import { contracts } from '@/constants/contracts'
+import useWallet from '@/hooks/useWallet'
+import { NetworkOptions, useNetworkStore } from '@/store/useStore'
 import { FileText, Github, Settings } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
@@ -16,6 +18,8 @@ export const TokenCard: React.FC = () => {
   const { isConnected, address } = useAccount()
   const { chain } = useNetwork()
   const { data: session } = useSession()
+  const { network } = useNetworkStore()
+  const { actingAccount } = useWallet()
 
   const contract = useMemo(() => chain && contracts.find((c) => c.name === 'Faucet' && c.chainId === chain.id), [chain])
   const isGitHubFollower = useMemo(
@@ -45,6 +49,26 @@ export const TokenCard: React.FC = () => {
   useEffect(() => {
     setClientSide(true)
   }, [])
+
+  const isWalletConnected = useMemo<boolean>(() => {
+    if (actingAccount && network === NetworkOptions.CONSENSUS) {
+      return true
+    }
+    if (isConnected && network === NetworkOptions.AUTO_EVM) {
+      return true
+    }
+    return false
+  }, [isConnected, actingAccount, network])
+
+  const currentWalletAddress = useMemo(() => {
+    if (actingAccount && network === NetworkOptions.CONSENSUS) {
+      return actingAccount.address
+    }
+    if (isConnected && network === NetworkOptions.AUTO_EVM) {
+      return address
+    }
+    return ''
+  }, [actingAccount, network, address, isConnected])
 
   if (!clientSide) return null
 
@@ -77,10 +101,10 @@ export const TokenCard: React.FC = () => {
         {/* GitHub Tab Content */}
         {activeTab === 'github' && (
           <GitHub
-            isConnected={isConnected}
+            isConnected={isWalletConnected}
             isGitHubFollower={isGitHubFollower}
             contract={contract}
-            address={address}
+            address={currentWalletAddress ?? undefined}
             setActiveTab={setActiveTab}
           />
         )}
@@ -88,10 +112,10 @@ export const TokenCard: React.FC = () => {
         {/* Discord Tab Content */}
         {activeTab === 'discord' && (
           <Discord
-            isConnected={isConnected}
+            isConnected={isWalletConnected}
             isDiscordGuildMember={isDiscordGuildMember}
             contract={contract}
-            address={address}
+            address={currentWalletAddress ?? undefined}
             setActiveTab={setActiveTab}
           />
         )}

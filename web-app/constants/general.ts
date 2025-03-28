@@ -1,0 +1,1 @@
+export const SUBSPACE_ACC_PREFIX = 6094
