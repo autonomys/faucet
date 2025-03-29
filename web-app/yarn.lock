@@ -41,10 +41,10 @@
   dependencies:
     "@autonomys/auto-utils" "^1.4.8"
 
-"@autonomys/auto-utils@1.4.2":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@autonomys/auto-utils/-/auto-utils-1.4.2.tgz#c7d4b843df461dfcc0c9be0945c9a02a0ed80515"
-  integrity sha512-it9iCuVzWJ7joTKDYcZYaAKND2aTfPWrIM7UrXoLd9CyPyiTCl/lUYJ54OQo2kwtIf5Y/p3/YrmuhJfaSsXTZQ==
+"@autonomys/auto-utils@1.4.8":
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/@autonomys/auto-utils/-/auto-utils-1.4.8.tgz#4c76e0c0aaec8b59bb094b004284cdfa9821c02f"
+  integrity sha512-iYdrICToz8zLqOyREBtgia0Tpy9y739Djqk2TEVlPgU7NHFyiOCnryvOEDk34Olwa3FkuL/zAp0LfZPJ7ANsaw==
   dependencies:
     "@polkadot/api" "^15.8.1"
     "@polkadot/extension-dapp" "^0.58.5"
