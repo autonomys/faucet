@@ -18,7 +18,7 @@ jobs:
         working-directory: ./web-app
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Deploy to Netlify Action 🚀
         uses: netlify/actions/cli@master
         env:
