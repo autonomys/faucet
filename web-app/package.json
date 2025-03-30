@@ -43,7 +43,7 @@
     "@rainbow-me/rainbowkit": "^1.0.11",
     "@talismn/connect-wallets": "^1.2.8",
     "clsx": "^2.1.1",
-    "ethers": "5.7.2",
+    "ethers": "5.8.0",
     "faunadb": "^4.8.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.483.0",
