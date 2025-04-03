@@ -139,7 +139,7 @@ function generateSuccessHTML(address: string, hash: string) {
   return `<!DOCTYPE html>
   <html><head>
   <meta property='fc:frame' content='vNext' />
-  <meta property='fc:frame:image' content='${metadata.url}/images/share-final.png' />
+  <meta property='fc:frame:image' content='${metadata.url}/images/share.png' />
   <meta property='fc:frame:image:aspect_ratio' content='1.91:1' />
   <meta property='fc:frame:post_url' content='request_url' />
   <meta property='fc:frame:button:1' content='View transaction' />
@@ -155,7 +155,7 @@ function generateErrorHTML() {
   return `<!DOCTYPE html>
   <html><head>
   <meta property='fc:frame' content='vNext' />
-  <meta property='fc:frame:image' content='${metadata.url}/images/share-request-error.png' />
+  <meta property='fc:frame:image' content='${metadata.url}/images/share.png' />
   <meta property='fc:frame:image:aspect_ratio' content='1.91:1' />
   <meta property='fc:frame:post_url' content='request_url' />
   <meta property='fc:frame:button:1' content='Try again' />
