@@ -5,10 +5,29 @@ import { JWT } from 'next-auth/jwt'
 import DiscordProvider, { DiscordProfile } from 'next-auth/providers/discord'
 import GitHubProvider, { GithubProfile } from 'next-auth/providers/github'
 
+const getOrigin = (url: string) => {
+  try {
+    return new URL(url).origin
+  } catch {
+    return null
+  }
+}
+
 const authOptions: AuthOptions = {
   debug: false,
   secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: 'jwt' },
+  cookies: {
+    sessionToken: {
+      name: `next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'none',
+        path: '/',
+        secure: true
+      }
+    }
+  },
   jwt: {
     encode: ({ token, secret }) => jsonwebtoken.sign(token!, secret, { algorithm: 'HS256' }),
     decode: async ({ token, secret }) => jsonwebtoken.verify(token!, secret, { algorithms: ['HS256'] }) as JWT
@@ -76,12 +95,33 @@ const authOptions: AuthOptions = {
     })
   ],
   callbacks: {
-    jwt: async ({ token, user }) => {
-      if (user) {
+    redirect: async ({ url, baseUrl }) => {
+      const trustedDomains = [
+        'https://subspacefaucet.com',
+        'https://www.subspacefaucet.com',
+        'https://autonomysfaucet.com',
+        'https://www.autonomysfaucet.com',
+        'https://autonomysfaucet.xyz',
+        'https://www.autonomysfaucet.xyz'
+      ]
+      if (url.startsWith('/')) return `${baseUrl}${url}`
+      const origin = getOrigin(url)
+      if (origin && trustedDomains.includes(origin)) return url
+
+      return baseUrl
+    },
+    jwt: async ({ token, user, account }) => {
+      if (account && user) {
         token.id = user.id
         token.accountType = user.accountType
         token.isGitHubFollower = user.isGitHubFollower
         token.isDiscordGuildMember = user.isDiscordGuildMember
+        return {
+          ...token,
+          accessToken: account.access_token,
+          accessTokenExpires: account.expires_at ? account.expires_at * 1000 : null,
+          refreshToken: account.refresh_token
+        }
       }
       return token
     },
