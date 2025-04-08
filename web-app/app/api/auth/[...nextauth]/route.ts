@@ -5,13 +5,7 @@ import { JWT } from 'next-auth/jwt'
 import DiscordProvider, { DiscordProfile } from 'next-auth/providers/discord'
 import GitHubProvider, { GithubProfile } from 'next-auth/providers/github'
 
-const getOrigin = (url: string) => {
-  try {
-    return new URL(url).origin
-  } catch {
-    return null
-  }
-}
+const ALLOWED_DOMAINS = ['subspacefaucet.com', 'autonomysfaucet.com', 'autonomysfaucet.xyz']
 
 const authOptions: AuthOptions = {
   debug: false,
@@ -19,12 +13,12 @@ const authOptions: AuthOptions = {
   session: { strategy: 'jwt' },
   cookies: {
     sessionToken: {
-      name: `next-auth.session-token`,
+      name: `__Secure-next-auth.session-token`,
       options: {
         httpOnly: true,
-        sameSite: 'none',
+        sameSite: 'lax',
         path: '/',
-        secure: true
+        secure: process.env.NODE_ENV === 'production'
       }
     }
   },
@@ -96,19 +90,9 @@ const authOptions: AuthOptions = {
   ],
   callbacks: {
     redirect: async ({ url, baseUrl }) => {
-      const trustedDomains = [
-        'https://subspacefaucet.com',
-        'https://www.subspacefaucet.com',
-        'https://autonomysfaucet.com',
-        'https://www.autonomysfaucet.com',
-        'https://autonomysfaucet.xyz',
-        'https://www.autonomysfaucet.xyz'
-      ]
-      if (url.startsWith('/')) return `${baseUrl}${url}`
-      const origin = getOrigin(url)
-      if (origin && trustedDomains.includes(origin)) return url
-
-      return baseUrl
+      const isAllowedDomain = ALLOWED_DOMAINS.some((domain) => new URL(url).hostname.endsWith(domain))
+      if (!isAllowedDomain) return baseUrl
+      return url
     },
     jwt: async ({ token, user, account }) => {
       if (account && user) {
