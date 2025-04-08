@@ -12,6 +12,7 @@ interface NetworkState {
   network: NetworkOptions
   setNetwork: (network: NetworkOptions) => void
   networks: Network[]
+  version: number
   setNetworks: (networks: Network[]) => void
 }
 
@@ -21,11 +22,13 @@ export const useNetworkStore = create<NetworkState>()(
       network: NetworkOptions.AUTO_EVM,
       setNetwork: (network: NetworkOptions) => set({ network }),
       networks: networks,
+      version: 1,
       setNetworks: (networks: Network[]) => set({ networks })
     }),
     {
       name: 'network-storage',
-      storage: createJSONStorage(() => localStorage)
+      storage: createJSONStorage(() => localStorage),
+      version: 1
     }
   )
 )
