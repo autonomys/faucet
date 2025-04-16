@@ -5,23 +5,10 @@ import { JWT } from 'next-auth/jwt'
 import DiscordProvider, { DiscordProfile } from 'next-auth/providers/discord'
 import GitHubProvider, { GithubProfile } from 'next-auth/providers/github'
 
-const ALLOWED_DOMAINS = ['subspacefaucet.com', 'autonomysfaucet.com', 'autonomysfaucet.xyz']
-
 const authOptions: AuthOptions = {
   debug: false,
   secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: 'jwt' },
-  cookies: {
-    sessionToken: {
-      name: `__Secure-next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: process.env.NODE_ENV === 'production'
-      }
-    }
-  },
   jwt: {
     encode: ({ token, secret }) => jsonwebtoken.sign(token!, secret, { algorithm: 'HS256' }),
     decode: async ({ token, secret }) => jsonwebtoken.verify(token!, secret, { algorithms: ['HS256'] }) as JWT
@@ -89,23 +76,12 @@ const authOptions: AuthOptions = {
     })
   ],
   callbacks: {
-    redirect: async ({ url, baseUrl }) => {
-      const isAllowedDomain = ALLOWED_DOMAINS.some((domain) => new URL(url).hostname.endsWith(domain))
-      if (!isAllowedDomain) return baseUrl
-      return url
-    },
-    jwt: async ({ token, user, account }) => {
-      if (account && user) {
+    jwt: async ({ token, user }) => {
+      if (user) {
         token.id = user.id
         token.accountType = user.accountType
         token.isGitHubFollower = user.isGitHubFollower
         token.isDiscordGuildMember = user.isDiscordGuildMember
-        return {
-          ...token,
-          accessToken: account.access_token,
-          accessTokenExpires: account.expires_at ? account.expires_at * 1000 : null,
-          refreshToken: account.refresh_token
-        }
       }
       return token
     },
