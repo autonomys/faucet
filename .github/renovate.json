@@ -21,7 +21,6 @@
     },
     {
       "matchDepTypes": ["minor", "patch", "devDependencies"],
-      "automerge": true,
       "automergeType": "pr"
     }
   ]
