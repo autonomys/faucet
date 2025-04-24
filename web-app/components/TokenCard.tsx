@@ -21,7 +21,16 @@ export const TokenCard: React.FC = () => {
   const { network } = useNetworkStore()
   const { actingAccount } = useWallet()
 
-  const contract = useMemo(() => chain && contracts.find((c) => c.name === 'Faucet' && c.chainId === chain.id), [chain])
+  const contract = useMemo(() => {
+    if (chain && network === NetworkOptions.AUTO_EVM) {
+      return contracts.find((c) => c.name === 'Faucet' && c.chainId === chain.id)
+    }
+    if (network === NetworkOptions.CONSENSUS) {
+      return contracts.find((c) => c.name === 'ConsensusFaucet' && c.chainId === -1)
+    }
+    return undefined
+  }, [chain, network])
+
   const isGitHubFollower = useMemo(
     () => !!(session && session.user != null && session.user.isGitHubFollower),
     [session]
