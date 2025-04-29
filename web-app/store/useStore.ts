@@ -14,6 +14,8 @@ interface NetworkState {
   networks: Network[]
   version: number
   setNetworks: (networks: Network[]) => void
+  activeTab: string
+  setActiveTab: (tab: string) => void
 }
 
 export const useNetworkStore = create<NetworkState>()(
@@ -23,7 +25,9 @@ export const useNetworkStore = create<NetworkState>()(
       setNetwork: (network: NetworkOptions) => set({ network }),
       networks: networks,
       version: 1,
-      setNetworks: (networks: Network[]) => set({ networks })
+      setNetworks: (networks: Network[]) => set({ networks }),
+      activeTab: 'github',
+      setActiveTab: (tab: string) => set({ activeTab: tab })
     }),
     {
       name: 'network-storage',

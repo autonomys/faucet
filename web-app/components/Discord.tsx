@@ -2,9 +2,11 @@ import { ConnectWalletButton } from '@/components/ConnectWalletButton'
 import { RequestTokenButton } from '@/components/RequestTokenButton'
 import { Web2SocialButton } from '@/components/Web2SocialButton'
 import { Contract } from '@/constants/contracts'
+import { NetworkOptions, useNetworkStore } from '@/store/useStore'
 import { Check, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import { RxDiscordLogo } from 'react-icons/rx'
+import { useNetwork } from 'wagmi'
 
 interface DiscordProps {
   isConnected: boolean
@@ -21,6 +23,8 @@ export const Discord: React.FC<DiscordProps> = ({
   address,
   setActiveTab
 }) => {
+  const { network } = useNetworkStore()
+  const { chain } = useNetwork()
   return (
     <div className='space-y-6'>
       <h3 className='text-xl font-semibold mb-4'>Request token via Discord</h3>
@@ -100,7 +104,14 @@ export const Discord: React.FC<DiscordProps> = ({
           <div className='flex-1 pt-1'>
             <div className='flex items-center justify-between'>
               <p className='font-medium'>Request token with the Faucet bot on Discord or here</p>
-              {contract && address && <RequestTokenButton contract={contract} address={address} />}
+
+              {chain && network === NetworkOptions.AUTO_EVM && address && isDiscordGuildMember && contract && (
+                <RequestTokenButton contract={contract} address={address} />
+              )}
+
+              {NetworkOptions.CONSENSUS === network && isDiscordGuildMember && address && (
+                <RequestTokenButton address={address} />
+              )}
             </div>
           </div>
         </li>

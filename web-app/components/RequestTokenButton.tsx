@@ -12,7 +12,7 @@ import { toast } from 'react-toastify'
 import { useContractReads, useNetwork } from 'wagmi'
 
 interface RequestTokenButtonProps {
-  contract: Contract
+  contract?: Contract
   address: string
 }
 
