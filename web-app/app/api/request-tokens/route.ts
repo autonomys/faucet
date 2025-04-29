@@ -3,15 +3,6 @@
 import { contracts } from '@/constants/contracts'
 import { metadata } from '@/constants/metadata'
 import { autoEVM, evmNetworks } from '@/constants/serverNetworks'
-import {
-  buildSlackStatsMessage,
-  createStats,
-  findRequest,
-  findStats,
-  saveRequest,
-  sendSlackMessage,
-  updateStats
-} from '@/utils'
 import { JsonFragment } from '@ethersproject/abi'
 import { Contract, Wallet, providers } from 'ethers'
 import { NextRequest, NextResponse } from 'next/server'
@@ -19,10 +10,6 @@ import { NextRequest, NextResponse } from 'next/server'
 type AccountType = 'github' | 'discord' | 'farcaster'
 
 export async function POST(req: NextRequest) {
-  const CURRENT_TIME = new Date()
-  const REQUEST_DATE = CURRENT_TIME.toISOString().slice(0, 16)
-  const STATS_DATE = CURRENT_TIME.toISOString().slice(0, 10)
-
   const body = await req.json()
   let isFarcasterFrame = false
 
@@ -54,7 +41,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const { chainId, address, accountType, accountId } = body as {
+    const { chainId, address } = body as {
       chainId: number
       address: string
       accountType: AccountType
@@ -72,55 +59,19 @@ export async function POST(req: NextRequest) {
     const faucetContract = contracts.find((c) => c.chainId === chainId && c.name === 'Faucet')
     if (!faucetContract) throw new Error('Unknown faucet contract')
 
-    const alreadyRequested = await findRequest(accountId, REQUEST_DATE, accountType)
+    const faucetAbi = faucetContract.abi as unknown as JsonFragment[]
+    const faucet = new Contract(faucetContract.address, faucetAbi, minterWallet)
 
-    if (!alreadyRequested) {
-      const faucetAbi = faucetContract.abi as unknown as JsonFragment[]
-      const faucet = new Contract(faucetContract.address, faucetAbi, minterWallet)
+    const tx = await faucet.populateTransaction.requestTokens(address)
+    const txResponse = await minterWallet.sendTransaction(tx)
 
-      const tx = await faucet.populateTransaction.requestTokens(address)
-      const txResponse = await minterWallet.sendTransaction(tx)
-
-      await saveRequest(address, accountId, REQUEST_DATE, txResponse.hash, accountType)
-
-      const stats = await findStats(STATS_DATE)
-      if (!stats || stats.length === 0) {
-        const slackMessageId = await sendSlackMessage(
-          'Current week evm-faucet requests',
-          buildSlackStatsMessage('update', 1, 1)
-        )
-        await createStats(address, accountType, slackMessageId, STATS_DATE)
-      } else {
-        const statsFound = stats[0].data
-        const isExisting = statsFound.addresses.includes(address)
-
-        await sendSlackMessage(
-          'Current week evm-faucet requests',
-          buildSlackStatsMessage(
-            'update',
-            statsFound.requests + 1,
-            isExisting ? statsFound.uniqueAddresses : statsFound.uniqueAddresses + 1,
-            {
-              ...statsFound.requestsByType,
-              [accountType]: (statsFound.requestsByType[accountType] || 0) + 1
-            }
-          ),
-          statsFound.slackMessageId
-        )
-
-        await updateStats(stats[0].ref, accountType, statsFound, address)
-      }
-
-      if (isFarcasterFrame) {
-        return new NextResponse(generateSuccessHTML(address, txResponse.hash), {
-          headers: { 'Content-Type': 'text/html' }
-        })
-      }
-
-      return NextResponse.json({ message: 'Success', txResponse })
-    } else {
-      return NextResponse.json({ message: 'Success', txResponse: null })
+    if (isFarcasterFrame) {
+      return new NextResponse(generateSuccessHTML(address, txResponse.hash), {
+        headers: { 'Content-Type': 'text/html' }
+      })
     }
+
+    return NextResponse.json({ message: 'Success', txResponse })
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error('Error requesting token', error)
