@@ -4,8 +4,10 @@ import { ConnectWalletButton } from '@/components/ConnectWalletButton'
 import { RequestTokenButton } from '@/components/RequestTokenButton'
 import { Web2SocialButton } from '@/components/Web2SocialButton'
 import { Contract } from '@/constants/contracts'
+import { NetworkOptions, useNetworkStore } from '@/store/useStore'
 import { Check, ExternalLink, Github } from 'lucide-react'
 import Link from 'next/link'
+import { useNetwork } from 'wagmi'
 
 interface GitHubProps {
   isConnected: boolean
@@ -16,6 +18,8 @@ interface GitHubProps {
 }
 
 export const GitHub: React.FC<GitHubProps> = ({ isConnected, isGitHubFollower, contract, address, setActiveTab }) => {
+  const { network } = useNetworkStore()
+  const { chain } = useNetwork()
   return (
     <div className='space-y-6'>
       <h3 className='text-xl font-semibold mb-4'>Request token via GitHub</h3>
@@ -96,7 +100,14 @@ export const GitHub: React.FC<GitHubProps> = ({ isConnected, isGitHubFollower, c
           <div className='flex-1 pt-1'>
             <div className='flex items-center justify-between'>
               <p className='font-medium'>Request token</p>
-              {contract && address && <RequestTokenButton contract={contract} address={address} />}
+
+              {chain && network === NetworkOptions.AUTO_EVM && isGitHubFollower && address && contract && (
+                <RequestTokenButton contract={contract} address={address} />
+              )}
+
+              {NetworkOptions.CONSENSUS === network && isGitHubFollower && address && (
+                <RequestTokenButton address={address} />
+              )}
             </div>
           </div>
         </li>

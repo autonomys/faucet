@@ -14,19 +14,15 @@ import { useAccount, useNetwork } from 'wagmi'
 
 export const TokenCard: React.FC = () => {
   const [clientSide, setClientSide] = useState(false)
-  const [activeTab, setActiveTab] = useState('github')
   const { isConnected, address } = useAccount()
   const { chain } = useNetwork()
   const { data: session } = useSession()
-  const { network } = useNetworkStore()
+  const { network, activeTab, setActiveTab } = useNetworkStore()
   const { actingAccount } = useWallet()
 
   const contract = useMemo(() => {
     if (chain && network === NetworkOptions.AUTO_EVM) {
       return contracts.find((c) => c.name === 'Faucet' && c.chainId === chain.id)
-    }
-    if (network === NetworkOptions.CONSENSUS) {
-      return contracts.find((c) => c.name === 'ConsensusFaucet' && c.chainId === -1)
     }
     return undefined
   }, [chain, network])
