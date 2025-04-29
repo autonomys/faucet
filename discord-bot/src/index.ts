@@ -6,44 +6,13 @@ import {
   CommandNames,
   buildSlackStatsMessage,
   config,
-  createStats,
   faucetBalanceLowSlackMessage,
-  findRequest,
-  findStats,
   formatSeconds,
   log,
   queries,
   requestTokens,
-  saveRequest,
   sendSlackMessage,
-  updateStats,
 } from './utils'
-
-const incrementFaucetRequestsCount = async (address: string, requestDate: string) => {
-  const stats = await findStats(requestDate)
-  log('stats', stats)
-  if (!stats || stats === null || stats.length === 0) {
-    const slackMessageId = await sendSlackMessage(
-      'Current week evm-faucet requests',
-      buildSlackStatsMessage('update', 1, 1),
-    )
-    await createStats(address, slackMessageId, requestDate)
-  } else {
-    const statsFound = stats[0].data
-    const isExistingAddresses = statsFound.addresses.find((a: string) => a === address)
-    await sendSlackMessage(
-      'Current week evm-faucet requests',
-      buildSlackStatsMessage(
-        'update',
-        statsFound.requests + 1,
-        isExistingAddresses ? statsFound.uniqueAddresses : statsFound.uniqueAddresses + 1,
-        statsFound.requestsByType,
-      ),
-      statsFound.slackMessageId,
-    )
-    await updateStats(stats[0].ref, statsFound, address)
-  }
-}
 
 const sendLowBalanceWarning = async (faucetBalance: BigNumber) =>
   await faucetBalanceLowSlackMessage(utils.formatEther(faucetBalance))
@@ -174,30 +143,17 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
                 const formattedAmount = utils.formatEther(withdrawalAmount)
                 log('withdrawalAmount', formattedAmount)
 
-                const previousRequestFound = await findRequest(body.member.user.id, REQUEST_DATE)
-                log('previousRequestFound', previousRequestFound)
-                if (!previousRequestFound) {
-                  // request tokens
-                  const tx = await requestTokens(addressOption.value)
-                  log('tx', tx)
-                  if (tx && tx.hash) {
-                    log('tx.hash', tx.hash)
-                    await saveRequest(addressOption.value, body.member.user.id, REQUEST_DATE, tx.hash)
-                    await incrementFaucetRequestsCount(addressOption.value, STATS_DATE)
-                    await postDiscordMessage(
-                      rest,
-                      body.channel_id,
-                      `${tagUser(body.member.user.id)} We just sent you ${formattedAmount} ${
-                        config.TOKEN_SYMBOL
-                      } :white_check_mark: tokens\nFind the transaction at ${config.EXPLORER_URL}/tx/${tx.hash}`,
-                    )
-                    return finishInteraction()
-                  }
-                } else {
+                // request tokens
+                const tx = await requestTokens(addressOption.value)
+                log('tx', tx)
+                if (tx && tx.hash) {
+                  log('tx.hash', tx.hash)
                   await postDiscordMessage(
                     rest,
                     body.channel_id,
-                    `We already sent you tokens recently, please wait a bit more`,
+                    `${tagUser(body.member.user.id)} We just sent you ${formattedAmount} ${
+                      config.TOKEN_SYMBOL
+                    } :white_check_mark: tokens\nFind the transaction at ${config.EXPLORER_URL}/tx/${tx.hash}`,
                   )
                   return finishInteraction()
                 }
