@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/autonomys/faucet#readme",
   "dependencies": {
+    "@autonomys/auto-consensus": "^1.4.18",
+    "@autonomys/auto-utils": "^1.4.18",
     "discord.js": "^14.12.1",
     "ethers": "^5.7.2",
     "tweetnacl": "^1.0.3"

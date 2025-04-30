@@ -1,18 +1,17 @@
+import { balance, transfer } from '@autonomys/auto-consensus'
+import {
+  activateWallet,
+  ActivateWalletParams,
+  address,
+  ApiPromise,
+  isAddress as isSubspaceAddress,
+  NetworkId,
+} from '@autonomys/auto-utils'
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import { CommandInteractionOption, REST, Routes } from 'discord.js'
 import { BigNumber, utils } from 'ethers'
 import nacl from 'tweetnacl'
-import {
-  CommandNames,
-  buildSlackStatsMessage,
-  config,
-  faucetBalanceLowSlackMessage,
-  formatSeconds,
-  log,
-  queries,
-  requestTokens,
-  sendSlackMessage,
-} from './utils'
+import { CommandNames, config, faucetBalanceLowSlackMessage, formatSeconds, log, queries, requestTokens } from './utils'
 
 const sendLowBalanceWarning = async (faucetBalance: BigNumber) =>
   await faucetBalanceLowSlackMessage(utils.formatEther(faucetBalance))
@@ -59,11 +58,6 @@ const finishInteraction = () => {
 }
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-  const CURRENT_TIME = new Date()
-  // Keeping only the date and minutes to avoid spamming the faucet (reduce the number of digit to reduce time between requests)
-  const REQUEST_DATE = CURRENT_TIME.toISOString().slice(0, 10) // Daily precision
-  const STATS_DATE = CURRENT_TIME.toISOString().slice(0, 10) // Daily precision
-
   const ed25519 = event.headers['x-signature-ed25519']
   const timestamp = event.headers['x-signature-timestamp']
   console.log('body', event.body)
@@ -111,11 +105,50 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
               )
               return finishInteraction()
             } else if (!utils.isAddress(addressOption.value)) {
-              await postDiscordMessage(
-                rest,
-                body.channel_id,
-                `:warning: ${tagUser(body.member.user.id)} Please provide a valid EVM address`,
-              )
+              if (isSubspaceAddress(addressOption.value)) {
+                const {
+                  api,
+                  accounts: [wallet],
+                } = await activateWallet({
+                  uri: process.env.WALLET_CONSENSUS_URI,
+                  networkId: NetworkId.TAURUS,
+                } as ActivateWalletParams)
+
+                const { free } = await balance(api as unknown as ApiPromise, wallet.address)
+                if (
+                  BigInt(free) <
+                  BigInt(
+                    (Number(process.env.SLACK_BALANCE_NOTIFICATION_THRESHOLD) * Number(process.env.CONSENSUS_AMOUNT)) /
+                      100,
+                  )
+                )
+                  await sendLowBalanceWarning(BigNumber.from(free.toString()))
+
+                if (BigInt(free) <= BigInt(process.env.CONSENSUS_AMOUNT || '0')) {
+                  await postDiscordMessage(
+                    rest,
+                    body.channel_id,
+                    `:warning: ${tagUser(body.member.user.id)} Consensus Faucet balance is too low, please wait for refill`,
+                  )
+                  return finishInteraction()
+                }
+
+                if (!process.env.CONSENSUS_AMOUNT) throw new Error('Missing CONSENSUS_AMOUNT')
+                // Create and sign the transfer transaction
+                const tx = await transfer(
+                  api as unknown as ApiPromise,
+                  addressOption.value,
+                  process.env.CONSENSUS_AMOUNT,
+                )
+                const txResponse = await tx.signAndSend(wallet)
+
+                await api.disconnect()
+              } else
+                await postDiscordMessage(
+                  rest,
+                  body.channel_id,
+                  `:warning: ${tagUser(body.member.user.id)} Please provide a valid EVM address`,
+                )
               return finishInteraction()
             } else {
               const currentTime = BigNumber.from(Math.floor(Date.now() / 1000))
