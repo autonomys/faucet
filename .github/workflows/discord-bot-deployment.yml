@@ -1,3 +1,4 @@
+name: Build and Deploy Discord Bot
 on:
   push:
     branches:
@@ -16,9 +17,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       - name: NPM Clean Install
-        run: cd discord-bot && npm ci
-      - name: Deploy Serverless Bot on AWS
-        run: cd discord-bot && npm run deploy
+        run: cd discord-bot && yarn install --frozen-lockfile
+      - name: Build and Deploy Serverless Bot on AWS
+        run: cd discord-bot && yarn build && yarn deploy
         env:
           # Discord Bot Token, Guild ID and Client ID
           TOKEN: ${{ secrets.TOKEN }}
