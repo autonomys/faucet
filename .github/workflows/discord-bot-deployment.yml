@@ -1,3 +1,4 @@
+name: Build and Deploy Discord Bot
 on:
   push:
     branches:
