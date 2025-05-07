@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@autonomys/auto-consensus": "^1.4.5",
-    "@autonomys/auto-utils": "1.4.8",
+    "@autonomys/auto-utils": "1.4.15",
     "@headlessui/react": "^1.7.19",
     "@headlessui/tailwindcss": "^0.2.2",
     "@heroicons/react": "^2.2.0",
