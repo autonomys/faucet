@@ -68,24 +68,17 @@ const FAUCET: Abi = [
   }
 ]
 
-const ENV_CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID
-const ENV_FAUCET_ADDRESS = process.env.NEXT_PUBLIC_FAUCET_ADDRESS
+const faucetChainId = process.env.NEXT_PUBLIC_FAUCET_CHAIN_ID
+const faucetAddress = process.env.NEXT_PUBLIC_FAUCET_ADDRESS as `0x${string}` | undefined
 
-const PARSED_CHAIN_ID = Number(ENV_CHAIN_ID)
-
-if (!ENV_CHAIN_ID || Number.isNaN(PARSED_CHAIN_ID)) {
-  throw new Error('Environment variable NEXT_PUBLIC_CHAIN_ID must be set to a valid number')
-}
-
-if (!ENV_FAUCET_ADDRESS) {
-  throw new Error('Environment variable NEXT_PUBLIC_FAUCET_ADDRESS must be set to a valid address')
-}
-
-export const contracts: Contract[] = [
-  {
-    chainId: PARSED_CHAIN_ID,
-    name: 'Faucet',
-    address: ENV_FAUCET_ADDRESS as `0x${string}`,
-    abi: FAUCET
-  }
-]
+export const contracts: Contract[] =
+  faucetChainId && faucetAddress
+    ? [
+        {
+          chainId: Number(faucetChainId),
+          name: 'Faucet',
+          address: faucetAddress,
+          abi: FAUCET
+        }
+      ]
+    : []
