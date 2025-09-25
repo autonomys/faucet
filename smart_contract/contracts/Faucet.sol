@@ -9,8 +9,8 @@ error Faucet_SendingTokensFailed();
 error Faucet_ContractBalanceIsZero();
 
 contract Faucet is MinterRole {
-    uint256 public withdrawalAmount = 0.0006 * (10**18);
-    uint256 public lockTime = 1 minutes;
+    uint256 public withdrawalAmount = 0.2 * (10**18);
+    uint256 public lockTime = 1440 minutes;
 
     event Withdrawal(address indexed to, uint256 indexed amount);
     event Send(address indexed to, uint256 indexed amount);
