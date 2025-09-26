@@ -7,10 +7,6 @@ import { NetworksUserConfig } from 'hardhat/types'
 let networks: NetworksUserConfig = {}
 
 const {
-  // Gemini
-  RPC_URL_GEMINI,
-  PRIVATE_KEY_GEMINI,
-  GEMINI_SCAN_API_KEY,
   // Chronos
   RPC_URL_CHRONOS,
   PRIVATE_KEY_CHRONOS,
@@ -20,14 +16,6 @@ const {
   PRIVATE_KEY_GOERLI,
   ETHERSCAN_API_KEY,
 } = process.env
-
-if (RPC_URL_GEMINI && PRIVATE_KEY_GEMINI) {
-  networks.gemini = {
-    url: RPC_URL_GEMINI,
-    chainId: 1177,
-    accounts: [PRIVATE_KEY_GEMINI],
-  }
-}
 
 if (RPC_URL_CHRONOS && PRIVATE_KEY_CHRONOS) {
   networks.chronos = {
@@ -62,19 +50,10 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
-      gemini: `${GEMINI_SCAN_API_KEY}`,
       chronos: `${CHRONOS_SCAN_API_KEY}`,
       goerli: `${ETHERSCAN_API_KEY}`,
     },
     customChains: [
-      {
-        network: 'gemini',
-        chainId: 1177, // Update this to the correct Gemini chain ID
-        urls: {
-          apiURL: 'https://blockscout.gemini.autonomys.xyz/api',
-          browserURL: 'https://blockscout.gemini.autonomys.xyz/',
-        },
-      },
       {
         network: 'chronos',
         chainId: 8700,
