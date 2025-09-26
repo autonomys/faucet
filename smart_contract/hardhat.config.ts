@@ -58,8 +58,8 @@ const config: HardhatUserConfig = {
         network: 'chronos',
         chainId: 8700,
         urls: {
-          apiURL: 'https://blockscout.chronos.autonomys.xyz/api',
-          browserURL: 'https://blockscout.chronos.autonomys.xyz/',
+          apiURL: ' https://explorer.auto-evm.chronos.autonomys.xyz/api',
+          browserURL: 'https://explorer.auto-evm.chronos.autonomys.xyz/',
         },
       },
     ],
