@@ -7,21 +7,21 @@ import { NetworksUserConfig } from 'hardhat/types'
 let networks: NetworksUserConfig = {}
 
 const {
-  // Taurus
-  RPC_URL_TAURUS,
-  PRIVATE_KEY_TAURUS,
-  TAURUS_SCAN_API_KEY,
+  // Chronos
+  RPC_URL_CHRONOS,
+  PRIVATE_KEY_CHRONOS,
+  CHRONOS_SCAN_API_KEY,
   // Goerli
   RPC_URL_GOERLI,
   PRIVATE_KEY_GOERLI,
   ETHERSCAN_API_KEY,
 } = process.env
 
-if (RPC_URL_TAURUS && PRIVATE_KEY_TAURUS) {
-  networks.taurus = {
-    url: RPC_URL_TAURUS,
-    chainId: 490000,
-    accounts: [PRIVATE_KEY_TAURUS],
+if (RPC_URL_CHRONOS && PRIVATE_KEY_CHRONOS) {
+  networks.chronos = {
+    url: RPC_URL_CHRONOS,
+    chainId: 8700,
+    accounts: [PRIVATE_KEY_CHRONOS],
   }
 }
 
@@ -50,16 +50,16 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
-      taurus: `${TAURUS_SCAN_API_KEY}`,
+      chronos: `${CHRONOS_SCAN_API_KEY}`,
       goerli: `${ETHERSCAN_API_KEY}`,
     },
     customChains: [
       {
-        network: 'taurus',
-        chainId: 490000,
+        network: 'chronos',
+        chainId: 8700,
         urls: {
-          apiURL: 'https://blockscout.taurus.autonomys.xyz/api',
-          browserURL: 'https://blockscout.taurus.autonomys.xyz/',
+          apiURL: ' https://explorer.auto-evm.chronos.autonomys.xyz/api',
+          browserURL: 'https://explorer.auto-evm.chronos.autonomys.xyz/',
         },
       },
     ],

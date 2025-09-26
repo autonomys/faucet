@@ -68,11 +68,17 @@ const FAUCET: Abi = [
   }
 ]
 
-export const contracts: Contract[] = [
-  {
-    chainId: 490000,
-    name: 'Faucet',
-    address: `0x2296dbb90C714c1355Ff9cbcB70D5AB29060b454`,
-    abi: FAUCET
-  }
-]
+const faucetChainId = process.env.NEXT_PUBLIC_FAUCET_CHAIN_ID
+const faucetAddress = process.env.NEXT_PUBLIC_FAUCET_ADDRESS as `0x${string}` | undefined
+
+export const contracts: Contract[] =
+  faucetChainId && faucetAddress
+    ? [
+        {
+          chainId: Number(faucetChainId),
+          name: 'Faucet',
+          address: faucetAddress,
+          abi: FAUCET
+        }
+      ]
+    : []

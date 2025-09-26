@@ -82,5 +82,29 @@
     "blockNumber": 0,
     "tag": "Faucet deployed by deploy script",
     "extra": {}
+  },
+  {
+    "name": "Faucet",
+    "address": "0x53014F49A5eb6D18CFf9E5e3E5c062963299dc5A",
+    "network": "chronos",
+    "deployer": "0xCaf65CeaB5D7ef4CA3cd6D30F02a8EaC889De0a2",
+    "deploymentDate": "Fri Sep 19 2025 13:46:28 GMT-0400 (Eastern Daylight Time)",
+    "chainId": 8700,
+    "blockHash": "",
+    "blockNumber": 0,
+    "tag": "Faucet deployed by deploy script",
+    "extra": {}
+  },
+  {
+    "name": "Faucet",
+    "address": "0x8C574312FB8925Dfc7a636171C78d463E01e953F",
+    "network": "chronos",
+    "deployer": "0xCaf65CeaB5D7ef4CA3cd6D30F02a8EaC889De0a2",
+    "deploymentDate": "Mon Sep 22 2025 09:08:29 GMT-0400 (Eastern Daylight Time)",
+    "chainId": 8700,
+    "blockHash": "",
+    "blockNumber": 0,
+    "tag": "Faucet deployed by deploy script",
+    "extra": {}
   }
 ]
