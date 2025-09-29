@@ -1,11 +1,9 @@
-import { NetworkOptions, useNetworkStore } from '@/store/useStore'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { useEffect, useState } from 'react'
 
 export const ConnectWalletButton: React.FC = () => {
   const [clientSide, setClientSide] = useState(false)
   const { openConnectModal } = useConnectModal()
-  const { network } = useNetworkStore()
 
   useEffect(() => {
     setClientSide(true)

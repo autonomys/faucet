@@ -3,7 +3,7 @@
 import { ToastContent } from '@/components/ToastContent'
 import { TokenRequested } from '@/components/TokenRequested'
 import { Contract } from '@/constants/contracts'
-import { NetworkOptions, useNetworkStore } from '@/store/useStore'
+import { useNetworkStore } from '@/store/useStore'
 import { formatSeconds } from '@/utils/time'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'

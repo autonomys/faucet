@@ -1,17 +1,13 @@
 import { ConnectEVMWallet } from '@/components/ConnectEVMWallet'
-import useWallet from '@/hooks/useWallet'
-import { NetworkOptions, useNetworkStore } from '@/store/useStore'
+import { NetworkOptions } from '@/store/useStore'
 import { useMemo } from 'react'
 import { LogoIcon } from './LogoIcon'
 import NetworkDropdown from './NetworkDropdown'
 
 export const Navbar: React.FC = () => {
-  const { network } = useNetworkStore()
-  const { actingAccount } = useWallet()
-
   const walletsButton = useMemo(() => {
     return <ConnectEVMWallet />
-  }, [network, actingAccount])
+  }, [])
 
   return (
     <header className='container mx-auto py-6 px-4 flex justify-between items-center'>

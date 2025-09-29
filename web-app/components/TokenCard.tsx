@@ -18,7 +18,6 @@ export const TokenCard: React.FC = () => {
   const { chain } = useNetwork()
   const { data: session } = useSession()
   const { network, activeTab, setActiveTab } = useNetworkStore()
-  const { actingAccount } = useWallet()
 
   const contract = useMemo(() => {
     if (chain && network === NetworkOptions.AUTO_EVM) {

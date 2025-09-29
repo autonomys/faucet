@@ -1,8 +1,6 @@
-import { NetworkOptions, useNetworkStore } from '@/store/useStore'
 import Link from 'next/link'
 
 export const Header: React.FC = () => {
-  const { network } = useNetworkStore()
   const networkText = 'Auto-EVM'
 
   return (
