@@ -16,7 +16,7 @@ interface TokenRequestedProps {
 export const TokenRequested: React.FC<TokenRequestedProps> = ({ withdrawalAmount, chain, res }) => {
   const { network } = useNetworkStore()
 
-  const AstralExplorerUrl = 'https://explorer.autonomys.xyz/taurus/consensus/extrinsics'
+  const AstralExplorerUrl = process.env.NEXT_PUBLIC_EXPLORER_URL || ''
 
   return (
     <div className='bg-brand-500 text-white px-4 py-2 w-[40vh]'>
@@ -41,7 +41,7 @@ export const TokenRequested: React.FC<TokenRequestedProps> = ({ withdrawalAmount
               target='_blank'
               rel='noopener noreferrer'>
               <button className='border border-white text-white text-sm px-3 py-1 rounded hover:bg-brand-success-hover cursor-pointer'>
-                View on Autonomys Astral Explorer
+                View on Block Explorer
               </button>
             </a>
           )}
