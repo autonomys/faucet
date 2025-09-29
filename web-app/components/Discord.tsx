@@ -109,9 +109,7 @@ export const Discord: React.FC<DiscordProps> = ({
                 <RequestTokenButton contract={contract} address={address} />
               )}
 
-              {NetworkOptions.CONSENSUS === network && isDiscordGuildMember && address && (
-                <RequestTokenButton address={address} />
-              )}
+              {/* Single-chain mode: only EVM flow remains */}
             </div>
           </div>
         </li>

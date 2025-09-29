@@ -1,7 +1,6 @@
 import { NetworkOptions, useNetworkStore } from '@/store/useStore'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { useEffect, useState } from 'react'
-import { ConnectConsensusWallet } from './ConnectConsensusWallet'
 
 export const ConnectWalletButton: React.FC = () => {
   const [clientSide, setClientSide] = useState(false)
@@ -13,10 +12,6 @@ export const ConnectWalletButton: React.FC = () => {
   }, [])
 
   if (!clientSide) return null
-
-  if (network === NetworkOptions.CONSENSUS) {
-    return <ConnectConsensusWallet className='text-sm py-1.5 px-3 border border-gray-100 dark:border-brand-hover' />
-  }
 
   return (
     <button

@@ -56,24 +56,13 @@ export const TokenCard: React.FC = () => {
   }, [])
 
   const isWalletConnected = useMemo<boolean>(() => {
-    if (actingAccount && network === NetworkOptions.CONSENSUS) {
-      return true
-    }
-    if (isConnected && network === NetworkOptions.AUTO_EVM) {
-      return true
-    }
-    return false
-  }, [isConnected, actingAccount, network])
+    return !!isConnected
+  }, [isConnected])
 
   const currentWalletAddress = useMemo(() => {
-    if (actingAccount && network === NetworkOptions.CONSENSUS) {
-      return actingAccount.address
-    }
-    if (isConnected && network === NetworkOptions.AUTO_EVM) {
-      return address
-    }
+    if (isConnected) return address
     return ''
-  }, [actingAccount, network, address, isConnected])
+  }, [address, isConnected])
 
   if (!clientSide) return null
 

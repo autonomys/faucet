@@ -101,12 +101,8 @@ export const GitHub: React.FC<GitHubProps> = ({ isConnected, isGitHubFollower, c
             <div className='flex items-center justify-between'>
               <p className='font-medium'>Request token</p>
 
-              {chain && network === NetworkOptions.AUTO_EVM && isGitHubFollower && address && contract && (
+              {chain && isGitHubFollower && address && contract && (
                 <RequestTokenButton contract={contract} address={address} />
-              )}
-
-              {NetworkOptions.CONSENSUS === network && isGitHubFollower && address && (
-                <RequestTokenButton address={address} />
               )}
             </div>
           </div>
