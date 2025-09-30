@@ -35,19 +35,28 @@
     leven "^3.1.0"
 
 "@autonomys/auto-consensus@^1.4.5":
-  version "1.4.8"
-  resolved "https://registry.yarnpkg.com/@autonomys/auto-consensus/-/auto-consensus-1.4.8.tgz#5d881756d6aef472e6fca1628a35954decd5f3f7"
-  integrity sha512-L2b7eKIyv4lZLm8UKT3KOplm02wTVC3n79xz231aNVDSxAKP8cFafd09ZQIB4PoLUUr86kj5sgX1wGDCEOyvYA==
+  version "1.4.15"
+  resolved "https://registry.yarnpkg.com/@autonomys/auto-consensus/-/auto-consensus-1.4.15.tgz#42313017b35e609bab362b88de76549d5298eb43"
+  integrity sha512-rTlkzKR7uuzkN1fPck1z2o+3CDq9xrLZOqZqRvTf2qPtcqRZDH9NVj5Ds2pIUT/TAxBEZLQ+u5PM/nxZcKqk9w==
   dependencies:
-    "@autonomys/auto-utils" "^1.4.8"
+    "@autonomys/auto-utils" "^1.4.15"
 
-"@autonomys/auto-utils@1.4.8", "@autonomys/auto-utils@^1.4.8":
+"@autonomys/auto-utils@1.4.8":
   version "1.4.8"
   resolved "https://registry.yarnpkg.com/@autonomys/auto-utils/-/auto-utils-1.4.8.tgz#4c76e0c0aaec8b59bb094b004284cdfa9821c02f"
   integrity sha512-iYdrICToz8zLqOyREBtgia0Tpy9y739Djqk2TEVlPgU7NHFyiOCnryvOEDk34Olwa3FkuL/zAp0LfZPJ7ANsaw==
   dependencies:
     "@polkadot/api" "^15.8.1"
     "@polkadot/extension-dapp" "^0.58.5"
+    fs "^0.0.1-security"
+
+"@autonomys/auto-utils@^1.4.15":
+  version "1.4.15"
+  resolved "https://registry.yarnpkg.com/@autonomys/auto-utils/-/auto-utils-1.4.15.tgz#7baf8c5d2773360f0591aa4c365af823989a2200"
+  integrity sha512-ksOk3IVmL8HSvxllpqUobnIBm4ECNePFUtAFHiIgmO5Zb48S3Ko8pjlcX/cKpy6Xl65UVfiJHHThjomCDsqRhg==
+  dependencies:
+    "@polkadot/api" "^15.8.1"
+    "@polkadot/extension-dapp" "^0.58.6"
     fs "^0.0.1-security"
 
 "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.26.2":
@@ -2189,7 +2198,7 @@
     rxjs "^7.8.1"
     tslib "^2.8.1"
 
-"@polkadot/api@15.9.1", "@polkadot/api@^15.8.1":
+"@polkadot/api@15.9.1", "@polkadot/api@^15.8.1", "@polkadot/api@^15.9.1":
   version "15.9.1"
   resolved "https://registry.yarnpkg.com/@polkadot/api/-/api-15.9.1.tgz#55fa6ded188a92bed755904573e2deb727481491"
   integrity sha512-VpS7ymL0kzUOXTocJa0AvrnAGUMgT2niyBa5oplItZf3nqF+gSyvdKkP1T9i9Tpp2sbvmwzcMBKUF4G/d+Q02w==
@@ -2222,6 +2231,16 @@
     "@polkadot/util-crypto" "^13.4.3"
     tslib "^2.8.1"
 
+"@polkadot/extension-dapp@^0.58.6":
+  version "0.58.7"
+  resolved "https://registry.yarnpkg.com/@polkadot/extension-dapp/-/extension-dapp-0.58.7.tgz#cfca0de5c596b3399fd8778946a8fac372951085"
+  integrity sha512-5DY4otAPYBFTfgWoYdWWfMn/TRia1Q9Iw5Jle86S9UdjQ2o6eumdeMn9tyYjeSsmBNqTrruiSRM3k0MyiJJi2A==
+  dependencies:
+    "@polkadot/extension-inject" "0.58.7"
+    "@polkadot/util" "^13.4.3"
+    "@polkadot/util-crypto" "^13.4.3"
+    tslib "^2.8.1"
+
 "@polkadot/extension-inject@0.58.6":
   version "0.58.6"
   resolved "https://registry.yarnpkg.com/@polkadot/extension-inject/-/extension-inject-0.58.6.tgz#703a08ade1144a0f1b04abcfe39e4f3b3525391b"
@@ -2230,6 +2249,19 @@
     "@polkadot/api" "^15.8.1"
     "@polkadot/rpc-provider" "^15.8.1"
     "@polkadot/types" "^15.8.1"
+    "@polkadot/util" "^13.4.3"
+    "@polkadot/util-crypto" "^13.4.3"
+    "@polkadot/x-global" "^13.4.3"
+    tslib "^2.8.1"
+
+"@polkadot/extension-inject@0.58.7":
+  version "0.58.7"
+  resolved "https://registry.yarnpkg.com/@polkadot/extension-inject/-/extension-inject-0.58.7.tgz#b5a66f9868392cdbc9201287c8ee31f6389e8409"
+  integrity sha512-5S/zpEHgZ0sbI0BWHTz1DwaANCLHLKyoQrDzMwngSAdfLBZvk9g/VLmz8thGz7XVoXQLJqM4smkN8EzBbdJUNA==
+  dependencies:
+    "@polkadot/api" "^15.9.1"
+    "@polkadot/rpc-provider" "^15.9.1"
+    "@polkadot/types" "^15.9.1"
     "@polkadot/util" "^13.4.3"
     "@polkadot/util-crypto" "^13.4.3"
     "@polkadot/x-global" "^13.4.3"
@@ -2276,7 +2308,7 @@
     rxjs "^7.8.1"
     tslib "^2.8.1"
 
-"@polkadot/rpc-provider@15.9.1", "@polkadot/rpc-provider@^15.8.1":
+"@polkadot/rpc-provider@15.9.1", "@polkadot/rpc-provider@^15.8.1", "@polkadot/rpc-provider@^15.9.1":
   version "15.9.1"
   resolved "https://registry.yarnpkg.com/@polkadot/rpc-provider/-/rpc-provider-15.9.1.tgz#951c86e0e2f464f4b28a96452eed487d3fda91b1"
   integrity sha512-FlWVI0q4RmQbLnB9O36WY/4zyMdpK4YyQyiskK06SyhfuKMwaXJdphKWz6wkKspvinW9duGJcittrC3wMKj6Ug==
@@ -2344,7 +2376,7 @@
     "@polkadot/util" "^13.4.3"
     tslib "^2.8.1"
 
-"@polkadot/types@15.9.1", "@polkadot/types@^15.8.1":
+"@polkadot/types@15.9.1", "@polkadot/types@^15.8.1", "@polkadot/types@^15.9.1":
   version "15.9.1"
   resolved "https://registry.yarnpkg.com/@polkadot/types/-/types-15.9.1.tgz#c0f865e391a172c84a7700233e99a928642fad6a"
   integrity sha512-F1cbpQeGaoBXm40re6idspqXeKQ/MVnC3Y2zGeJW6huXCz1QDfl+pMbFBCBTvU8uSoV2ii+F28vpmIOO9aDkQQ==
@@ -3035,11 +3067,11 @@
   integrity sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==
 
 "@types/node@*":
-  version "22.13.14"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.13.14.tgz#70d84ec91013dcd2ba2de35532a5a14c2b4cc912"
-  integrity sha512-Zs/Ollc1SJ8nKUAgc7ivOEdIBM8JAKgrqqUYi2J997JuKO7/tpQC+WCetQ1sypiKCQWHdvdg9wBNpUPEWZae7w==
+  version "22.14.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.14.0.tgz#d3bfa3936fef0dbacd79ea3eb17d521c628bb47e"
+  integrity sha512-Kmpl+z84ILoG+3T/zQFyAJsU6EPTmOCj8/2+83fSN6djd6I4o7uOuGIH6vq3PrjY5BGitSbFuMN18j3iknubbA==
   dependencies:
-    undici-types "~6.20.0"
+    undici-types "~6.21.0"
 
 "@types/node@^20":
   version "20.17.28"
@@ -7876,10 +7908,10 @@ undici-types@~6.19.2:
   resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-6.19.8.tgz#35111c9d1437ab83a7cdc0abae2f26d88eda0a02"
   integrity sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==
 
-undici-types@~6.20.0:
-  version "6.20.0"
-  resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-6.20.0.tgz#8171bf22c1f588d1554d55bf204bc624af388433"
-  integrity sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==
+undici-types@~6.21.0:
+  version "6.21.0"
+  resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-6.21.0.tgz#691d00af3909be93a7faa13be61b3a5b50ef12cb"
+  integrity sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==
 
 unfetch@^4.2.0:
   version "4.2.0"
