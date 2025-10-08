@@ -2,17 +2,13 @@
 pragma solidity ^0.8.0;
 
 import { stdJson } from 'forge-std/StdJson.sol';
-import { Vm } from 'forge-std/Vm.sol';
 import { Test } from 'forge-std/Test.sol';
 
 contract Errors is Test {
   using stdJson for string;
 
-  Vm public constant vm = Vm(address(uint160(uint256(keccak256('hevm cheat code')))));
-
   mapping(RevertStatus => string) private _errors;
 
-  // Add a revert error to the enum of errors.
   enum RevertStatus {
     SUCCESS,
     SKIP_VALIDATION,
