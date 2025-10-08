@@ -25,7 +25,10 @@ contract Errors is DSTest {
 
   // Associate your error with a revert message and add it to the mapping.
   constructor() {
-    string memory json = vm.readFile('./constants/errors.json');
+    // Resolve path from the Foundry project root to avoid CI working-directory issues
+    string memory root = vm.projectRoot();
+    string memory path = string.concat(root, '/constants/errors.json');
+    string memory json = vm.readFile(path);
 
     // Faucet
     _errors[RevertStatus.Faucet_FailSendingNativeToken] = json.readString('.Faucet.FailSendingNativeToken');
