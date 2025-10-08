@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { stdJson } from 'foundry-test-utility/contracts/utils/stdJson.sol';
-import { Vm } from 'foundry-test-utility/contracts/utils/vm.sol';
-import { DSTest } from 'foundry-test-utility/contracts/utils/test.sol';
+import { stdJson } from 'forge-std/StdJson.sol';
+import { Vm } from 'forge-std/Vm.sol';
+import { Test } from 'forge-std/Test.sol';
 
-contract Errors is DSTest {
+contract Errors is Test {
   using stdJson for string;
 
   Vm public constant vm = Vm(address(uint160(uint256(keccak256('hevm cheat code')))));
