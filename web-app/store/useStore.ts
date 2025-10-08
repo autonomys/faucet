@@ -4,7 +4,7 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 
 export enum NetworkOptions {
-  AUTO_EVM = 'auto-evm-taurus'
+  AUTO_EVM = 'auto-evm-chronos'
 }
 
 interface NetworkState {
