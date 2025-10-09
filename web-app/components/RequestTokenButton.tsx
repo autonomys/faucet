@@ -3,7 +3,7 @@
 import { ToastContent } from '@/components/ToastContent'
 import { TokenRequested } from '@/components/TokenRequested'
 import { Contract } from '@/constants/contracts'
-import { NetworkOptions, useNetworkStore } from '@/store/useStore'
+import { useNetworkStore } from '@/store/useStore'
 import { formatSeconds } from '@/utils/time'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
@@ -87,47 +87,33 @@ export const RequestTokenButton: React.FC<RequestTokenButtonProps> = ({ contract
   const handleRequestToken = async () => {
     if (!validateSession()) return
 
-    // For Auto-EVM, check the timelock
-    if (network === NetworkOptions.AUTO_EVM && !checkTimeLock()) {
+    // Check the timelock
+    if (!checkTimeLock()) {
       setIsError(true)
       return
     }
     setIsLoading(true)
     try {
-      let response
-      if (network === NetworkOptions.CONSENSUS) {
-        // Consensus network API call
-        response = await fetch(`/api/request-tokens/taurus/consensus`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ address })
-        })
-      } else {
-        // Check if chain is defined
-        if (!chain) {
-          toast.error(
-            <ToastContent title='Error requesting token' description='Network chain information is missing.' />
-          )
-          setIsError(true)
-          setIsLoading(false)
-          return
-        }
-        // Auto-EVM network API call
-        response = await fetch('/api/request-tokens', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            chainId: chain.id,
-            address,
-            accountType: session?.user?.accountType,
-            accountId: session?.user?.id
-          })
-        })
+      // Check if chain is defined
+      if (!chain) {
+        toast.error(<ToastContent title='Error requesting token' description='Network chain information is missing.' />)
+        setIsError(true)
+        setIsLoading(false)
+        return
       }
+      // Single EVM network API call
+      const response = await fetch('/api/request-tokens', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          chainId: chain.id,
+          address,
+          accountType: session?.user?.accountType,
+          accountId: session?.user?.id
+        })
+      })
 
       const result = await response.json()
 

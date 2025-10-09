@@ -38,7 +38,11 @@
     "ethers": "^6.14.0"
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^2.1.0",
+    "@nomicfoundation/hardhat-ethers": "^3.1.0",
+    "@nomicfoundation/hardhat-network-helpers": "^1.1.0",
     "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@nomicfoundation/hardhat-verify": "^1.1.1",
     "@typechain/ethers-v6": "^0.4.3",
     "@typechain/hardhat": "^8.0.3",
     "@types/chai": "^4.3.11",

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import 'foundry-test-utility/contracts/utils/console.sol';
+import 'forge-std/console.sol';
 import { Errors } from './errors.t.sol';
 
 contract Constants is Errors {

@@ -5,7 +5,7 @@ pragma solidity ^0.8.0;
  * @title Faucet - Test
  */
 
-import { CheatCodes } from 'foundry-test-utility/contracts/utils/cheatcodes.sol';
+// forge-std provides Vm via Test base; explicit CheatCodes import not needed
 import { Constants } from "./utils/constants.t.sol";
 
 import { Faucet } from "../Faucet.sol";
@@ -20,6 +20,10 @@ contract FaucetTest is Constants {
         faucet = new Faucet();
 
         faucet.addMinter(address(this));
+
+        // Align contract config with test constants
+        faucet.setWithdrawalAmount(BASIC_MINT_AMOUNT);
+        faucet.setLockTime(BASIC_TIME_LOCK);
 
         vm.deal(address(faucet), BASIC_MINT_AMOUNT);
 

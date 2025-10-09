@@ -1,7 +1,7 @@
 // constants/serverNetworks.ts
 export const autoEVM = {
-  id: 490000,
-  name: 'Auto-EVM - Autonomys Taurus Testnet',
+  id: Number(process.env.NEXT_PUBLIC_FAUCET_CHAIN_ID || 0),
+  name: 'Auto-EVM Testnet',
   network: 'auto-evm-taurus',
   nativeCurrency: {
     decimals: 18,
@@ -18,8 +18,8 @@ export const autoEVM = {
   },
   blockExplorers: {
     default: {
-      name: 'Autonomys Taurus Blockscout Explorer',
-      url: 'https://blockscout.taurus.autonomys.xyz/'
+      name: 'Block Explorer',
+      url: process.env.NEXT_PUBLIC_EXPLORER_URL || ''
     }
   }
 }

@@ -1,18 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { stdJson } from 'foundry-test-utility/contracts/utils/stdJson.sol';
-import { Vm } from 'foundry-test-utility/contracts/utils/vm.sol';
-import { DSTest } from 'foundry-test-utility/contracts/utils/test.sol';
+import { stdJson } from 'forge-std/StdJson.sol';
+import { Test } from 'forge-std/Test.sol';
 
-contract Errors is DSTest {
+contract Errors is Test {
   using stdJson for string;
-
-  Vm public constant vm = Vm(address(uint160(uint256(keccak256('hevm cheat code')))));
 
   mapping(RevertStatus => string) private _errors;
 
-  // Add a revert error to the enum of errors.
   enum RevertStatus {
     SUCCESS,
     SKIP_VALIDATION,
@@ -25,7 +21,10 @@ contract Errors is DSTest {
 
   // Associate your error with a revert message and add it to the mapping.
   constructor() {
-    string memory json = vm.readFile('./constants/errors.json');
+    // Resolve path from the Foundry project root to avoid CI working-directory issues
+    string memory root = vm.projectRoot();
+    string memory path = string.concat(root, '/constants/errors.json');
+    string memory json = vm.readFile(path);
 
     // Faucet
     _errors[RevertStatus.Faucet_FailSendingNativeToken] = json.readString('.Faucet.FailSendingNativeToken');
